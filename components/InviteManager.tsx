@@ -21,7 +21,6 @@ type Props = {
 export function InviteManager({ initialInvites, appUrl }: Props) {
   const router = useRouter();
   const [invites, setInvites] = useState(initialInvites);
-  const [email, setEmail] = useState("");
   const [tenantName, setTenantName] = useState("");
   const [link, setLink] = useState("");
   const [error, setError] = useState("");
@@ -35,7 +34,6 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: email || undefined,
         tenantName: tenantName || undefined,
       }),
     });
@@ -47,7 +45,6 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
     }
     setLink(data.link);
     setInvites((prev) => [data.invite, ...prev]);
-    setEmail("");
     setTenantName("");
     router.refresh();
   }
@@ -63,10 +60,6 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
     <div className="stack">
       <form className="panel-form" onSubmit={createInvite}>
         <h3>Gerar convite</h3>
-        <label>
-          E-mail (opcional)
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
         <label>
           Nome do tenant (opcional)
           <input value={tenantName} onChange={(e) => setTenantName(e.target.value)} />
@@ -87,7 +80,6 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
           <thead>
             <tr>
               <th>Token / link</th>
-              <th>E-mail</th>
               <th>Expira</th>
               <th>Status</th>
               <th></th>
@@ -107,7 +99,6 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
                   <td>
                     <code className="tiny">{`${appUrl}/cadastro?invite=${inv.token}`}</code>
                   </td>
-                  <td>{inv.email || "—"}</td>
                   <td>{new Date(inv.expiresAt).toLocaleDateString("pt-BR")}</td>
                   <td>{status}</td>
                   <td>

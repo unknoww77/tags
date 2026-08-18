@@ -44,7 +44,7 @@ export default async function SuperTenantPage({ params }: Props) {
           <ul>
             {tenant.users.map((u) => (
               <li key={u.id} className="field-label-row" style={{ marginBottom: 8 }}>
-                {u.name} — {u.email}
+                {u.name} — @{u.username}
                 <ImpersonateButton userId={u.id} />
               </li>
             ))}

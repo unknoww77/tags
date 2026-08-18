@@ -6,14 +6,13 @@ import { useRouter } from "next/navigation";
 
 type Props = {
   token: string;
-  prefilledEmail?: string;
 };
 
-export function RegisterForm({ token, prefilledEmail }: Props) {
+export function RegisterForm({ token }: Props) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [tenantName, setTenantName] = useState("");
-  const [email, setEmail] = useState(prefilledEmail || "");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +25,13 @@ export function RegisterForm({ token, prefilledEmail }: Props) {
     const res = await fetch("/api/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, name, email, password, tenantName: tenantName || undefined }),
+      body: JSON.stringify({
+        token,
+        name,
+        username,
+        password,
+        tenantName: tenantName || undefined,
+      }),
     });
     const data = await res.json();
     if (!res.ok) {
@@ -35,7 +40,7 @@ export function RegisterForm({ token, prefilledEmail }: Props) {
       return;
     }
 
-    const login = await signIn("credentials", { email, password, redirect: false });
+    const login = await signIn("credentials", { username, password, redirect: false });
     setLoading(false);
     if (login?.error) {
       router.push("/login");
@@ -56,13 +61,17 @@ export function RegisterForm({ token, prefilledEmail }: Props) {
         <input value={tenantName} onChange={(e) => setTenantName(e.target.value)} placeholder="Opcional" />
       </label>
       <label>
-        E-mail
+        Vulgo
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
-          disabled={Boolean(prefilledEmail)}
+          minLength={3}
+          maxLength={32}
+          autoComplete="username"
+          placeholder="somente letras, numeros e _"
+          pattern="[A-Za-z0-9_]{3,32}"
         />
       </label>
       <label>

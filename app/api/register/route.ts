@@ -6,29 +6,33 @@ import { prisma } from "@/lib/prisma";
 const schema = z.object({
   token: z.string().min(10),
   name: z.string().min(2).max(120),
-  email: z.string().email(),
+  username: z
+    .string()
+    .min(3)
+    .max(32)
+    .regex(/^[a-zA-Z0-9_]+$/, "Use apenas letras, números e _"),
   password: z.string().min(8).max(128),
   tenantName: z.string().min(2).max(120).optional(),
 });
+
+function normalizeUsername(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, "");
+}
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const data = schema.parse(body);
-    const email = data.email.toLowerCase().trim();
+    const username = normalizeUsername(data.username);
 
     const invite = await prisma.invite.findUnique({ where: { token: data.token } });
     if (!invite || invite.revokedAt || invite.usedAt || invite.expiresAt < new Date()) {
       return NextResponse.json({ error: "Convite inválido ou expirado" }, { status: 400 });
     }
 
-    if (invite.email && invite.email.toLowerCase() !== email) {
-      return NextResponse.json({ error: "Este convite é para outro e-mail" }, { status: 400 });
-    }
-
-    const existing = await prisma.user.findUnique({ where: { email } });
+    const existing = await prisma.user.findUnique({ where: { username } });
     if (existing) {
-      return NextResponse.json({ error: "E-mail já cadastrado" }, { status: 400 });
+      return NextResponse.json({ error: "Vulgo já está em uso" }, { status: 400 });
     }
 
     const passwordHash = await bcrypt.hash(data.password, 12);
@@ -41,7 +45,7 @@ export async function POST(request: Request) {
 
       const user = await tx.user.create({
         data: {
-          email,
+          username,
           name: data.name,
           passwordHash,
           role: "TENANT_ADMIN",

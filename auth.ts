@@ -12,6 +12,7 @@ declare module "next-auth" {
       id: string;
       email: string;
       name: string;
+      username: string;
       role: Role;
       tenantId: string | null;
     };
@@ -20,13 +21,18 @@ declare module "next-auth" {
   interface User {
     role: Role;
     tenantId: string | null;
+    username?: string | null;
   }
 }
 
 const credentialsSchema = z.object({
-  email: z.string().email(),
+  username: z.string().min(2).max(40),
   password: z.string().min(6),
 });
+
+function normalizeUsername(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, "");
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -39,15 +45,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       name: "credentials",
       credentials: {
-        email: { label: "Email", type: "email" },
+        username: { label: "Vulgo", type: "text" },
         password: { label: "Senha", type: "password" },
       },
       async authorize(raw) {
         const parsed = credentialsSchema.safeParse(raw);
         if (!parsed.success) return null;
 
-        const email = parsed.data.email.toLowerCase().trim();
-        const user = await prisma.user.findUnique({ where: { email } });
+        const username = normalizeUsername(parsed.data.username);
+        const user = await prisma.user.findUnique({ where: { username } });
         if (!user) return null;
 
         const ok = await bcrypt.compare(parsed.data.password, user.passwordHash);
@@ -55,8 +61,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         return {
           id: user.id,
-          email: user.email,
+          email: user.email ?? `${user.username}@local`,
           name: user.name,
+          username: user.username,
           role: user.role,
           tenantId: user.tenantId,
         };
@@ -69,6 +76,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id!;
         token.role = user.role;
         token.tenantId = user.tenantId;
+        token.username = (user as { username?: string }).username ?? "";
+        token.email = user.email ?? "";
+        token.name = user.name ?? "";
       }
       return token;
     },
@@ -77,8 +87,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = String(token.id ?? "");
         session.user.role = (token.role as Role) ?? "TENANT_ADMIN";
         session.user.tenantId = (token.tenantId as string | null) ?? null;
-        session.user.email = session.user.email ?? "";
-        session.user.name = session.user.name ?? "";
+        session.user.email = String(token.email ?? "");
+        session.user.name = String(token.name ?? "");
+        session.user.username = String(token.username ?? "");
       }
       return session;
     },

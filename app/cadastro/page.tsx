@@ -47,7 +47,7 @@ export default async function CadastroPage({ searchParams }: Props) {
       <main className="auth-card">
         <h1>Criar conta</h1>
         <p className="muted">Complete o cadastro com o convite recebido.</p>
-        <RegisterForm token={token} prefilledEmail={invite.email ?? undefined} />
+        <RegisterForm token={token} />
       </main>
     </div>
   );

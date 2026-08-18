@@ -3,7 +3,12 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+function normalizeUsername(value: string) {
+  return value.trim().toLowerCase().replace(/\s+/g, "");
+}
+
 async function main() {
+  const username = normalizeUsername(process.env.SUPER_ADMIN_USERNAME ?? "admin");
   const email = (process.env.SUPER_ADMIN_EMAIL ?? "admin@top1tags.dev").toLowerCase().trim();
   const password = process.env.SUPER_ADMIN_PASSWORD ?? "ChangeMeNow123!";
   const name = process.env.SUPER_ADMIN_NAME ?? "Super Admin";
@@ -19,25 +24,32 @@ async function main() {
     },
   });
 
-  // upsert by email — if tenant id fixed fails on first run without where unique on name
-  // Tenant.id is cuid by default; fixed id works for upsert.
-
-  const user = await prisma.user.upsert({
-    where: { email },
-    update: {
-      name,
-      passwordHash,
-      role: "SUPER_ADMIN",
-      tenantId: tenant.id,
-    },
-    create: {
-      email,
-      name,
-      passwordHash,
-      role: "SUPER_ADMIN",
-      tenantId: tenant.id,
-    },
+  const existingByEmail = await prisma.user.findFirst({
+    where: { OR: [{ email }, { username }] },
   });
+
+  const user = existingByEmail
+    ? await prisma.user.update({
+        where: { id: existingByEmail.id },
+        data: {
+          username,
+          email,
+          name,
+          passwordHash,
+          role: "SUPER_ADMIN",
+          tenantId: tenant.id,
+        },
+      })
+    : await prisma.user.create({
+        data: {
+          username,
+          email,
+          name,
+          passwordHash,
+          role: "SUPER_ADMIN",
+          tenantId: tenant.id,
+        },
+      });
 
   await prisma.globalSettings.upsert({
     where: { id: "global" },
@@ -54,7 +66,7 @@ async function main() {
     },
   });
 
-  console.log(`Super admin ready: ${user.email} (tenant ${tenant.name})`);
+  console.log(`Super admin ready: vulgo=${user.username} (tenant ${tenant.name})`);
 }
 
 main()

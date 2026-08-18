@@ -16,6 +16,7 @@ export const env = {
   cloudflareAccountId: () => process.env.CLOUDFLARE_ACCOUNT_ID ?? "",
   trackingSalt: () => process.env.TRACKING_IP_SALT ?? "top1tags-dev-salt",
   superAdminEmail: () => process.env.SUPER_ADMIN_EMAIL ?? "admin@top1tags.dev",
+  superAdminUsername: () => process.env.SUPER_ADMIN_USERNAME ?? "admin",
   superAdminPassword: () => process.env.SUPER_ADMIN_PASSWORD ?? "ChangeMeNow123!",
   superAdminName: () => process.env.SUPER_ADMIN_NAME ?? "Super Admin",
 };

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export function LoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,13 +16,13 @@ export function LoginForm() {
     setLoading(true);
     setError("");
     const res = await signIn("credentials", {
-      email,
+      username,
       password,
       redirect: false,
     });
     setLoading(false);
     if (res?.error) {
-      setError("E-mail ou senha inválidos");
+      setError("Vulgo ou senha inválidos");
       return;
     }
     router.push("/dashboard");
@@ -32,13 +32,15 @@ export function LoginForm() {
   return (
     <form className="auth-form" onSubmit={onSubmit}>
       <label>
-        E-mail
+        Vulgo
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
-          autoComplete="email"
+          minLength={2}
+          autoComplete="username"
+          placeholder="seu_vulgo"
         />
       </label>
       <label>

@@ -17,7 +17,7 @@ export async function GET(_request: Request, { params }: Params) {
     where: { id: tenantId },
     include: {
       settings: true,
-      users: { select: { id: true, name: true, email: true, role: true } },
+      users: { select: { id: true, name: true, username: true, role: true } },
       _count: { select: { pages: true } },
     },
   });

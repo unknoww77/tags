@@ -100,7 +100,7 @@ export default async function SuperAdminPage() {
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>E-mail</th>
+                  <th>Vulgo</th>
                   <th>Role</th>
                   <th>Tenant</th>
                   <th></th>
@@ -110,7 +110,7 @@ export default async function SuperAdminPage() {
                 {users.map((u) => (
                   <tr key={u.id}>
                     <td>{u.name}</td>
-                    <td>{u.email}</td>
+                    <td>{u.username}</td>
                     <td>{u.role === "SUPER_ADMIN" ? "Super" : "Admin"}</td>
                     <td>
                       {u.tenant?.name || "—"}

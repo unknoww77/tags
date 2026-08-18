@@ -16,7 +16,7 @@ export default async function LoginPage() {
       <PlatformHeader />
       <main className="auth-card">
         <h1>Entrar</h1>
-        <p className="muted">Acesso para super admin e tenant admins convidados.</p>
+        <p className="muted">Entre com vulgo e senha (super admin ou conta convidada).</p>
         <LoginForm />
         <p className="muted">
           Tem convite? <Link href="/cadastro">Criar conta</Link>
