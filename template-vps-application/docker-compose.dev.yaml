@@ -1,0 +1,40 @@
+name: top1tags-dev
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports: ["5433:5432"]
+    environment:
+      POSTGRES_USER: top1tags
+      POSTGRES_PASSWORD: top1tags
+      POSTGRES_DB: top1tags
+    volumes:
+      - top1tags-pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U top1tags -d top1tags"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npx prisma db push && npx tsx prisma/seed.ts && npm run dev"
+    ports: ["3000:3000"]
+    environment:
+      NODE_ENV: development
+      HOSTNAME: 0.0.0.0
+      WATCHPACK_POLLING: "true"
+      DATABASE_URL: postgresql://top1tags:top1tags@postgres:5432/top1tags?schema=public
+    env_file:
+      - path: .env
+        required: false
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - top1tags-node-modules:/app/node_modules
+
+volumes:
+  top1tags-pg:
+  top1tags-node-modules:

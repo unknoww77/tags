@@ -1,0 +1,139 @@
+
+@font-face {
+    font-family: 'Averta';
+    src: url("") format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+     font-family: 'Averta', 'Lato';
+}
+
+.orange-bar-text {
+   font-family: 'Averta', 'Lato';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.orange-bar-button {
+    font-family: 'Averta', 'Lato';
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #FF6338;
+}
+
+.orange-bar-button:hover {
+    font-family: 'Averta', 'Lato'; !important;
+    text-align: center;
+    color: #FF6338 !important;
+    background: #FFF !important;
+    border-radius: 20px;
+}
+
+.orange-bar-button:focus {
+  background-color: #FFFFFF !important;
+  border-radius: 20px;
+  color: #FF6338 !important;
+}
+
+.button, .hs-blog-post-listing__post-button, .hs-button, button {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* Remove a aparÃªncia padrÃ£o do radio */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px; /* Ajuste o tamanho conforme necessÃ¡rio */
+  height: 20px;
+  border: 2px solid white; /* Borda branca */
+  background-color: transparent;
+  border-radius: 50%; /* Deixa o radio redondo */
+  outline: none;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Quando o radio estiver selecionado */
+input[type="radio"]:checked {
+  background-color: #FF6338; /* Cor de fundo quando selecionado */
+  border: 2px solid white; /* MantÃ©m a borda branca */
+}
+
+/* Adicionando um efeito interno para simular o marcador do radio */
+input[type="radio"]:checked::before {
+  content: "";
+  width: 10px; /* Ajuste do tamanho do marcador interno */
+  height: 10px;
+  background-color: white; /* Cor do marcador interno */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/*  */
+.orange-bar {
+  position: relative;
+  width: calc(100% - 40px); /* MantÃ©m margens de 20px de cada lado */
+  max-width: 1200px;
+  margin: 0 auto; /* Centraliza no desktop */
+  background-color: #FF6338;
+  color: white;
+  padding: 15px;
+  transition: top 0.6s ease-in-out;
+  z-index: 1000; /* MantÃ©m acima do conteÃºdo */
+}
+
+/* No Mobile: Garante o mesmo comportamento */
+@media (max-width: 767px) {
+  .orange-bar {
+    width: calc(100% - 40px); /* MantÃ©m centralizado com 20px de cada lado */
+    max-width: none;
+    margin: 0 auto;
+  }
+}
+
+/* Quando fixa na tela */
+.orange-bar.fixed {
+  position: fixed;
+  top: 0px; /* MantÃ©m um espaÃ§amento de 50px do topo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px); /* MantÃ©m margens */
+  max-width: 1200px;
+}
+
+/* No Mobile: Fixa com largura ajustada */
+@media (max-width: 767px) {
+  .orange-bar.fixed {
+    width: calc(100% - 40px);
+  }
+}
+
+/* Quando chega no footer, mantÃ©m a posiÃ§Ã£o sem desaparecer */
+.orange-bar.sticky-stop {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px); /* MantÃ©m margens laterais */
+  max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+    .orange-bar, .orange-bar-content {
+        display: none;
+    }
+}

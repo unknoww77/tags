@@ -1,0 +1,21 @@
+﻿{
+    "urls":  [
+                 "https://lp.conectcar.com/planos",
+                 "https://conectcar.com/",
+                 "https://conectcar.com/para-voce/"
+             ],
+    "dumpedAt":  "2026-08-15T04:35:15.9890975-03:00",
+    "note":  "HTML/CSS estatico. Para medidas reais (hover, computed), cole devtools-snippet.js no Console em lp.conectcar.com/planos",
+    "officialTokens":  {
+                           "btnHeight":  "47px",
+                           "orange":  "#FF6338",
+                           "subtitleBg":  "#EDEDED",
+                           "cardHeight":  "500px",
+                           "btnRadius":  "24px",
+                           "cardWidth":  "344-400px",
+                           "gray":  "#4D5761",
+                           "cardRadius":  "12px",
+                           "font":  "Averta, Lato",
+                           "cardShadow":  "0 4px 6px rgba(0,0,0,0.1)"
+                       }
+}

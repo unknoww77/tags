@@ -1,0 +1,43 @@
+name: Platform Health
+
+on:
+  schedule:
+    # A cada 5 minutos
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: platform-health
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    name: probe_platform
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Restore health state
+        uses: actions/cache/restore@v4
+        with:
+          path: .platform-health-state.json
+          key: platform-health-state-v1-${{ github.run_id }}
+          restore-keys: |
+            platform-health-state-v1-
+
+      - name: Probe + Telegram
+        env:
+          PLATFORM_HEALTH_URL: ${{ secrets.PLATFORM_HEALTH_URL }}
+          PLATFORM_TELEGRAM_BOT_TOKEN: ${{ secrets.PLATFORM_TELEGRAM_BOT_TOKEN }}
+          PLATFORM_TELEGRAM_CHAT_ID: ${{ secrets.PLATFORM_TELEGRAM_CHAT_ID }}
+          PLATFORM_HEALTH_STATE_PATH: .platform-health-state.json
+          PLATFORM_HEALTH_FAIL_THRESHOLD: "2"
+        run: node scripts/platform-health-check.mjs
+
+      - name: Save health state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .platform-health-state.json
+          key: platform-health-state-v1-${{ github.run_id }}

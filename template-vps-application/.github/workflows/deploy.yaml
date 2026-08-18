@@ -1,0 +1,150 @@
+name: Deploy Top1Tags
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "app/**"
+      - "components/**"
+      - "lib/**"
+      - "prisma/**"
+      - "scripts/**"
+      - "public/**"
+      - "auth.ts"
+      - "middleware.ts"
+      - "Dockerfile"
+      - "Caddyfile"
+      - "docker-compose.prod.yaml"
+      - ".env.example"
+      - "package.json"
+      - "package-lock.json"
+      - "next.config.ts"
+      - "tsconfig.json"
+      - ".github/workflows/deploy.yaml"
+
+concurrency:
+  group: deploy-top1tags
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    env:
+      ENV_SECRET: ${{ secrets.INFRA_ENV }}
+      ALLOWED_IPS: ${{ secrets.INFRA_ALLOWED_IPS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build application image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          load: true
+          tags: top1tags:latest
+          cache-from: type=gha,scope=top1tags
+          cache-to: type=gha,mode=max,scope=top1tags
+          provenance: false
+
+      - name: Package application image
+        run: docker save top1tags:latest | gzip > top1tags-image.tar.gz
+
+      - name: Prepare VPS
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.INFRA_SERVER_IP }}
+          username: ${{ secrets.INFRA_SERVER_USERNAME }}
+          key: ${{ secrets.INFRA_SERVER_KEY }}
+          port: 20203
+          envs: ALLOWED_IPS
+          script: |
+            set -eu
+            APP_DIR="$HOME/top1tags"
+            mkdir -p "$APP_DIR"
+            if ! docker compose version >/dev/null 2>&1 && ! sudo docker compose version >/dev/null 2>&1; then
+              echo "Docker Compose V2 não encontrado no servidor."
+              exit 1
+            fi
+            if command -v ufw >/dev/null 2>&1; then
+              sudo ufw allow 20203/tcp comment 'SSH deploy' || true
+              if [ -n "$ALLOWED_IPS" ]; then
+                for port in 80 443; do
+                  for ip in $ALLOWED_IPS; do
+                    sudo ufw allow from "$ip" to any port "$port" proto tcp
+                  done
+                done
+              else
+                sudo ufw allow 80/tcp
+                sudo ufw allow 443/tcp
+              fi
+              sudo ufw --force enable || true
+            fi
+
+      - name: Upload deploy artifacts
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.INFRA_SERVER_IP }}
+          username: ${{ secrets.INFRA_SERVER_USERNAME }}
+          key: ${{ secrets.INFRA_SERVER_KEY }}
+          port: 20203
+          source: "docker-compose.prod.yaml,Caddyfile,top1tags-image.tar.gz"
+          target: "~/top1tags"
+          overwrite: true
+
+      - name: Deploy service
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.INFRA_SERVER_IP }}
+          username: ${{ secrets.INFRA_SERVER_USERNAME }}
+          key: ${{ secrets.INFRA_SERVER_KEY }}
+          port: 20203
+          envs: ENV_SECRET
+          script: |
+            set -eu
+            APP_DIR="$HOME/top1tags"
+            cd "$APP_DIR"
+            if sudo docker compose version >/dev/null 2>&1; then DCC="sudo docker compose"; else DCC="docker compose"; fi
+            if [ -n "$ENV_SECRET" ]; then
+              printf '%s\n' "$ENV_SECRET" > .env
+              chmod 600 .env
+            elif [ ! -f .env ]; then
+              echo "Secret INFRA_ENV não configurado."
+              exit 1
+            fi
+            gunzip -c top1tags-image.tar.gz | sudo docker load
+            rm -f top1tags-image.tar.gz
+            $DCC -f docker-compose.prod.yaml up -d --remove-orphans
+            $DCC -f docker-compose.prod.yaml ps
+            healthy=0
+            for i in $(seq 1 40); do
+              if $DCC -f docker-compose.prod.yaml exec -T app node -e "fetch('http://127.0.0.1:3000').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))" 2>/dev/null; then healthy=1; break; fi
+              sleep 3
+            done
+            if [ "$healthy" -ne 1 ]; then
+              $DCC -f docker-compose.prod.yaml logs --tail=120
+              exit 1
+            fi
+
+      - name: Notify Telegram on deploy failure
+        if: failure()
+        env:
+          PLATFORM_TELEGRAM_BOT_TOKEN: ${{ secrets.PLATFORM_TELEGRAM_BOT_TOKEN }}
+          PLATFORM_TELEGRAM_CHAT_ID: ${{ secrets.PLATFORM_TELEGRAM_CHAT_ID }}
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/notify-deploy-failure.mjs
+
+      - name: Clean up old images
+        if: always()
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.INFRA_SERVER_IP }}
+          username: ${{ secrets.INFRA_SERVER_USERNAME }}
+          key: ${{ secrets.INFRA_SERVER_KEY }}
+          port: 20203
+          script: sudo docker image prune --force --filter "dangling=true"

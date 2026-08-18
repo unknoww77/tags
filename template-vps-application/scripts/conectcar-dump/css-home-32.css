@@ -1,0 +1,1654 @@
+
+/*******************************/
+/* PAGE MODELO TEXTO */
+/*******************************/
+
+/* page modelo texto - util */
+.modelo-texto .util {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+.modelo-texto .util:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+/* page modelo texto - header */
+.modelo-texto .modelo-texto-header {
+    display: block;
+    width: 100%;
+    padding: 100px 0;
+    margin: 0 auto;
+    background-color: #A0A7AE;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.modelo-texto .modelo-texto-header h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-texto .modelo-texto-header h1 {
+        font-size: 36px;
+    }
+}
+
+/* page modelo texto - content */
+.modelo-texto .modelo-texto-content {
+    display: block;
+    width: 100%;
+    padding: 120px 0;
+    margin: 0 auto;
+}
+.modelo-texto .modelo-texto-content p {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #7C878F;
+    margin: 20px 0;
+}
+.modelo-texto .modelo-texto-content ul {
+    padding: 0;
+    margin: 20px 0;
+}
+.modelo-texto .modelo-texto-content li {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #7C878F;
+    padding: 0 0 0 32px;
+    margin: 8px 0;    
+}
+.modelo-texto .modelo-texto-content a {
+    color: #ff6600;
+}
+.modelo-texto .modelo-texto-content a:hover {
+    text-decoration: underline;
+}
+.modelo-texto .modelo-texto-content .bt {
+    display: inline-block;
+    padding: 16px 32px;
+    margin: 40px 0;
+    background-color: transparent;
+    border: solid 2px #FF6A38;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1;
+    color: #FF6A38;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-texto .modelo-texto-content .bt:hover {
+    text-decoration: none;
+    background-color: #FF6A38;
+    color: #fff;
+}
+.modelo-texto .modelo-texto-content hr.wp-block-separator {
+    width: 100%;
+    max-width: 100%;
+    margin: 40px 0 20px;
+}
+.modelo-texto .modelo-texto-content .wp-block-image {
+    text-align: left;
+    margin: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-texto .modelo-texto-content {
+        padding: 80px 0;
+    }
+}
+
+/* page modelo texto - content: variacao col1 */
+.modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-left {
+    float: left;
+    display: block;
+    width: 50%;
+    margin: 0;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-right {
+    float: right;
+    display: block;
+    width: 40%;
+    margin: 0;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-right img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content h2 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    color: #292F36;
+    margin: 0 0 24px;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content h2:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    margin: 24px 0 0;
+    background-color: #EBEDEE;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content h2.has-text-align-center:after {
+    margin-left: auto;
+    margin-right: auto;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content h3 {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #FF6A38;
+    margin: 0 0 48px;
+}
+.modelo-texto.modelo-texto-col1 .modelo-texto-content h4 {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #FF6A38;
+    margin: 40px 0 20px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-left {
+        float: none;
+        width: 100%;
+    }
+    .modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-right {
+        float: none;
+        width: 100%;
+    }
+    .modelo-texto.modelo-texto-col1 .modelo-texto-content .modelo-texto-content-right img {
+        width: 100%;
+        max-width: 720px;
+        height: auto;
+        margin: 40px 0 0;
+    }
+    .modelo-texto.modelo-texto-col1 .modelo-texto-content h2 {
+        letter-spacing: unset;
+    }
+}
+
+
+/* page modelo texto - content: variacao full */
+.modelo-texto.modelo-texto-full .modelo-texto-content h2 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    color: #FF6A38;
+    margin: 0 0 24px;
+}
+.modelo-texto.modelo-texto-full .modelo-texto-content h2:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 2px;
+    margin: 24px 0 0;
+    background-color: #EBEDEE;
+}
+.modelo-texto.modelo-texto-full .modelo-texto-content h2.has-text-align-center:after {
+    margin-left: auto;
+    margin-right: auto;
+}
+.modelo-texto.modelo-texto-full .modelo-texto-content h3 {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #7C878F;
+    margin: 0 0 48px;
+}
+.modelo-texto.modelo-texto-full .modelo-texto-content h4 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #7C878F;
+    margin: 40px 0 20px;
+}
+.modelo-texto.modelo-texto-full .modelo-texto-content .wp-container-3 {
+    gap: 80px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-texto.modelo-texto-full .modelo-texto-content h2 {
+        letter-spacing: unset;
+    }
+}
+
+@media only screen and (max-width: 781px) {
+    .modelo-texto.modelo-texto-full .modelo-texto-content .wp-container-3 {
+        gap: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*******************************/
+/* PAGE MODELO PERFIL */
+/*******************************/
+
+/* page modelo perfil - util */
+.modelo-perfil .util {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+.modelo-perfil .util:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+/* page modelo perfil - header */
+.modelo-perfil .modelo-perfil-header {
+    display: block;
+    width: 100%;
+    padding: 80px 0 0;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.modelo-perfil .modelo-perfil-header h1 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #fff;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-perfil .modelo-perfil-header {
+        padding: 60px 0 0;
+    }
+    .modelo-perfil .modelo-perfil-header h1 {
+        font-size: 28px;
+    }
+}
+
+/* page modelo perfil - content */
+.modelo-perfil .modelo-perfil-content {
+    display: block;
+    width: 100%;
+    padding: 40px 0 200px;
+    margin: 0 auto;
+    background-color: #FF6A38;
+}
+.modelo-perfil .modelo-perfil-content h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #0D2963;
+    margin: 0 0 24px;
+}
+.modelo-perfil .modelo-perfil-content p {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #fff;
+    margin: 12px 0;
+}
+.modelo-perfil .modelo-perfil-content p.mini {
+    font-size: 10px;
+}
+.modelo-perfil .modelo-perfil-content a {
+    color: #0D2963;
+}
+.modelo-perfil .modelo-perfil-content a:hover {
+    text-decoration: underline;
+}
+.modelo-perfil .modelo-perfil-content .bt {
+    display: inline-block;
+    min-width: 160px;
+    padding: 12px 24px;
+    margin: 12px 0 0;
+    background-color: #0D2963;
+    border: solid 2px #0D2963;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1;
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-perfil .modelo-perfil-content .bt:hover,
+.modelo-perfil .modelo-perfil-content .bt:focus {
+    text-decoration: none;
+    background-color: #0D2963 !important;
+    color: #fff !important;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-perfil .modelo-perfil-content {
+        padding: 60px 0;
+    }
+    .modelo-perfil .modelo-perfil-content h2 {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (min-width: 782px) {
+    .modelo-perfil .modelo-perfil-content .wp-container-3 {
+        position: relative;
+    }
+    .modelo-perfil .modelo-perfil-content .wp-container-3:before {
+        content: "";
+        position: absolute;
+        top: -16px;
+        bottom: -16px;
+        left: 50%;
+        display: block;
+        width: 1px;
+        background-color: #ff8d6e;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*******************************/
+/* PAGE MODELO COMO COLAR */
+/*******************************/
+
+/* page modelo como colar - util */
+.modelo-comocolar .util {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+.modelo-comocolar .util:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+
+/* page modelo como colar - header */
+.modelo-comocolar .comocolar-header {
+    display: block;
+    width: 100%;
+    min-height: 500px;
+    padding: 160px 0 0;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.modelo-comocolar.veiculo .comocolar-header {
+    padding-top: 270px;
+}
+
+.modelo-comocolar .comocolar-header h1 {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0 0 16px;
+    max-width: 300px;
+}
+.modelo-comocolar .comocolar-header p {
+    text-align: left;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #fff;
+    margin: 0;
+    max-width: 380px;
+}
+
+.modelo-comocolar .comocolar-header p.comocolar-breadcrumb {
+    font-size: 13px;
+}
+.modelo-comocolar .comocolar-header p.comocolar-breadcrumb span {
+    color: #fff;
+    margin: 0 8px;
+}
+.modelo-comocolar .comocolar-header p.comocolar-breadcrumb a {
+    font-weight: bold;
+}
+.modelo-comocolar .comocolar-header p.comocolar-breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 1600px) {
+    .modelo-comocolar .comocolar-header {
+        min-height: 400px;
+        padding: 120px 0 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-header {
+        padding-top: 200px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar .comocolar-header {
+        min-height: 0;
+        padding: 20px 0 60px;
+        background-image: unset !important;
+    }
+    .modelo-comocolar.veiculo .comocolar-header {
+        padding-top: 20px;
+    }
+    .modelo-comocolar.veiculo .comocolar-header h1 {
+        margin-bottom: 4px;
+    }
+}
+
+
+/* page modelo como colar - abas */
+.modelo-comocolar .comocolar-abas:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+.modelo-comocolar .comocolar-abas ul {
+    position: relative;
+    top: -40px;
+    float: left;
+    display: block;
+    width: calc(100% + 32px);
+    padding: 0;
+    margin: 0 0 0 -16px;
+}
+.modelo-comocolar .comocolar-abas li {
+    float: left;
+    display: block;
+    width: 25%;
+    padding: 16px;
+    margin: 0;
+}
+.modelo-comocolar .comocolar-abas li a {
+    display: block;
+    width: 100%;
+    min-height: 130px;
+    padding: 20px;
+    background-color: #fff !important;
+    border: 1px solid #cacaca;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px 0 rgb(0 0 0 / 5%);
+}
+.modelo-comocolar .comocolar-abas li a:hover {
+    border-color: #ff6338;
+}
+.modelo-comocolar .comocolar-abas li a.open,
+.modelo-comocolar .comocolar-abas li a.open:hover {
+    border-color: #fff;
+}
+.modelo-comocolar .comocolar-abas li a img {
+    display: block;
+    margin: 0 0 16px;
+}
+.modelo-comocolar .comocolar-abas li a span {
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 1.2;
+    color: #2a3037;
+}
+.modelo-comocolar .comocolar-abas li a.open span {
+    color: #ff6338;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar .comocolar-abas li {
+        width: 50%;
+    }
+    
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll {
+        position: relative;
+        top: -40px;
+        display: block;
+        width: calc(100% + 32px);
+        margin: 0 0 -20px -16px;
+        overflow-x: auto;
+    }
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll ul {
+        position: relative;
+        top: unset;
+        float: none;
+        display: table;
+        width: auto;
+        padding: 16px;
+        margin: 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll ul li {
+        float: none;
+        display: table-cell;
+        width: auto;
+        padding: 0;
+        margin: 0 16px 0 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll ul li a {
+        width: auto;
+        min-height: 96px;
+        padding: 24px 12px;
+        margin: 0 12px 0 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll ul li a img {
+        width: 24px;
+        height: auto;
+        margin: 0 0 10px;
+    }
+    .modelo-comocolar.veiculo .comocolar-abas .comocolar-abas-scroll ul li a span {
+        font-weight: 600;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+}
+
+
+/* page modelo como colar - aba content */
+
+.modelo-comocolar.veiculo .comocolar-aba-content {
+    display: none;
+    width: 100%;
+    padding: 8px 0 48px;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content.open {
+    display: block;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+.modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col1 {
+    float: left;
+    width: 50%;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col2 {
+    float: left;
+    width: 20%;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col3 {
+    float: left;
+    width: 30%;
+}
+
+.modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col1 img {
+    width: 90%;
+    height: auto;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col2 img {
+    width: 70%;
+    height: auto;
+}
+
+.modelo-comocolar.veiculo .comocolar-aba-content h3 {
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #293b8a;
+    margin: 0 0 12px;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content ul {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    top: unset;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content li {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 36px;
+    padding: 6px 0 6px 32px;
+    margin: 0;  
+    border-bottom: 1px solid #f3f3f3;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #212529;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content li:before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    position: absolute;
+    top: 4px;
+    left: 0;
+}
+.modelo-comocolar.veiculo .comocolar-aba-content ul.fazer li:before {
+    background-image: url(assets/images/lista-fazer.png);
+}
+.modelo-comocolar.veiculo .comocolar-aba-content ul.nao-fazer li:before {
+    background-image: url(assets/images/lista-nao-fazer.png);
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar.veiculo .comocolar-aba-content {
+        padding: 0 0 32px;
+    }
+    .modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col1 {
+        float: none;
+        width: 100%;
+        padding: 0 0 4px 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col2 {
+        float: none;
+        width: 100%;
+        padding: 4px 0;
+    }
+    .modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col3 {
+        float: none;
+        width: 100%;
+        padding: 32px 0 0 0;
+    }
+
+    .modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col1 img {
+        width: 100%;
+        max-width: 640px;
+        height: auto;
+    }
+    .modelo-comocolar.veiculo .comocolar-aba-content .comocolar-aba-col2 img {
+        width: 30%;
+        max-width: 180px;
+        height: auto;
+        margin: 0 1%;
+    }
+}
+
+
+/* page modelo como colar - content */
+.modelo-comocolar .comocolar-content {
+    margin-bottom: 100px;
+}
+.modelo-comocolar .comocolar-content:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+.modelo-comocolar .comocolar-content .comocolar-content-left {
+    float: left;
+    display: block;
+    width: 35%;
+    padding-top: 160px;
+}
+.modelo-comocolar .comocolar-content .comocolar-content-right {
+    float: left;
+    display: block;
+    width: 65%;
+    text-align: right;
+}
+.modelo-comocolar .comocolar-content .comocolar-content-right img {
+    display: inline-block;
+    width: 90%;
+    height: auto;
+}
+.modelo-comocolar .comocolar-content .comocolar-content-left h2 {
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: #293b8a;
+    margin: 0 0 16px;
+}
+.modelo-comocolar .comocolar-content .comocolar-content-left p {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2a3037;
+    margin: 16px 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar .comocolar-content .comocolar-content-left {
+        float: none;
+        width: 100%;
+        padding-top: 0;
+    }
+    .modelo-comocolar .comocolar-content .comocolar-content-right {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .modelo-comocolar .comocolar-content .comocolar-content-right img {
+        width: 100%;
+        max-width: 800px;
+    }
+}
+
+
+/* page modelo como colar - content veiculo */
+
+.modelo-comocolar .comocolar-content {
+    margin-bottom: 60px;
+}
+.modelo-comocolar.veiculo .comocolar-content h4 {
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #293b8a;
+    margin: 0 0 16px;
+}
+.modelo-comocolar.veiculo .comocolar-content p {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #2a3037;
+    margin: 0 0 8px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar .comocolar-content {
+        margin-bottom: 40px;
+    }
+}
+
+
+/* page modelo como colar - duvidas */
+
+.modelo-comocolar .comocolar-duvidas {
+    display: block;
+    width: 100%;
+    margin: 0 0 120px;
+}
+.modelo-comocolar .comocolar-duvidas .comocolar-box {
+    display: block;
+    width: 100%;
+    padding: 56px 40px;
+    margin: 0 auto;
+    background-color: #ff6338;
+    border-radius: 10px;
+    text-align: center;
+}
+.modelo-comocolar .comocolar-duvidas .comocolar-box h4 {
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    font-size: 35px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0 0 16px;
+}
+.modelo-comocolar .comocolar-duvidas .comocolar-box p {
+    text-align: center;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #fff;
+    margin: 0 0 16px;
+}
+.modelo-comocolar .comocolar-duvidas .comocolar-box .bt {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    padding: 12px 20px;
+    margin: 0 auto;
+    background-color: #fff !important;
+    border-radius: 40px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #ff6338;
+    cursor: pointer;
+}
+.modelo-comocolar .comocolar-duvidas .comocolar-box .bt.bt-whatsapp:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin: 0 4px 0 0;
+    background: url(assets/images/icone-whatsapp-laranja.png) no-repeat center center;
+    background-size: contain;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-comocolar .comocolar-duvidas {
+        margin-bottom: 80px;
+    }
+    .modelo-comocolar .comocolar-duvidas .comocolar-box {
+        padding: 40px;
+    }
+    .modelo-comocolar .comocolar-duvidas .comocolar-box h4 {
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*******************************/
+/* PAGE MODELO BURGER KING */
+/*******************************/
+
+/* page modelo burger king - util */
+.modelo-bk .util {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+.modelo-bk .util:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+
+/* page modelo burger king - header */
+.modelo-bk .bk-header {
+    display: block;
+    width: 100%;
+    min-height: 640px;
+    padding: 120px 0 0;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.modelo-bk .bk-header h1 {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 24px;
+    max-width: 600px;
+}
+.modelo-bk .bk-header p {
+    text-align: left;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #4c3501;
+    margin: 16px 0;
+    max-width: 600px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk .bk-header {
+        background-position: left top;
+        background-size: cover;
+        min-height: unset;
+        padding: 60px 0;        
+    }
+    .modelo-bk .bk-header h1 {
+        font-size: 42px;
+        line-height: 1.2;
+    }
+    .modelo-bk .bk-header p {
+        font-size: 24px;
+    }
+}
+
+
+/* page modelo burger king - content */
+.modelo-bk .bk-content {
+    padding: 60px 0 120px;
+    background-color: #f7f2ed;
+}
+.modelo-bk .bk-content h2 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #67562f;
+    margin: 32px 0 16px;
+}
+.modelo-bk .bk-content h3 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #67562f;
+    margin: 32px 0 8px;
+}
+.modelo-bk .bk-content h4 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #67562f;
+    margin: 16px 0 8px;
+}
+.modelo-bk .bk-content h5,
+.modelo-bk .bk-content h6 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #67562f;
+    margin: 8px 0 8px;
+}
+.modelo-bk .bk-content p {
+    text-align: left;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #2a3037;
+    margin: 8px 0;
+}
+.modelo-bk .bk-content ul {
+    padding: 0;
+    margin: 16px 0;
+}
+.modelo-bk .bk-content li {
+    text-align: left;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #2a3037;
+    margin: 8px 0;
+}
+.modelo-bk .bk-content .wp-block-image .alignleft {
+    float: left;
+    margin: 16px 8px 0 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk .bk-content {
+        padding: 40px 0 100px;
+    }
+    .modelo-bk .bk-content .wp-block-image .alignleft {
+        float: left;
+        margin: 12px 0 0 0;
+    }
+    .modelo-bk .bk-content h2 {
+        font-size: 28px;
+    }
+    .modelo-bk .bk-content h3 {
+        font-size: 22px;
+    }
+    .modelo-bk .bk-content h4 {
+        font-size: 20px;
+    }
+    .modelo-bk .bk-content h5,
+    .modelo-bk .bk-content h6 {
+        font-size: 18px;
+    }
+    .modelo-bk .bk-content p {
+        font-size: 18px;
+    }
+    .modelo-bk .bk-content li {
+        font-size: 18px;
+    }
+}
+
+
+/* page modelo burger king capa */
+.page-template-page-burger-king-capa-php .site-main > * {
+    margin-bottom: 0;
+}
+
+/* page modelo burger king capa - header */
+.modelo-bk-capa .bk-header {
+    display: block;
+    width: 100%;
+    min-height: 640px;
+    padding: 120px 0 0;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.modelo-bk-capa .bk-header h1 {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 24px;
+    max-width: 600px;
+}
+.modelo-bk-capa .bk-header p {
+    text-align: left;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #4c3501;
+    margin: 16px 0;
+    max-width: 600px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk-capa .bk-header {
+        background-position: left top;
+        background-size: cover;
+        min-height: unset;
+        padding: 60px 0 520px;        
+    }
+    .modelo-bk-capa .bk-header h1 {
+        font-size: 42px;
+        line-height: 1.2;
+    }
+    .modelo-bk-capa .bk-header p {
+        font-size: 24px;
+    }
+}
+
+
+/* page modelo burger king capa - encontre */
+.modelo-bk-capa .bk-encontre {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 0px;
+    padding: 260px 0;
+    margin: 0 auto;
+    background-color: #6e392c;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url(assets/images/bk-bg-onions.png);
+}
+.modelo-bk-capa .bk-encontre:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: block;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+    background-image: url(assets/images/bk-bg-nuggets-mask.png);
+}
+
+.modelo-bk-capa .bk-encontre .bk-encontre-map {
+    position: absolute;
+    z-index: 2;
+    top: -90px;
+    left: calc(50% - 450px);
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    padding: 0;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 15px 15px 15px rgb(5 5 5 / 20%);
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .map {
+    float: left;
+    display: block;
+    width: 50%;
+    height: 264px;
+    border-radius: 16px 0 0 16px;
+    background-color: #eee;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao {
+    float: right;
+    display: block;
+    width: 50%;
+    padding: 24px 40px;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao h3 {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #212529;
+    margin: 0 0 16px; 
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao p {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #212529;
+    margin: 16px 0;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao .bt {
+    display: inline-block;
+    padding: 16px 32px;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    border: 0;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1;
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao .bt:hover {
+    text-decoration: none;
+    background-color: #FF6A38;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.modelo-bk-capa .bk-encontre .bk-encontre-content {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    padding-left: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-content h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0 0 24px;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-content p {
+    text-align: center;
+    margin: 8px auto;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-content .bt {
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 0 auto;
+    background-color: #FF6A38;
+    border: 0;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-content .bt:hover,
+.modelo-bk-capa .bk-encontre .bk-encontre-content .bt:focus {
+    text-decoration: none !important;
+    background-color: #FF6A38 !important;
+    color: #fff !important;
+}
+.modelo-bk-capa .bk-encontre .bk-encontre-content .bt:hover {
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk-capa .bk-encontre {
+        padding: 120px 0;
+    }
+    .modelo-bk-capa .bk-encontre:after {
+        height: 120px;
+    }
+    .modelo-bk-capa .bk-encontre .bk-encontre-map {
+        top: -480px;
+        left: calc(50% - 170px);
+        width: 340px;
+        max-width: 340px;
+    }
+    .modelo-bk-capa .bk-encontre .bk-encontre-map .map {
+        float: none;
+        width: 100%;
+        height: 180px;
+        border-radius: 16px 16px 0 0;
+    }
+    .modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao {
+        float: none;
+        width: 100%;
+        padding: 24px 24px;
+    }
+    .modelo-bk-capa .bk-encontre .bk-encontre-map .localizacao p {
+        text-align: center;
+    }
+
+    .modelo-bk-capa .bk-encontre .bk-encontre-content {
+        padding-left: 0;
+    }
+    .modelo-bk-capa .bk-encontre .bk-encontre-content h2 {
+        max-width: 300px;
+        margin: 0 auto 24px;
+        font-size: 40px;
+    }
+}
+
+
+/* page modelo burger king capa - planos */
+.modelo-bk-capa .bk-planos {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 0px;
+    padding: 40px 0 120px;
+    margin: 0 auto;
+    background-color: #f9ebda;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-image: url(assets/images/bk-bg-nuggets.png);
+}
+.modelo-bk-capa .bk-planos h2 {
+    text-align: left;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 1.2;
+    color: #67562f;
+    margin: 0 0 16px;
+    max-width: 720px;
+}
+.modelo-bk-capa .bk-planos p {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #67562f;
+    margin: 16px 0;
+    max-width: 720px;
+}
+.modelo-bk-capa .bk-planos .bt {
+    display: inline-block;
+    padding: 20px 40px;
+    margin: 24px 0 0;
+    background-color: #FF6A38;
+    border: 0;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-bk-capa .bk-planos .bt:hover,
+.modelo-bk-capa .bk-planos .bt:focus {
+    text-decoration: none !important;
+    background-color: #FF6A38 !important;
+    color: #fff !important;
+}
+.modelo-bk-capa .bk-planos .bt:hover {
+    opacity: 0.8;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk-capa .bk-planos {
+        background-position: left top;
+        padding: 40px 0 60px;
+    }
+    .modelo-bk-capa .bk-planos h2 {
+        text-transform: unset;
+        font-size: 32px;
+    }
+    .modelo-bk-capa .bk-planos p {
+        font-size: 18px;
+    }
+}
+
+
+/* page modelo burger king capa - faq */
+.modelo-bk-capa .bk-faq {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 0px;
+    padding: 40px 0;
+    margin: 0 auto;
+    background-color: #ff6338;
+}
+.modelo-bk-capa .bk-faq:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+.modelo-bk-capa .bk-faq .col_1 {
+    float: left;
+    width: 36%;
+    margin: 0;
+    padding-top: 12px;
+    text-align: left;
+}
+.modelo-bk-capa .bk-faq .col_2 {
+    float: left;
+    width: 36%;
+    margin: 0;
+    text-align: center;
+}
+.modelo-bk-capa .bk-faq .col_3 {
+    float: left;
+    width: 28%;
+    margin: 0;
+    padding-top: 12px;
+    text-align: right;
+}
+
+.modelo-bk-capa .bk-faq h2 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 0;
+}
+.modelo-bk-capa .bk-faq p {
+    font-family: 'Lato', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    margin: 0;
+}
+.modelo-bk-capa .bk-faq .bt {
+    display: inline-block;
+    padding: 20px 32px;
+    margin: 0;
+    background-color: #fff;
+    border: 0;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    color: #FF6A38;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.modelo-bk-capa .bk-faq .bt:hover,
+.modelo-bk-capa .bk-faq .bt:focus {
+    text-decoration: none !important;
+    background-color: #fff !important;
+    color: #FF6A38 !important;
+}
+.modelo-bk-capa .bk-faq .bt:hover {
+    opacity: 0.9;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-bk-capa .bk-faq .col_1 {
+        float: none;
+        width: 100%;
+        padding-top: 0;
+        padding-bottom: 8px;
+        text-align: center;
+    }
+    .modelo-bk-capa .bk-faq .col_2 {
+        float: none;
+        width: 100%;
+        text-align: center;
+    }
+    .modelo-bk-capa .bk-faq .col_3 {
+        float: none;
+        width: 100%;
+        margin: 0;
+        padding-top: 24px;
+        text-align: center;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*******************************/
+/* PAGE MODELO VALE PEDAGIO */
+/*******************************/
+
+/* page modelo vale pedagio - util */
+.modelo-vp .util {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 16px;
+    margin: 0 auto;
+}
+.modelo-vp .util:after {
+    content: "";
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    opacity: 0;
+}
+
+
+/* page modelo vale pedagio - header */
+.modelo-vp .vp-header {
+    display: block;
+    width: 100%;
+    min-height: 640px;
+    padding: 120px 0 0;
+    margin: 0 auto;
+    background-color: #0D2963;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.modelo-vp .vp-header h1 {
+    text-align: left;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 52px;
+    line-height: 1.1;
+    color: #fff;
+    margin: 0 0 24px;
+    max-width: 600px;
+}
+.modelo-vp .vp-header p {
+    text-align: left;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #fff;
+    margin: 16px 0;
+    max-width: 600px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-vp .vp-header {
+        background-position: left top;
+        background-size: cover;
+        min-height: unset;
+        padding: 60px 0;        
+    }
+    .modelo-vp .vp-header h1 {
+        font-size: 42px;
+        line-height: 1.2;
+    }
+    .modelo-vp .vp-header p {
+        font-size: 24px;
+    }
+}
+
+
+/* page modelo vale pedagio - content */
+.modelo-vp .vp-content {
+    padding: 60px 0 120px;
+    background-color: #fff;
+}
+.modelo-vp .vp-content h2 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #293B8A;
+    margin: 32px 0 16px;
+}
+.modelo-vp .vp-content h3 {
+    text-align: left;
+    font-weight: 400;
+    font-size: 28px;
+    font-style: italic;
+    line-height: 1.2;
+    color: #FF6338;
+    margin: 32px 0 8px;
+}
+.modelo-vp .vp-content h4 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #FF6338;
+    margin: 16px 0 8px;
+}
+.modelo-vp .vp-content h5,
+.modelo-vp .vp-content h6 {
+    text-align: left;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.2;
+    color: #FF6338;
+    margin: 8px 0 8px;
+}
+.modelo-vp .vp-content p {
+    text-align: left;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #2a3037;
+    margin: 8px 0;
+}
+.modelo-vp .vp-content ul {
+    padding: 0;
+    margin: 16px 0;
+}
+.modelo-vp .vp-content li {
+    text-align: left;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.5;
+    color: #2a3037;
+    margin: 8px 0;
+}
+.modelo-vp .vp-content .wp-block-image .alignleft {
+    float: left;
+    margin: 16px 8px 0 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .modelo-vp .vp-content {
+        padding: 40px 0 100px;
+    }
+    .modelo-vp .vp-content .wp-block-image .alignleft {
+        float: left;
+        margin: 12px 0 0 0;
+    }
+    .modelo-vp .vp-content h2 {
+        font-size: 28px;
+    }
+    .modelo-vp .vp-content h3 {
+        font-size: 22px;
+    }
+    .modelo-vp .vp-content h4 {
+        font-size: 20px;
+    }
+    .modelo-vp .vp-content h5,
+    .modelo-vp .vp-content h6 {
+        font-size: 18px;
+    }
+    .modelo-vp .vp-content p {
+        font-size: 18px;
+    }
+    .modelo-vp .vp-content li {
+        font-size: 18px;
+    }
+}
+
+
+
+
+
+
+
+
+

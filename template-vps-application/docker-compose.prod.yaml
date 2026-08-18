@@ -1,0 +1,78 @@
+name: top1tags
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-top1tags}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-top1tags}
+      POSTGRES_DB: ${POSTGRES_DB:-top1tags}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks: [web]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-top1tags} -d ${POSTGRES_DB:-top1tags}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: top1tags:latest
+    pull_policy: never
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+    env_file:
+      - path: .env
+        required: false
+    networks: [web]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  cron:
+    image: curlimages/curl:8.5.0
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    environment:
+      CRON_SECRET: ${CRON_SECRET:-}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          echo "[cron] validating NS $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          curl -sS -X POST -H "Authorization: Bearer $$CRON_SECRET" http://app:3000/api/cron/validate-ns || true
+          sleep 600
+        done
+    networks: [web]
+
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    ports: ["80:80", "443:443"]
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:-top1tags.dev}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [web]
+
+networks:
+  web:
+
+volumes:
+  postgres-data:
+  caddy-data:
+  caddy-config:

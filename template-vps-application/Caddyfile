@@ -1,0 +1,18 @@
+# Catch-all HTTP — Cloudflare Flexible envia tráfego dos custom domains na origem :80.
+# A plataforma top1tags.dev também pode ficar atrás do Cloudflare apontando para esta VPS.
+:80 {
+	encode zstd gzip
+	reverse_proxy app:3000
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+}
+
+# HTTPS direto no Caddy (útil se APP_DOMAIN não estiver atrás do Cloudflare).
+# Descomente e ajuste se precisar de cert local na origem:
+# {$APP_DOMAIN} {
+# 	encode zstd gzip
+# 	reverse_proxy app:3000
+# }
