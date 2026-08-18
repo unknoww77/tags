@@ -34,13 +34,13 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        tenantName: tenantName || undefined,
+        tenantName: tenantName.trim() || undefined,
       }),
     });
     const data = await res.json();
     setLoading(false);
     if (!res.ok) {
-      setError(data.error || "Erro");
+      setError(data.error || "Erro ao gerar convite");
       return;
     }
     setLink(data.link);
@@ -62,7 +62,11 @@ export function InviteManager({ initialInvites, appUrl }: Props) {
         <h3>Gerar convite</h3>
         <label>
           Nome do tenant (opcional)
-          <input value={tenantName} onChange={(e) => setTenantName(e.target.value)} />
+          <input
+            value={tenantName}
+            onChange={(e) => setTenantName(e.target.value)}
+            placeholder="Deixe vazio ou use 2+ caracteres"
+          />
         </label>
         {error && <p className="form-error">{error}</p>}
         <button type="submit" disabled={loading}>

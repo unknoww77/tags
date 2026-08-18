@@ -7,8 +7,15 @@ import { env } from "@/lib/env";
 import { getGlobalSettings, writeAudit } from "@/lib/settings";
 
 const createSchema = z.object({
-  email: z.string().email().optional().or(z.literal("")),
-  tenantName: z.string().min(2).max(120).optional(),
+  tenantName: z
+    .string()
+    .trim()
+    .max(120)
+    .optional()
+    .transform((v) => {
+      const t = (v ?? "").trim();
+      return t.length >= 2 ? t : undefined;
+    }),
   daysValid: z.number().int().min(1).max(90).optional(),
 });
 
