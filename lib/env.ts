@@ -23,7 +23,13 @@ export const env = {
 export function isPlatformHost(host: string): boolean {
   const domain = env.platformDomain();
   const h = host.toLowerCase().split(":")[0];
-  return h === domain || h === `www.${domain}` || h === "localhost" || h.endsWith(".localhost");
+  return (
+    h === domain ||
+    h === `www.${domain}` ||
+    h === "localhost" ||
+    h === "127.0.0.1" ||
+    h.endsWith(".localhost")
+  );
 }
 
 export function getPreviewSlug(host: string): string | null {
