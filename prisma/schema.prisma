@@ -33,6 +33,7 @@ enum TrackEventType {
   view
   cta_click
   lead
+  chat_start
 }
 
 enum LeadStatus {
