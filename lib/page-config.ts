@@ -1,4 +1,4 @@
-export type FormFieldKey = "name" | "phone" | "email" | "city";
+export type FormFieldKey = "name" | "phone" | "email" | "city" | "placa";
 
 export type QuizQuestion = {
   id: string;
@@ -14,6 +14,8 @@ export type PageEngagementConfig = {
   whatsappMessage: string;
   formFields: Record<FormFieldKey, boolean>;
   quizQuestions: QuizQuestion[];
+  /** quando true, exibe badge "Exclusivo Itaú" e pergunta de placa condicional */
+  itauMode?: boolean;
 };
 
 export const FORM_FIELD_LABELS: Record<FormFieldKey, string> = {
@@ -21,6 +23,7 @@ export const FORM_FIELD_LABELS: Record<FormFieldKey, string> = {
   phone: "Telefone / WhatsApp",
   email: "E-mail",
   city: "Cidade",
+  placa: "Placa do veículo",
 };
 
 export const DEFAULT_QUIZ: QuizQuestion[] = [
@@ -41,6 +44,25 @@ export const DEFAULT_QUIZ: QuizQuestion[] = [
   },
 ];
 
+/** Quiz padrão para campanha Itaú — qualifica correntista + veículo */
+export const DEFAULT_QUIZ_ITAU: QuizQuestion[] = [
+  {
+    id: "itau_conta",
+    question: "Qual é o seu tipo de conta no Itaú?",
+    options: ["Corrente", "Poupança", "Não sou cliente Itaú"],
+  },
+  {
+    id: "tem_veiculo",
+    question: "Você tem veículo registrado em seu nome?",
+    options: ["Sim, tenho", "Não tenho"],
+  },
+  {
+    id: "tem_tag",
+    question: "Você já tem alguma tag de pedágio?",
+    options: ["Não tenho", "Tenho e quero trocar", "Tenho e quero outra"],
+  },
+];
+
 export function defaultPageConfig(): PageEngagementConfig {
   return {
     showForm: true,
@@ -53,8 +75,29 @@ export function defaultPageConfig(): PageEngagementConfig {
       phone: true,
       email: false,
       city: false,
+      placa: false,
     },
     quizQuestions: DEFAULT_QUIZ,
+    itauMode: false,
+  };
+}
+
+export function defaultItauPageConfig(): PageEngagementConfig {
+  return {
+    showForm: true,
+    showQuiz: true,
+    sendToWhatsapp: false,
+    whatsappNumber: "",
+    whatsappMessage: "Olá! Vim pela landing do Itaú e quero saber mais sobre a tag.",
+    formFields: {
+      name: true,
+      phone: true,
+      email: false,
+      city: false,
+      placa: true,
+    },
+    quizQuestions: DEFAULT_QUIZ_ITAU,
+    itauMode: true,
   };
 }
 
@@ -69,11 +112,13 @@ export function parsePageConfig(raw: unknown): PageEngagementConfig {
     sendToWhatsapp: Boolean(c.sendToWhatsapp ?? base.sendToWhatsapp),
     whatsappNumber: String(c.whatsappNumber ?? base.whatsappNumber).replace(/\D/g, ""),
     whatsappMessage: String(c.whatsappMessage ?? base.whatsappMessage).slice(0, 500),
+    itauMode: Boolean(c.itauMode ?? base.itauMode),
     formFields: {
       name: Boolean(c.formFields?.name ?? base.formFields.name),
       phone: Boolean(c.formFields?.phone ?? base.formFields.phone),
       email: Boolean(c.formFields?.email ?? base.formFields.email),
       city: Boolean(c.formFields?.city ?? base.formFields.city),
+      placa: Boolean(c.formFields?.placa ?? base.formFields.placa),
     },
     quizQuestions:
       Array.isArray(c.quizQuestions) && c.quizQuestions.length > 0

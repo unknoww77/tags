@@ -21,7 +21,7 @@ export function PagePreview({ brand, headline, description, config }: Props) {
   const primary = isCC ? CC_ORANGE : VL_BLUE;
   const accent = isCC ? CC_GREEN : VL_TEAL;
 
-  const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
+    const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
   const heroSub =
     description ||
     (isCC
@@ -167,6 +167,26 @@ export function PagePreview({ brand, headline, description, config }: Props) {
               paddingTop: 16,
             }}
           >
+            {/* Badge Itaú */}
+            {config.itauMode && (
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 5,
+                  background: "linear-gradient(90deg,#ec7000,#f59e0b)",
+                  color: "#fff",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  borderRadius: 20,
+                  padding: "4px 12px",
+                  marginBottom: 12,
+                }}
+              >
+                🟠 Promoção exclusiva para clientes Itaú
+              </div>
+            )}
+
             {/* STEP indicator */}
             <StepFlow hasQuiz={hasQuiz} hasForm={hasForm} primary={primary} />
 
@@ -373,7 +393,15 @@ function FormPreview({
               color: "#bbb",
             }}
           >
-            {key === "phone" ? "(11) 99999-9999" : key === "email" ? "seu@email.com" : key === "city" ? "São Paulo" : "Seu nome"}
+            {key === "phone"
+              ? "(11) 99999-9999"
+              : key === "email"
+                ? "seu@email.com"
+                : key === "city"
+                  ? "São Paulo"
+                  : key === "placa"
+                    ? "ABC1D23"
+                    : "Seu nome"}
           </div>
         </div>
       ))}

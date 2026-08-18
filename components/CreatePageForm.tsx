@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BRAND_LABELS, getTemplatesForBrand } from "@/lib/templates";
-import { defaultPageConfig } from "@/lib/page-config";
+import { defaultPageConfig, defaultItauPageConfig } from "@/lib/page-config";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
 import { FieldLabel } from "@/components/HelpTip";
 import { PagePreview } from "@/components/PagePreview";

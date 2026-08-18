@@ -4,6 +4,7 @@ import { YesNoSelector, SelectorButton } from "@/components/SelectorButton";
 import { FieldLabel, HelpTip } from "@/components/HelpTip";
 import {
   FORM_FIELD_LABELS,
+  DEFAULT_QUIZ_ITAU,
   type FormFieldKey,
   type PageEngagementConfig,
   type QuizQuestion,
@@ -19,6 +20,7 @@ const FIELD_HELP: Record<FormFieldKey, string> = {
   phone: "Pede telefone/WhatsApp do lead. Essencial se você for ligar ou chamar depois.",
   email: "Pede e-mail. Útil para follow-up por e-mail; deixe desligado se não for usar.",
   city: "Pede a cidade. Ajuda a segmentar campanhas regionais.",
+  placa: "Pede a placa do veículo. Em modo Itaú, só aparece se o visitante respondeu que tem veículo.",
 };
 
 export function EngagementConfigFields({ value, onChange }: Props) {
@@ -65,12 +67,39 @@ export function EngagementConfigFields({ value, onChange }: Props) {
     patch({ quizQuestions: value.quizQuestions.filter((_, i) => i !== index) });
   }
 
+  function activateItauMode(active: boolean) {
+    if (active) {
+      patch({
+        itauMode: true,
+        showQuiz: true,
+        quizQuestions: DEFAULT_QUIZ_ITAU,
+        formFields: { ...value.formFields, placa: true },
+      });
+    } else {
+      patch({ itauMode: false });
+    }
+  }
+
   return (
     <div className="engagement-config">
       <h3 className="field-label-row">
         Engajamento da página
         <HelpTip text="Aqui você define o funil: formulário, quiz e/ou WhatsApp. Os leads ficam salvos no dashboard da página." />
       </h3>
+
+      {/* Itaú mode toggle */}
+      <div className="itau-mode-toggle">
+        <span className="itau-mode-badge">🟠 Modo Itaú</span>
+        <span className="itau-mode-desc">
+          Ativa quiz de qualificação Itaú (conta, veículo, placa) e badge exclusivo na landing.
+        </span>
+        <YesNoSelector
+          label="Campanha exclusiva Itaú?"
+          value={Boolean(value.itauMode)}
+          onChange={activateItauMode}
+          help="Quando ativado, o quiz padrão vira o fluxo Itaú (tipo de conta, veículo no nome, placa) e aparece o selo 'Promoção exclusiva para clientes Itaú' na página."
+        />
+      </div>
 
       <YesNoSelector
         label="Mostrar formulário na página?"

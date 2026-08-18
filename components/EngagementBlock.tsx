@@ -29,6 +29,13 @@ function getUtms() {
   };
 }
 
+/** retorna true se o visitante respondeu que tem veículo (para mostrar campo de placa) */
+function answeredHasVehicle(answers: Record<string, string>): boolean {
+  return Object.values(answers).some((v) =>
+    v.toLowerCase().startsWith("sim")
+  );
+}
+
 export function EngagementBlock({ pageId, domain, configRaw }: Props) {
   const config = useMemo(() => parsePageConfig(configRaw), [configRaw]);
 
@@ -48,7 +55,7 @@ function EngagementFlow({
   domain: string;
   config: PageEngagementConfig;
 }) {
-  const enabledFields = (Object.keys(config.formFields) as FormFieldKey[]).filter(
+  const baseEnabledFields = (Object.keys(config.formFields) as FormFieldKey[]).filter(
     (k) => config.formFields[k]
   );
 
@@ -61,6 +68,16 @@ function EngagementFlow({
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [whatsappOpened, setWhatsappOpened] = useState<boolean | null>(null);
+
+  // Em modo Itaú: mostra placa somente se respondeu que TEM veículo
+  const enabledFields: FormFieldKey[] = (() => {
+    if (!config.itauMode) return baseEnabledFields;
+    const hasVehicle = answeredHasVehicle(answers);
+    return baseEnabledFields.filter((k) => {
+      if (k === "placa") return hasVehicle;
+      return true;
+    });
+  })();
 
   function pickQuiz(option: string) {
     const q = config.quizQuestions[quizIndex];
@@ -179,6 +196,11 @@ function EngagementFlow({
 
     return (
       <div className="quiz-block">
+        {config.itauMode && (
+          <div className="itau-badge">
+            <ItauLogoInline /> Promoção exclusiva para clientes Itaú
+          </div>
+        )}
         <p className="quiz-progress">
           Pergunta {quizIndex + 1} de {config.quizQuestions.length}
         </p>
@@ -196,20 +218,48 @@ function EngagementFlow({
     return null;
   }
 
+  const hasVehicle = config.itauMode ? answeredHasVehicle(answers) : true;
+
   return (
     <form className="lead-form" onSubmit={onSubmitForm}>
+      {config.itauMode && (
+        <div className="itau-badge">
+          <ItauLogoInline /> Promoção exclusiva para clientes Itaú
+        </div>
+      )}
       <h3>{config.showQuiz ? "Quase lá — seus dados" : "Prefere que a gente te chame?"}</h3>
       {enabledFields.map((key) => (
         <label key={key}>
           {FORM_FIELD_LABELS[key]}
-          <input
-            value={fields[key] || ""}
-            onChange={(e) => setFields((prev) => ({ ...prev, [key]: e.target.value }))}
-            type={key === "email" ? "email" : "text"}
-            required
-          />
+          {key === "placa" ? (
+            <input
+              value={fields[key] || ""}
+              onChange={(e) =>
+                setFields((prev) => ({
+                  ...prev,
+                  [key]: e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8),
+                }))
+              }
+              placeholder="ABC1D23"
+              maxLength={8}
+              required
+            />
+          ) : (
+            <input
+              value={fields[key] || ""}
+              onChange={(e) => setFields((prev) => ({ ...prev, [key]: e.target.value }))}
+              type={key === "email" ? "email" : "text"}
+              required
+            />
+          )}
         </label>
       ))}
+      {/* Modo Itaú: se não tem veículo, exibe checkbox "Não tenho veículo" */}
+      {config.itauMode && !hasVehicle && (
+        <p className="lead-no-vehicle">
+          ✓ Registrado: sem veículo no nome
+        </p>
+      )}
       {error && <p className="form-error">{error}</p>}
       <button type="submit" disabled={saving}>
         {saving
@@ -219,5 +269,32 @@ function EngagementFlow({
             : "Enviar dados para contato"}
       </button>
     </form>
+  );
+}
+
+function ItauLogoInline() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      style={{ display: "inline", verticalAlign: "middle", marginRight: 4 }}
+    >
+      <circle cx="20" cy="20" r="20" fill="#EC7000" />
+      <text
+        x="20"
+        y="26"
+        textAnchor="middle"
+        fill="#fff"
+        fontSize="16"
+        fontWeight="bold"
+        fontFamily="Arial,sans-serif"
+      >
+        itaú
+      </text>
+    </svg>
   );
 }
