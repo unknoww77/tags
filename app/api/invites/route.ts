@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     const invite = await prisma.invite.create({
       data: {
         token,
-        email: data.email ? data.email.toLowerCase().trim() : null,
+        email: null,
         tenantName: data.tenantName || null,
         expiresAt,
         createdBy: session.user.id,
