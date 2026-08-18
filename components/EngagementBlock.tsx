@@ -197,9 +197,14 @@ function EngagementFlow({
     return (
       <div className="quiz-block">
         {config.itauMode && (
-          <div className="itau-badge">
-            <ItauLogoInline /> Promoção exclusiva para clientes Itaú
-          </div>
+          <>
+            <div className="itau-badge">
+              <ItauLogoInline /> Promoção exclusiva para clientes Itaú
+            </div>
+            <p className="itau-helper-text">
+              Para ativar a promoção, a validação deve ser feita com débito automático no Itaú.
+            </p>
+          </>
         )}
         <p className="quiz-progress">
           Pergunta {quizIndex + 1} de {config.quizQuestions.length}
@@ -223,9 +228,14 @@ function EngagementFlow({
   return (
     <form className="lead-form" onSubmit={onSubmitForm}>
       {config.itauMode && (
-        <div className="itau-badge">
-          <ItauLogoInline /> Promoção exclusiva para clientes Itaú
-        </div>
+        <>
+          <div className="itau-badge">
+            <ItauLogoInline /> Promoção exclusiva para clientes Itaú
+          </div>
+          <p className="itau-helper-text">
+            Complete os dados para ativar a promoção. A validação final exige débito automático no Itaú.
+          </p>
+        </>
       )}
       <h3>{config.showQuiz ? "Quase lá — seus dados" : "Prefere que a gente te chame?"}</h3>
       {enabledFields.map((key) => (
@@ -242,6 +252,39 @@ function EngagementFlow({
               }
               placeholder="ABC1D23"
               maxLength={8}
+              required
+            />
+          ) : key === "cpf" ? (
+            <input
+              value={fields[key] || ""}
+              onChange={(e) =>
+                setFields((prev) => ({
+                  ...prev,
+                  [key]: e.target.value.replace(/\D/g, "").slice(0, 11),
+                }))
+              }
+              placeholder="00000000000"
+              inputMode="numeric"
+              required
+            />
+          ) : key === "birthDate" ? (
+            <input
+              value={fields[key] || ""}
+              onChange={(e) => setFields((prev) => ({ ...prev, [key]: e.target.value }))}
+              type="date"
+              required
+            />
+          ) : key === "income" ? (
+            <input
+              value={fields[key] || ""}
+              onChange={(e) =>
+                setFields((prev) => ({
+                  ...prev,
+                  [key]: e.target.value.replace(/[^\d,.]/g, "").slice(0, 20),
+                }))
+              }
+              placeholder="Ex: 3500"
+              inputMode="decimal"
               required
             />
           ) : (

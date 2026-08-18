@@ -21,6 +21,9 @@ const FIELD_HELP: Record<FormFieldKey, string> = {
   email: "Pede e-mail. Útil para follow-up por e-mail; deixe desligado se não for usar.",
   city: "Pede a cidade. Ajuda a segmentar campanhas regionais.",
   placa: "Pede a placa do veículo. Em modo Itaú, só aparece se o visitante respondeu que tem veículo.",
+  cpf: "Pede o CPF para validação comercial e conferência de elegibilidade da promoção.",
+  birthDate: "Pede a data de nascimento para completar a proposta e validar dados do cliente.",
+  income: "Pede a renda mensal para qualificar melhor o lead antes do atendimento.",
 };
 
 export function EngagementConfigFields({ value, onChange }: Props) {
@@ -73,7 +76,16 @@ export function EngagementConfigFields({ value, onChange }: Props) {
         itauMode: true,
         showQuiz: true,
         quizQuestions: DEFAULT_QUIZ_ITAU,
-        formFields: { ...value.formFields, placa: true },
+        formFields: {
+          ...value.formFields,
+          name: true,
+          phone: true,
+          email: true,
+          placa: true,
+          cpf: true,
+          birthDate: true,
+          income: true,
+        },
       });
     } else {
       patch({ itauMode: false });
@@ -91,13 +103,13 @@ export function EngagementConfigFields({ value, onChange }: Props) {
       <div className="itau-mode-toggle">
         <span className="itau-mode-badge">🟠 Modo Itaú</span>
         <span className="itau-mode-desc">
-          Ativa quiz de qualificação Itaú (conta, veículo, placa) e badge exclusivo na landing.
+          Ativa um funil Itaú mais completo com conta, veículo, débito automático e captura dos dados principais do cliente.
         </span>
         <YesNoSelector
           label="Campanha exclusiva Itaú?"
           value={Boolean(value.itauMode)}
           onChange={activateItauMode}
-          help="Quando ativado, o quiz padrão vira o fluxo Itaú (tipo de conta, veículo no nome, placa) e aparece o selo 'Promoção exclusiva para clientes Itaú' na página."
+          help="Quando ativado, o quiz padrão vira o fluxo Itaú completo, a landing mostra aviso de promoção exclusiva e o formulário captura nome completo, CPF, nascimento, renda, telefone, e-mail e placa quando houver veículo."
         />
       </div>
 

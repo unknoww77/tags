@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FORM_FIELD_LABELS, type FormFieldKey, type PageEngagementConfig } from "@/lib/page-config";
 
 type Props = {
@@ -21,20 +21,58 @@ export function PagePreview({ brand, headline, description, config }: Props) {
   const primary = isCC ? CC_ORANGE : VL_BLUE;
   const accent = isCC ? CC_GREEN : VL_TEAL;
 
-    const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
+  const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
   const heroSub =
     description ||
     (isCC
       ? "Pode ir tranquilo, por onde você for!"
       : "A tag de pedágio mais completa do Brasil.");
 
-  const enabledFields = (Object.keys(config.formFields) as FormFieldKey[]).filter(
-    (k) => config.formFields[k]
-  );
-
   const hasQuiz = config.showQuiz && config.quizQuestions.length > 0;
   const hasForm = config.showForm;
   const hasWpp = config.sendToWhatsapp && config.whatsappNumber.length >= 10;
+  const vehicleQuestion = useMemo(
+    () =>
+      config.quizQuestions.find((q) =>
+        /ve[ií]culo registrado em seu nome/i.test(q.question)
+      )?.question ?? null,
+    [config.quizQuestions]
+  );
+  const [previewStep, setPreviewStep] = useState<"hero" | "quiz" | "form" | "done">(
+    hasQuiz ? "quiz" : hasForm ? "form" : "hero"
+  );
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+
+  const enabledFields = useMemo(() => {
+    let fields = (Object.keys(config.formFields) as FormFieldKey[]).filter((k) => config.formFields[k]);
+    if (config.itauMode && fields.includes("placa") && vehicleQuestion) {
+      const vehicleAnswer = answers[vehicleQuestion] ?? "";
+      const hasVehicle = /^sim/i.test(vehicleAnswer);
+      fields = fields.filter((key) => key !== "placa" || hasVehicle);
+    }
+    return fields;
+  }, [answers, config.formFields, config.itauMode, vehicleQuestion]);
+
+  function resetFlow() {
+    setAnswers({});
+    setQuizIndex(0);
+    setPreviewStep(hasQuiz ? "quiz" : hasForm ? "form" : "hero");
+  }
+
+  function pickQuizAnswer(question: string, option: string) {
+    const nextAnswers = { ...answers, [question]: option };
+    setAnswers(nextAnswers);
+    if (quizIndex + 1 < config.quizQuestions.length) {
+      setQuizIndex((prev) => prev + 1);
+      return;
+    }
+    if (hasForm) {
+      setPreviewStep("form");
+      return;
+    }
+    setPreviewStep("done");
+  }
 
   return (
     <div
@@ -186,23 +224,53 @@ export function PagePreview({ brand, headline, description, config }: Props) {
                 🟠 Promoção exclusiva para clientes Itaú
               </div>
             )}
-
-            {/* STEP indicator */}
-            <StepFlow hasQuiz={hasQuiz} hasForm={hasForm} primary={primary} />
-
-            {/* quiz preview */}
-            {hasQuiz && (
-              <QuizPreview questions={config.quizQuestions} primary={primary} accent={accent} />
+            {config.itauMode && (
+              <p style={{ fontSize: 10, color: "#6b7280", margin: "0 0 12px" }}>
+                A ativação da promoção depende da validação do débito automático no Itaú.
+              </p>
             )}
 
-            {/* form preview */}
-            {hasForm && (
+            {/* STEP indicator */}
+            <StepFlow
+              hasQuiz={hasQuiz}
+              hasForm={hasForm}
+              primary={primary}
+              activeStep={previewStep}
+            />
+
+            {previewStep === "hero" && (
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 14 }}>
+                <button
+                  type="button"
+                  onClick={() => setPreviewStep(hasQuiz ? "quiz" : hasForm ? "form" : "done")}
+                  style={previewActionButton(primary)}
+                >
+                  Ver início do funil
+                </button>
+              </div>
+            )}
+
+            {previewStep === "quiz" && hasQuiz && (
+              <QuizPreview
+                questions={config.quizQuestions}
+                primary={primary}
+                quizIndex={quizIndex}
+                onPick={pickQuizAnswer}
+              />
+            )}
+
+            {previewStep === "form" && hasForm && (
               <FormPreview
                 fields={enabledFields}
                 hasWpp={hasWpp}
                 primary={primary}
                 hasQuiz={hasQuiz}
+                onSubmitPreview={() => setPreviewStep("done")}
               />
+            )}
+
+            {previewStep === "done" && (
+              <DonePreview hasWpp={hasWpp} primary={primary} onRestart={resetFlow} />
             )}
 
             {!hasQuiz && !hasForm && (
@@ -262,10 +330,12 @@ function StepFlow({
   hasQuiz,
   hasForm,
   primary,
+  activeStep,
 }: {
   hasQuiz: boolean;
   hasForm: boolean;
   primary: string;
+  activeStep: "hero" | "quiz" | "form" | "done";
 }) {
   const steps: string[] = [];
   if (hasQuiz) steps.push("Quiz");
@@ -280,8 +350,18 @@ function StepFlow({
         <span key={s} style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <span
             style={{
-              background: i === 0 ? primary : "#e5e7eb",
-              color: i === 0 ? "#fff" : "#555",
+              background:
+                (activeStep === "quiz" && i === 0) ||
+                (activeStep === "form" && ((hasQuiz && i <= 1) || (!hasQuiz && i === 0))) ||
+                (activeStep === "done")
+                  ? primary
+                  : "#e5e7eb",
+              color:
+                (activeStep === "quiz" && i === 0) ||
+                (activeStep === "form" && ((hasQuiz && i <= 1) || (!hasQuiz && i === 0))) ||
+                activeStep === "done"
+                  ? "#fff"
+                  : "#555",
               borderRadius: 12,
               padding: "2px 10px",
               fontSize: 10,
@@ -300,14 +380,15 @@ function StepFlow({
 function QuizPreview({
   questions,
   primary,
-  accent,
+  quizIndex,
+  onPick,
 }: {
   questions: { id: string; question: string; options: string[] }[];
   primary: string;
-  accent: string;
+  quizIndex: number;
+  onPick: (question: string, option: string) => void;
 }) {
-  const [qi, setQi] = useState(0);
-  const q = questions[Math.min(qi, questions.length - 1)];
+  const q = questions[Math.min(quizIndex, questions.length - 1)];
 
   if (!q) return null;
 
@@ -322,7 +403,7 @@ function QuizPreview({
       }}
     >
       <p style={{ fontSize: 10, color: "#888", margin: "0 0 6px" }}>
-        Pergunta {qi + 1} de {questions.length}
+        Pergunta {quizIndex + 1} de {questions.length}
       </p>
       <p style={{ fontWeight: 700, fontSize: 13, margin: "0 0 12px", color: "#111" }}>{q.question}</p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
@@ -330,7 +411,7 @@ function QuizPreview({
           <button
             key={opt}
             type="button"
-            onClick={() => setQi((prev) => Math.min(prev + 1, questions.length - 1))}
+            onClick={() => onPick(q.question, opt)}
             style={{
               background: "#fff",
               border: `2px solid ${primary}`,
@@ -347,7 +428,7 @@ function QuizPreview({
         ))}
       </div>
       <p style={{ fontSize: 9, color: "#aaa", marginTop: 8 }}>
-        ↑ clique para simular o fluxo do quiz
+        Clique numa resposta para avançar no fluxo
       </p>
     </div>
   );
@@ -358,11 +439,13 @@ function FormPreview({
   hasWpp,
   primary,
   hasQuiz,
+  onSubmitPreview,
 }: {
   fields: FormFieldKey[];
   hasWpp: boolean;
   primary: string;
   hasQuiz: boolean;
+  onSubmitPreview: () => void;
 }) {
   if (fields.length === 0) return null;
 
@@ -401,6 +484,12 @@ function FormPreview({
                   ? "São Paulo"
                   : key === "placa"
                     ? "ABC1D23"
+              : key === "cpf"
+                ? "00000000000"
+              : key === "birthDate"
+                ? "1995-08-18"
+              : key === "income"
+                ? "3500"
                     : "Seu nome"}
           </div>
         </div>
@@ -415,10 +504,57 @@ function FormPreview({
           fontWeight: 700,
           fontSize: 12,
           marginTop: 10,
+          cursor: "pointer",
         }}
+        onClick={onSubmitPreview}
       >
         {hasWpp ? "Enviar e abrir WhatsApp" : "Enviar dados para contato"}
       </div>
     </div>
   );
+}
+
+function DonePreview({
+  hasWpp,
+  primary,
+  onRestart,
+}: {
+  hasWpp: boolean;
+  primary: string;
+  onRestart: () => void;
+}) {
+  return (
+    <div
+      style={{
+        background: "#f9fafb",
+        borderRadius: 10,
+        padding: "18px 14px",
+        border: "1px solid #e5e7eb",
+        textAlign: "center",
+      }}
+    >
+      <p style={{ fontWeight: 700, fontSize: 14, margin: "0 0 8px", color: "#111" }}>
+        {hasWpp ? "Lead enviado e WhatsApp aberto" : "Lead enviado com sucesso"}
+      </p>
+      <p style={{ fontSize: 11, color: "#666", margin: "0 0 14px" }}>
+        Este é o estado final que o visitante vê depois de passar por todo o fluxo.
+      </p>
+      <button type="button" onClick={onRestart} style={previewActionButton(primary)}>
+        Recomeçar preview
+      </button>
+    </div>
+  );
+}
+
+function previewActionButton(primary: string) {
+  return {
+    background: primary,
+    color: "#fff",
+    border: "none",
+    borderRadius: 999,
+    padding: "8px 16px",
+    fontSize: 12,
+    fontWeight: 700,
+    cursor: "pointer",
+  } as const;
 }

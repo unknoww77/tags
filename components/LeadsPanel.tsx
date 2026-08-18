@@ -103,6 +103,14 @@ export function LeadsPanel({ pageId }: { pageId: string }) {
                       <div className="muted">{lead.phone || "—"}</div>
                       <div className="muted">{lead.email || ""}</div>
                       <div className="muted">{lead.city || ""}</div>
+                      {lead.formJson &&
+                        Object.entries(lead.formJson)
+                          .filter(([key]) => !["name", "phone", "email", "city"].includes(key))
+                          .map(([key, value]) => (
+                            <div key={key} className="muted tiny">
+                              {fieldLabel(key)}: {value || "—"}
+                            </div>
+                          ))}
                     </td>
                     <td>
                       <select
@@ -137,4 +145,14 @@ export function LeadsPanel({ pageId }: { pageId: string }) {
       )}
     </div>
   );
+}
+
+function fieldLabel(key: string) {
+  const labels: Record<string, string> = {
+    placa: "Placa",
+    cpf: "CPF",
+    birthDate: "Nascimento",
+    income: "Renda",
+  };
+  return labels[key] || key;
 }
