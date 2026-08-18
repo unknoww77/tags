@@ -1,9 +1,21 @@
-export type FormFieldKey = "name" | "phone" | "email" | "city" | "placa";
+export type FormFieldKey =
+  | "name"
+  | "phone"
+  | "email"
+  | "city"
+  | "placa"
+  | "cpf"
+  | "birthDate"
+  | "income";
 
 export type QuizQuestion = {
   id: string;
   question: string;
   options: string[];
+};
+
+export type FlowLayout = {
+  positions: Record<string, { x: number; y: number }>;
 };
 
 export type PageEngagementConfig = {
@@ -16,14 +28,19 @@ export type PageEngagementConfig = {
   quizQuestions: QuizQuestion[];
   /** quando true, exibe badge "Exclusivo Itaú" e pergunta de placa condicional */
   itauMode?: boolean;
+  /** posições dos blocos no editor visual de fluxo */
+  flowLayout?: FlowLayout;
 };
 
 export const FORM_FIELD_LABELS: Record<FormFieldKey, string> = {
-  name: "Nome",
+  name: "Nome completo",
   phone: "Telefone / WhatsApp",
   email: "E-mail",
   city: "Cidade",
   placa: "Placa do veículo",
+  cpf: "CPF",
+  birthDate: "Data de nascimento",
+  income: "Renda mensal",
 };
 
 export const DEFAULT_QUIZ: QuizQuestion[] = [
@@ -61,6 +78,11 @@ export const DEFAULT_QUIZ_ITAU: QuizQuestion[] = [
     question: "Você já tem alguma tag de pedágio?",
     options: ["Não tenho", "Tenho e quero trocar", "Tenho e quero outra"],
   },
+  {
+    id: "debito_itau",
+    question: "Você consegue validar a promoção com débito automático no Itaú?",
+    options: ["Sim, consigo validar", "Preciso de ajuda para validar"],
+  },
 ];
 
 export function defaultPageConfig(): PageEngagementConfig {
@@ -76,6 +98,9 @@ export function defaultPageConfig(): PageEngagementConfig {
       email: false,
       city: false,
       placa: false,
+      cpf: false,
+      birthDate: false,
+      income: false,
     },
     quizQuestions: DEFAULT_QUIZ,
     itauMode: false,
@@ -92,9 +117,12 @@ export function defaultItauPageConfig(): PageEngagementConfig {
     formFields: {
       name: true,
       phone: true,
-      email: false,
+      email: true,
       city: false,
       placa: true,
+      cpf: true,
+      birthDate: true,
+      income: true,
     },
     quizQuestions: DEFAULT_QUIZ_ITAU,
     itauMode: true,
@@ -113,12 +141,25 @@ export function parsePageConfig(raw: unknown): PageEngagementConfig {
     whatsappNumber: String(c.whatsappNumber ?? base.whatsappNumber).replace(/\D/g, ""),
     whatsappMessage: String(c.whatsappMessage ?? base.whatsappMessage).slice(0, 500),
     itauMode: Boolean(c.itauMode ?? base.itauMode),
+    flowLayout:
+      c.flowLayout && typeof c.flowLayout === "object" && c.flowLayout.positions
+        ? {
+            positions: Object.fromEntries(
+              Object.entries(c.flowLayout.positions as Record<string, { x?: number; y?: number }>).map(
+                ([id, pos]) => [id, { x: Number(pos.x ?? 0), y: Number(pos.y ?? 0) }]
+              )
+            ),
+          }
+        : base.flowLayout,
     formFields: {
       name: Boolean(c.formFields?.name ?? base.formFields.name),
       phone: Boolean(c.formFields?.phone ?? base.formFields.phone),
       email: Boolean(c.formFields?.email ?? base.formFields.email),
       city: Boolean(c.formFields?.city ?? base.formFields.city),
       placa: Boolean(c.formFields?.placa ?? base.formFields.placa),
+      cpf: Boolean(c.formFields?.cpf ?? base.formFields.cpf),
+      birthDate: Boolean(c.formFields?.birthDate ?? base.formFields.birthDate),
+      income: Boolean(c.formFields?.income ?? base.formFields.income),
     },
     quizQuestions:
       Array.isArray(c.quizQuestions) && c.quizQuestions.length > 0

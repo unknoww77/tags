@@ -7,7 +7,6 @@ import { DomainConnect } from "@/components/DomainConnect";
 import { PageAnalytics } from "@/components/PageAnalytics";
 import { PageConfigEditor } from "@/components/PageConfigEditor";
 import { LeadsPanel } from "@/components/LeadsPanel";
-import { PreviewPanel } from "@/components/PreviewPanel";
 import { env } from "@/lib/env";
 import { BRAND_LABELS } from "@/lib/templates";
 
@@ -35,7 +34,7 @@ export default async function PageDetailPage({ params }: Props) {
   return (
     <div className="platform-shell">
       <PlatformHeader />
-      <main className="dashboard">
+      <main className="dashboard new-page-shell">
         <Link href="/dashboard" className="muted">
           ← Voltar
         </Link>
@@ -49,17 +48,29 @@ export default async function PageDetailPage({ params }: Props) {
         </div>
 
         <section className="panel">
-          <h2>Preview ao vivo</h2>
-          <PreviewPanel
-            slug={page.slug}
-            platformDomain={env.platformDomain()}
-            appUrl={env.appUrl()}
+          <h2>Funil da página</h2>
+          <p className="muted">
+            Arraste os blocos no editor acima para montar o fluxo. Configure detalhes abaixo e veja o preview ao lado.
+          </p>
+          <div className="selector-row wrap" style={{ marginBottom: 12 }}>
+            <a
+              className="selector-btn"
+              href={`https://${page.slug}.${env.platformDomain()}?utm_source=preview&utm_medium=dashboard&utm_campaign=teste`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Abrir preview real
+            </a>
+          </div>
+          <PageConfigEditor
+            pageId={page.id}
+            initialConfig={page.configJson}
+            brand={page.brand}
+            templateId={page.templateId}
+            title={page.title}
+            headline={page.headline}
+            description={page.description}
           />
-        </section>
-
-        <section className="panel">
-          <h2>Formulário, quiz e WhatsApp</h2>
-          <PageConfigEditor pageId={page.id} initialConfig={page.configJson} />
         </section>
 
         <section className="panel">

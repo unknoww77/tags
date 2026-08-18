@@ -3,14 +3,29 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
+import { FunnelFlowEditor } from "@/components/FunnelFlowEditor";
+import { PagePreview } from "@/components/PagePreview";
 import { parsePageConfig, type PageEngagementConfig } from "@/lib/page-config";
 
 type Props = {
   pageId: string;
   initialConfig: unknown;
+  brand: "conectcar" | "veloe";
+  templateId: string;
+  title: string;
+  headline: string | null;
+  description: string | null;
 };
 
-export function PageConfigEditor({ pageId, initialConfig }: Props) {
+export function PageConfigEditor({
+  pageId,
+  initialConfig,
+  brand,
+  templateId,
+  title,
+  headline,
+  description,
+}: Props) {
   const router = useRouter();
   const [config, setConfig] = useState<PageEngagementConfig>(() => parsePageConfig(initialConfig));
   const [saving, setSaving] = useState(false);
@@ -44,13 +59,28 @@ export function PageConfigEditor({ pageId, initialConfig }: Props) {
   }
 
   return (
-    <div className="stack">
-      <EngagementConfigFields value={config} onChange={setConfig} />
-      {error && <p className="form-error">{error}</p>}
-      {message && <p className="success-box">{message}</p>}
-      <button type="button" onClick={save} disabled={saving}>
-        {saving ? "Salvando..." : "Salvar engajamento"}
-      </button>
+    <div className="config-editor-stack">
+      <FunnelFlowEditor config={config} onChange={setConfig} />
+      <div className="config-preview-split">
+      <div className="stack config-preview-form">
+        <EngagementConfigFields value={config} onChange={setConfig} />
+        {error && <p className="form-error">{error}</p>}
+        {message && <p className="success-box">{message}</p>}
+        <button type="button" onClick={save} disabled={saving}>
+          {saving ? "Salvando..." : "Salvar engajamento"}
+        </button>
+      </div>
+      <div className="config-preview-panel">
+        <div className="new-page-preview-label">Preview do fluxo</div>
+        <PagePreview
+          brand={brand}
+          templateId={templateId}
+          headline={headline || title}
+          description={description || ""}
+          config={config}
+        />
+      </div>
+      </div>
     </div>
   );
 }

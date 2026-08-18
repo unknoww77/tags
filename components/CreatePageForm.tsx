@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BRAND_LABELS, getTemplatesForBrand } from "@/lib/templates";
 import { defaultPageConfig, defaultItauPageConfig } from "@/lib/page-config";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
+import { FunnelFlowEditor } from "@/components/FunnelFlowEditor";
 import { FieldLabel } from "@/components/HelpTip";
 import { PagePreview } from "@/components/PagePreview";
 
@@ -64,7 +65,9 @@ export function CreatePageForm() {
   }
 
   return (
-    <div className="new-page-split">
+    <div className="config-editor-stack">
+      <FunnelFlowEditor config={config} onChange={setConfig} />
+      <div className="new-page-split">
       <form className="panel-form new-page-form" onSubmit={onSubmit}>
       <div className="selector-group">
         <span className="selector-label">
@@ -153,6 +156,7 @@ export function CreatePageForm() {
           description={description}
           config={config}
         />
+      </div>
       </div>
     </div>
   );

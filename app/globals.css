@@ -430,12 +430,12 @@ button:hover:not(:disabled) {
 /* ── New page: split form + live preview ──────────────────── */
 .new-page-split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 28px;
   align-items: start;
   margin-top: 20px;
-  width: calc(100vw - 280px);
-  max-width: 1280px;
+  width: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 860px) {
@@ -455,8 +455,9 @@ button:hover:not(:disabled) {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  height: calc(100vh - 120px);
-  min-height: 500px;
+  height: calc(100vh - 140px);
+  min-height: 560px;
+  min-width: 0;
 }
 
 .new-page-preview-label {
@@ -465,6 +466,169 @@ button:hover:not(:disabled) {
   color: var(--muted, #888);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+.config-preview-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.config-preview-form {
+  min-width: 0;
+}
+
+.config-preview-panel {
+  position: sticky;
+  top: 16px;
+  height: calc(100vh - 140px);
+  min-height: 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.config-editor-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Editor visual de fluxo (estilo Typebot) ─────────────── */
+.funnel-flow-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(18, 26, 43, 0.65);
+  padding: 14px;
+}
+
+.funnel-flow-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.funnel-flow-toolbar strong {
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.funnel-flow-canvas-wrap {
+  height: min(520px, 62vh);
+  min-height: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0f172a;
+}
+
+.funnel-flow-canvas-wrap .react-flow {
+  background: transparent;
+}
+
+.funnel-flow-node {
+  width: 240px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  cursor: grab;
+}
+
+.funnel-flow-node.is-selected {
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+}
+
+.funnel-flow-node-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 3px solid var(--accent);
+  padding-left: 8px;
+  margin-bottom: 8px;
+}
+
+.funnel-flow-node-icon {
+  font-size: 0.9rem;
+}
+
+.funnel-flow-node-type {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.funnel-flow-node-label {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+.funnel-flow-node-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.funnel-flow-option-pill {
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.funnel-flow-handle {
+  width: 10px !important;
+  height: 10px !important;
+  background: var(--accent-2) !important;
+  border: 2px solid #0f172a !important;
+}
+
+.funnel-flow-inspector {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+}
+
+.funnel-flow-inspector h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.funnel-flow-inspector label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 980px) {
+  .config-preview-split {
+    grid-template-columns: 1fr;
+  }
+
+  .config-preview-panel,
+  .new-page-preview {
+    position: static;
+    height: auto;
+    min-height: 420px;
+  }
 }
 
 .card-list {
@@ -778,6 +942,13 @@ code,
   color: var(--ok, #4ade80);
   margin: 4px 0;
   font-weight: 600;
+}
+
+.itau-helper-text {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0 0 12px;
+  line-height: 1.45;
 }
 
 /* toggle de modo Itaú no dashboard */
