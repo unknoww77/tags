@@ -23,11 +23,11 @@ on:
       - "tsconfig.json"
       - ".github/workflows/deploy.yaml"
 
-# Um deploy por vez: o em andamento termina; o próximo espera na fila.
-# cancel-in-progress: false = nunca cancela um deploy que já começou.
+# Sempre o código mais novo: se chega outro push, cancela o deploy antigo
+# (em andamento ou na fila) e sobe só o commit da tip.
 concurrency:
   group: deploy-top1tags
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -40,6 +40,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Identify deploy
+        run: |
+          echo "=== DEPLOY IDENTITY ==="
+          echo "repo: ${{ github.repository }}"
+          echo "ref: ${{ github.ref_name }}"
+          echo "sha: ${{ github.sha }}"
+          echo "event: ${{ github.event_name }}"
+          echo "actor: ${{ github.actor }}"
+          echo "run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          git log -1 --pretty=format:'commit %H%nauthor %an <%ae>%ndate %ci%n%s%n%n%b'
+          echo ""
+          echo "=== END IDENTITY ==="
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -117,7 +130,16 @@ jobs:
             # Trava local na VPS: se dois deploys chegarem juntos, o segundo espera o primeiro.
             exec 9>"$APP_DIR/.deploy.lock"
             flock -w 2400 9
+            echo "=== VPS DEPLOY ==="
+            echo "host=$(hostname)"
+            echo "at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             if sudo docker compose version >/dev/null 2>&1; then DCC="sudo docker compose"; else DCC="docker compose"; fi
+            # grava metadado do deploy no servidor
+            {
+              echo "deployed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              echo "github_sha=${{ github.sha }}"
+              echo "github_run=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            } > "$APP_DIR/.deploy-meta"
             if [ -n "$ENV_SECRET" ]; then
               printf '%s\n' "$ENV_SECRET" > .env
               chmod 600 .env
@@ -125,6 +147,8 @@ jobs:
               echo "Secret INFRA_ENV não configurado."
               exit 1
             fi
+            # preserva overrides locais de super admin se existirem
+            grep -q '^SUPER_ADMIN_USERNAME=' .env || echo 'SUPER_ADMIN_USERNAME=admin' >> .env
             gunzip -c top1tags-image.tar.gz | sudo docker load
             rm -f top1tags-image.tar.gz
             $DCC -f docker-compose.prod.yaml up -d --remove-orphans
@@ -138,7 +162,8 @@ jobs:
               $DCC -f docker-compose.prod.yaml logs --tail=120
               exit 1
             fi
-            echo "DEPLOY_OK"
+            echo "DEPLOY_OK sha=${{ github.sha }}"
+            cat "$APP_DIR/.deploy-meta"
 
       - name: Notify Telegram on deploy failure
         if: failure()
