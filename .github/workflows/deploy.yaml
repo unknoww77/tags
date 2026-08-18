@@ -23,11 +23,14 @@ on:
       - "tsconfig.json"
       - ".github/workflows/deploy.yaml"
 
-# Sempre o código mais novo: se chega outro push, cancela o deploy antigo
-# (em andamento ou na fila) e sobe só o commit da tip.
+# Fila segura:
+# - cancel-in-progress: false → não mata um deploy no meio do upload/apply na VPS
+# - GitHub mantém só 1 pendente: pushes intermediários saem da fila
+# - tip-check → só aplica na VPS se este commit ainda for a tip do main
+# Obs: tip do main já contém TODOS os commits anteriores (features não se perdem).
 concurrency:
   group: deploy-top1tags
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -40,6 +43,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Identify deploy
         run: |
@@ -54,10 +59,27 @@ jobs:
           echo ""
           echo "=== END IDENTITY ==="
 
+      - name: Tip check (before build)
+        id: tip_before
+        run: |
+          git fetch origin "${{ github.ref_name }}" --prune
+          TIP=$(git rev-parse "origin/${{ github.ref_name }}")
+          echo "this=${{ github.sha }}"
+          echo "tip=$TIP"
+          if [ "$TIP" != "${{ github.sha }}" ]; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Já existe commit mais novo ($TIP). Este run só faria trabalho duplicado — pulando build/deploy. A tip inclui este commit."
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            echo "Ainda somos a tip de ${{ github.ref_name }}."
+          fi
+
       - name: Setup Docker Buildx
+        if: steps.tip_before.outputs.deploy == 'true'
         uses: docker/setup-buildx-action@v3
 
       - name: Build application image
+        if: steps.tip_before.outputs.deploy == 'true'
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -69,9 +91,26 @@ jobs:
           provenance: false
 
       - name: Package application image
+        if: steps.tip_before.outputs.deploy == 'true'
         run: docker save top1tags:latest | gzip > top1tags-image.tar.gz
 
+      - name: Tip check (before VPS)
+        id: tip_after
+        if: steps.tip_before.outputs.deploy == 'true'
+        run: |
+          git fetch origin "${{ github.ref_name }}" --prune
+          TIP=$(git rev-parse "origin/${{ github.ref_name }}")
+          echo "this=${{ github.sha }}"
+          echo "tip=$TIP"
+          if [ "$TIP" != "${{ github.sha }}" ]; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Durante o build surgiu tip nova ($TIP). Não vamos aplicar imagem antiga na VPS — o próximo run na fila fará isso."
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Prepare VPS
+        if: steps.tip_before.outputs.deploy == 'true' && steps.tip_after.outputs.deploy == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.INFRA_SERVER_IP }}
@@ -103,6 +142,7 @@ jobs:
             fi
 
       - name: Upload deploy artifacts
+        if: steps.tip_before.outputs.deploy == 'true' && steps.tip_after.outputs.deploy == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.INFRA_SERVER_IP }}
@@ -114,6 +154,7 @@ jobs:
           overwrite: true
 
       - name: Deploy service
+        if: steps.tip_before.outputs.deploy == 'true' && steps.tip_after.outputs.deploy == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.INFRA_SERVER_IP }}
@@ -127,14 +168,13 @@ jobs:
             APP_DIR="$HOME/top1tags"
             mkdir -p "$APP_DIR"
             cd "$APP_DIR"
-            # Trava local na VPS: se dois deploys chegarem juntos, o segundo espera o primeiro.
+            # Trava na VPS: apply um por vez
             exec 9>"$APP_DIR/.deploy.lock"
             flock -w 2400 9
             echo "=== VPS DEPLOY ==="
             echo "host=$(hostname)"
             echo "at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             if sudo docker compose version >/dev/null 2>&1; then DCC="sudo docker compose"; else DCC="docker compose"; fi
-            # grava metadado do deploy no servidor
             {
               echo "deployed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
               echo "github_sha=${{ github.sha }}"
@@ -147,7 +187,6 @@ jobs:
               echo "Secret INFRA_ENV não configurado."
               exit 1
             fi
-            # preserva overrides locais de super admin se existirem
             grep -q '^SUPER_ADMIN_USERNAME=' .env || echo 'SUPER_ADMIN_USERNAME=admin' >> .env
             gunzip -c top1tags-image.tar.gz | sudo docker load
             rm -f top1tags-image.tar.gz
@@ -174,7 +213,7 @@ jobs:
         run: node scripts/notify-deploy-failure.mjs
 
       - name: Clean up old images
-        if: always()
+        if: always() && steps.tip_before.outputs.deploy == 'true' && steps.tip_after.outputs.deploy == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.INFRA_SERVER_IP }}
