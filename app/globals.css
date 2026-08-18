@@ -239,6 +239,51 @@ button:hover:not(:disabled) {
   width: min(640px, calc(100% - 32px));
 }
 
+/* ── New page shell (wide, não narrow) ───────────────────── */
+.dashboard.new-page-shell {
+  width: min(1300px, calc(100% - 32px));
+}
+
+/* ── New page: split form + live preview ──────────────────── */
+.new-page-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+  margin-top: 20px;
+  width: calc(100vw - 280px);
+  max-width: 1280px;
+}
+
+@media (max-width: 860px) {
+  .new-page-split {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+}
+
+.new-page-form {
+  margin-top: 0;
+}
+
+.new-page-preview {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: calc(100vh - 120px);
+  min-height: 500px;
+}
+
+.new-page-preview-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted, #888);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
 .card-list {
   display: grid;
   gap: 12px;

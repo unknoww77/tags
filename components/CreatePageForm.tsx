@@ -6,6 +6,7 @@ import { BRAND_LABELS, getTemplatesForBrand } from "@/lib/templates";
 import { defaultPageConfig } from "@/lib/page-config";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
 import { FieldLabel } from "@/components/HelpTip";
+import { PagePreview } from "@/components/PagePreview";
 
 export function CreatePageForm() {
   const router = useRouter();
@@ -63,7 +64,8 @@ export function CreatePageForm() {
   }
 
   return (
-    <form className="panel-form" onSubmit={onSubmit}>
+    <div className="new-page-split">
+      <form className="panel-form new-page-form" onSubmit={onSubmit}>
       <div className="selector-group">
         <span className="selector-label">
           <FieldLabel help="Escolha a marca da landing. Isso define o visual e o texto base (ConectCar ou Veloe). Você pode mudar só criando outra página.">
@@ -140,5 +142,18 @@ export function CreatePageForm() {
         {loading ? "Criando..." : "Criar página"}
       </button>
     </form>
+
+      {/* Preview column */}
+      <div className="new-page-preview">
+        <div className="new-page-preview-label">Preview ao vivo</div>
+        <PagePreview
+          brand={brand}
+          templateId={templateId}
+          headline={headline}
+          description={description}
+          config={config}
+        />
+      </div>
+    </div>
   );
 }

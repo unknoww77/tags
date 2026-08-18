@@ -21,7 +21,7 @@ export default async function NewPagePage() {
   return (
     <div className="platform-shell">
       <PlatformHeader />
-      <main className="dashboard narrow">
+      <main className="dashboard new-page-shell">
         <Link href="/dashboard" className="muted">
           ← Voltar
         </Link>
