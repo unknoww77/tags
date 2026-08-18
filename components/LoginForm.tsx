@@ -30,7 +30,7 @@ export function LoginForm() {
   }
 
   return (
-    <form className="auth-form" onSubmit={onSubmit}>
+    <form className="auth-form login-auth-form" onSubmit={onSubmit}>
       <label>
         Vulgo
         <input
@@ -51,11 +51,12 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           required
           autoComplete="current-password"
+          placeholder="••••••••"
         />
       </label>
       {error && <p className="form-error">{error}</p>}
-      <button type="submit" disabled={loading}>
-        {loading ? "Entrando..." : "Entrar"}
+      <button className="login-submit-btn" type="submit" disabled={loading}>
+        {loading ? "Entrando..." : "Entrar no painel →"}
       </button>
     </form>
   );
