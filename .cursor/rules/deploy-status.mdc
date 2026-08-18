@@ -1,0 +1,15 @@
+---
+description: Sempre reportar fila e identidade dos deploys Top1Tags
+alwaysApply: true
+---
+
+# Deploys Top1Tags
+
+Quando o usuário pedir deploy, ou quando um push/deploy subir (Actions ou VPS):
+
+1. Liste a fila com `gh run list --workflow "Deploy Top1Tags" --limit 5`.
+2. Informe claramente: **rodando agora**, **próximo na fila**, **último sucesso/falha** (commit + SHA curto + URL).
+3. Confirme que o deploy em andamento é o commit da **tip** (`git rev-parse HEAD`). Se houver run antigo na frente, **cancele** o antigo.
+4. Concurrency do workflow: `cancel-in-progress: true` — só o código mais novo deve ir para a VPS.
+5. Depois do deploy, se possível confira `~/top1tags/.deploy-meta` na VPS e health do app.
+6. Avise o usuário em português, de forma curta, sempre que um deploy iniciar, terminar ou for cancelado.
