@@ -23,6 +23,8 @@ on:
       - "tsconfig.json"
       - ".github/workflows/deploy.yaml"
 
+# Um deploy por vez: o em andamento termina; o próximo espera na fila.
+# cancel-in-progress: false = nunca cancela um deploy que já começou.
 concurrency:
   group: deploy-top1tags
   cancel-in-progress: false
@@ -31,6 +33,7 @@ jobs:
   deploy:
     name: Build and deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     env:
       ENV_SECRET: ${{ secrets.INFRA_ENV }}
       ALLOWED_IPS: ${{ secrets.INFRA_ALLOWED_IPS }}
@@ -104,11 +107,16 @@ jobs:
           username: ${{ secrets.INFRA_SERVER_USERNAME }}
           key: ${{ secrets.INFRA_SERVER_KEY }}
           port: 20203
+          command_timeout: 30m
           envs: ENV_SECRET
           script: |
             set -eu
             APP_DIR="$HOME/top1tags"
+            mkdir -p "$APP_DIR"
             cd "$APP_DIR"
+            # Trava local na VPS: se dois deploys chegarem juntos, o segundo espera o primeiro.
+            exec 9>"$APP_DIR/.deploy.lock"
+            flock -w 2400 9
             if sudo docker compose version >/dev/null 2>&1; then DCC="sudo docker compose"; else DCC="docker compose"; fi
             if [ -n "$ENV_SECRET" ]; then
               printf '%s\n' "$ENV_SECRET" > .env
@@ -130,6 +138,7 @@ jobs:
               $DCC -f docker-compose.prod.yaml logs --tail=120
               exit 1
             fi
+            echo "DEPLOY_OK"
 
       - name: Notify Telegram on deploy failure
         if: failure()
