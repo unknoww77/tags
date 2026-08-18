@@ -55,7 +55,7 @@ enum ChatMessageSender {
 
 model User {
   id           String    @id @default(cuid())
-  username     String    @unique @default(cuid())
+  username     String?   @unique
   email        String?   @unique
   name         String
   passwordHash String

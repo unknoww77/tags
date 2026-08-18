@@ -12,13 +12,7 @@ function run(cmd, args) {
   }
 }
 
-const prismaCli = path.join(
-  process.cwd(),
-  "node_modules",
-  "prisma",
-  "build",
-  "index.js",
-);
+const prismaCli = path.join(process.cwd(), "node_modules", "prisma", "build", "index.js");
 const tsxCli = path.join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs");
 
 console.log("[entrypoint] prisma db push");
