@@ -14,12 +14,8 @@ export default async function HomePage() {
     <div className="platform-shell">
       <PlatformHeader />
       <main className="hero-platform">
-        <p className="eyebrow">top1tags.dev</p>
-        <h1>Rede de tags com tracking preciso</h1>
-        <p>
-          Plataforma invite-only para parceiros criarem landings ConectCar e Veloe, conectarem
-          domínio via Cloudflare e medirem cada visita e conversão.
-        </p>
+        <p className="eyebrow">t0p.1 tags</p>
+        <h1>Só o futuro das tags está aqui</h1>
         <div className="hero-actions">
           <Link className="cta-btn" href="/login">
             Entrar
