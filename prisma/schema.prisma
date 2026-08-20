@@ -37,10 +37,18 @@ enum TrackEventType {
 }
 
 enum LeadStatus {
-  new
-  contacted
-  converted
-  discarded
+  colhido
+  usado
+  perdido
+  convertido
+}
+
+enum LeadLossReason {
+  sem_contato
+  sem_interesse
+  duplicado
+  fora_perfil
+  outro
 }
 
 enum ChatConversationStatus {
@@ -180,7 +188,9 @@ model Lead {
   mode            String     @default("contact")
   whatsappEnabled Boolean    @default(false)
   whatsappOpened  Boolean    @default(false)
-  status          LeadStatus @default(new)
+  status          LeadStatus     @default(colhido)
+  lossReason      LeadLossReason?
+  lossNote        String?
   utmSource       String?
   utmMedium       String?
   utmCampaign     String?

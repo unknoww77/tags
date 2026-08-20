@@ -29,13 +29,14 @@ import type { PageEngagementConfig } from "@/lib/page-config";
 type Props = {
   config: PageEngagementConfig;
   onChange: (next: PageEngagementConfig) => void;
+  compact?: boolean;
 };
 
 const nodeTypes: NodeTypes = {
   funnel: FunnelFlowNode,
 };
 
-export function FunnelFlowEditor({ config, onChange }: Props) {
+export function FunnelFlowEditor({ config, onChange, compact = false }: Props) {
   const built = useMemo(() => configToFlow(config), [config]);
   const [nodes, setNodes, onNodesChange] = useNodesState(built.nodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(built.edges);
@@ -100,7 +101,7 @@ export function FunnelFlowEditor({ config, onChange }: Props) {
   }
 
   return (
-    <div className="funnel-flow-shell">
+    <div className={`funnel-flow-shell${compact ? " is-compact" : ""}`}>
       <div className="funnel-flow-toolbar">
         <div>
           <strong>Editor de fluxo</strong>
@@ -137,9 +138,14 @@ export function FunnelFlowEditor({ config, onChange }: Props) {
           onSelectionChange={onSelectionChange}
           nodeTypes={nodeTypes}
           fitView
-          fitViewOptions={{ padding: 0.2 }}
-          minZoom={0.4}
-          maxZoom={1.4}
+          fitViewOptions={{ padding: 0.35, maxZoom: 1 }}
+          minZoom={0.25}
+          maxZoom={1.2}
+          defaultEdgeOptions={{
+            type: "smoothstep",
+            animated: true,
+            style: { stroke: "#38bdf8", strokeWidth: 2 },
+          }}
           deleteKeyCode={null}
           proOptions={{ hideAttribution: true }}
         >

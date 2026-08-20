@@ -50,7 +50,7 @@ export async function POST(request: Request) {
         mode: "chat",
         whatsappEnabled: false,
         whatsappOpened: false,
-        status: "new",
+        status: "colhido",
         device: detectDevice(ua),
         ipHash: hashIp(ip),
       },

@@ -69,7 +69,7 @@ export function ConectCarLanding({
 }: Props) {
   return (
     <div className={`cc-site${compact ? " is-compact" : ""}`}>
-      <TrackingBeacon pageId={page.id} domain={domain} />
+      <TrackingBeacon pageId={page.id} domain={domain} configRaw={page.configJson} />
 
       <header className="cc-header">
         <div className="cc-header-inner">

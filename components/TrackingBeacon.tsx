@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { parsePageConfig, type SentinelEventType } from "@/lib/page-config";
 
 type Props = {
   pageId: string;
   domain: string;
+  configRaw?: unknown;
 };
 
 function getUtms() {
@@ -43,14 +45,105 @@ export function trackEvent(
   }).catch(() => undefined);
 }
 
-export function TrackingBeacon({ pageId, domain }: Props) {
+function getClickId(paramName: string) {
+  if (typeof window === "undefined") return undefined;
+  const search = new URLSearchParams(window.location.search);
+  return (
+    search.get(paramName) ||
+    search.get("clickid") ||
+    search.get("click_id") ||
+    search.get("cid") ||
+    undefined
+  );
+}
+
+export function sendSentinelEvent(
+  pageId: string,
+  domain: string,
+  eventType: SentinelEventType,
+  label: string,
+  configRaw?: unknown,
+  metadata?: Record<string, unknown>
+) {
+  const config = parsePageConfig(configRaw).sentinel;
+  if (!config?.enabled || !config.apiKey || !config.endpoint) return;
+
+  const payload = {
+    pageId,
+    domain,
+    eventType,
+    label,
+    endpoint: config.endpoint,
+    clickIdParam: config.clickIdParam,
+    clickId: getClickId(config.clickIdParam),
+    pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
+    referrer: typeof document !== "undefined" ? document.referrer || undefined : undefined,
+    metadata,
+  };
+
+  void fetch("/api/sentinel/track", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  }).catch(() => undefined);
+}
+
+export function TrackingBeacon({ pageId, domain, configRaw }: Props) {
   const sent = useRef(false);
+  const selectorBound = useRef(false);
 
   useEffect(() => {
     if (sent.current) return;
     sent.current = true;
     trackEvent(pageId, domain, "view");
-  }, [pageId, domain]);
+
+    const config = parsePageConfig(configRaw).sentinel;
+    if (config?.enabled && config.pageviewEnabled) {
+      sendSentinelEvent(pageId, domain, "pageview", "Landing Page View", configRaw, {
+        path: typeof window !== "undefined" ? window.location.pathname : "/",
+      });
+    }
+  }, [pageId, domain, configRaw]);
+
+  useEffect(() => {
+    const config = parsePageConfig(configRaw).sentinel;
+    if (!config || !config.enabled || config.selectors.length === 0 || selectorBound.current) return;
+    selectorBound.current = true;
+    const selectors = config.selectors;
+
+    function onClick(event: MouseEvent) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      for (const rule of selectors) {
+        const matched = target.closest(rule.selector);
+        if (!matched) continue;
+
+        sendSentinelEvent(
+          pageId,
+          domain,
+          rule.eventType,
+          rule.label || rule.selector,
+          configRaw,
+          { selector: rule.selector }
+        );
+        trackEvent(pageId, domain, "cta_click", {
+          source: "sentinel_selector",
+          selector: rule.selector,
+          mappedEvent: rule.eventType,
+          label: rule.label || rule.selector,
+        });
+        break;
+      }
+    }
+
+    document.addEventListener("click", onClick);
+    return () => {
+      selectorBound.current = false;
+      document.removeEventListener("click", onClick);
+    };
+  }, [pageId, domain, configRaw]);
 
   return null;
 }

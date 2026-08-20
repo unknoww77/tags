@@ -18,6 +18,30 @@ export type FlowLayout = {
   positions: Record<string, { x: number; y: number }>;
 };
 
+export type SentinelEventType =
+  | "pageview"
+  | "init_checkout"
+  | "add_to_cart"
+  | "purchase";
+
+export type SentinelSelectorRule = {
+  id: string;
+  selector: string;
+  eventType: SentinelEventType;
+  label: string;
+};
+
+export type SentinelTrackingConfig = {
+  enabled: boolean;
+  apiKey: string;
+  endpoint: string;
+  pageviewEnabled: boolean;
+  finalNoWhatsappEvent: SentinelEventType;
+  whatsappClickEvent: SentinelEventType;
+  clickIdParam: string;
+  selectors: SentinelSelectorRule[];
+};
+
 export type PageEngagementConfig = {
   showForm: boolean;
   showQuiz: boolean;
@@ -30,6 +54,8 @@ export type PageEngagementConfig = {
   itauMode?: boolean;
   /** posições dos blocos no editor visual de fluxo */
   flowLayout?: FlowLayout;
+  /** integração com Sentinel Tracking */
+  sentinel?: SentinelTrackingConfig;
 };
 
 export const FORM_FIELD_LABELS: Record<FormFieldKey, string> = {
@@ -85,6 +111,83 @@ export const DEFAULT_QUIZ_ITAU: QuizQuestion[] = [
   },
 ];
 
+export function defaultSentinelConfig(): SentinelTrackingConfig {
+  return {
+    enabled: false,
+    apiKey: "",
+    endpoint: "https://sentinel.1001api.com/api/v1/event",
+    pageviewEnabled: true,
+    finalNoWhatsappEvent: "add_to_cart",
+    whatsappClickEvent: "purchase",
+    clickIdParam: "click_id",
+    selectors: [],
+  };
+}
+
+export function veloeSentinelPresets(): SentinelSelectorRule[] {
+  return [
+    {
+      id: "vl_hero_cta",
+      selector: ".vl-hero .vl-btn",
+      eventType: "init_checkout",
+      label: "Hero CTA",
+    },
+    {
+      id: "vl_header_cta",
+      selector: ".vl-header-cta",
+      eventType: "add_to_cart",
+      label: "Header CTA",
+    },
+    {
+      id: "vl_plan_cta",
+      selector: ".vl-plan-cta",
+      eventType: "add_to_cart",
+      label: "Plano CTA",
+    },
+    {
+      id: "vl_funil_submit",
+      selector: "#funil button[type=submit]",
+      eventType: "add_to_cart",
+      label: "Funil submit",
+    },
+    {
+      id: "vl_whatsapp",
+      selector: "a[href*='wa.me']",
+      eventType: "purchase",
+      label: "WhatsApp click",
+    },
+  ];
+}
+
+export function conectcarSentinelPresets(): SentinelSelectorRule[] {
+  return [
+    {
+      id: "cc_hero_cta",
+      selector: ".cc-hero .cc-btn",
+      eventType: "init_checkout",
+      label: "Hero CTA",
+    },
+    {
+      id: "cc_header_cta",
+      selector: ".cc-header-cta",
+      eventType: "add_to_cart",
+      label: "Header CTA",
+    },
+    {
+      id: "cc_funil_submit",
+      selector: "#funil button[type=submit]",
+      eventType: "add_to_cart",
+      label: "Funil submit",
+    },
+    {
+      id: "cc_whatsapp",
+      selector: "a[href*='wa.me']",
+      eventType: "purchase",
+      label: "WhatsApp click",
+    },
+  ];
+}
+
 export function defaultPageConfig(): PageEngagementConfig {
   return {
     showForm: true,
@@ -104,6 +207,7 @@ export function defaultPageConfig(): PageEngagementConfig {
     },
     quizQuestions: DEFAULT_QUIZ,
     itauMode: false,
+    sentinel: defaultSentinelConfig(),
   };
 }
 
@@ -126,6 +230,7 @@ export function defaultItauPageConfig(): PageEngagementConfig {
     },
     quizQuestions: DEFAULT_QUIZ_ITAU,
     itauMode: true,
+    sentinel: defaultSentinelConfig(),
   };
 }
 
@@ -133,6 +238,7 @@ export function parsePageConfig(raw: unknown): PageEngagementConfig {
   const base = defaultPageConfig();
   if (!raw || typeof raw !== "object") return base;
   const c = raw as Partial<PageEngagementConfig>;
+  const sentinelBase = defaultSentinelConfig();
 
   return {
     showForm: Boolean(c.showForm ?? base.showForm),
@@ -151,6 +257,48 @@ export function parsePageConfig(raw: unknown): PageEngagementConfig {
             ),
           }
         : base.flowLayout,
+    sentinel:
+      c.sentinel && typeof c.sentinel === "object"
+        ? {
+            enabled: Boolean(c.sentinel.enabled ?? sentinelBase.enabled),
+            apiKey: String(c.sentinel.apiKey ?? sentinelBase.apiKey).slice(0, 300),
+            endpoint: String(c.sentinel.endpoint ?? sentinelBase.endpoint).slice(0, 500),
+            pageviewEnabled: Boolean(c.sentinel.pageviewEnabled ?? sentinelBase.pageviewEnabled),
+            finalNoWhatsappEvent:
+              c.sentinel.finalNoWhatsappEvent === "purchase" ||
+              c.sentinel.finalNoWhatsappEvent === "init_checkout" ||
+              c.sentinel.finalNoWhatsappEvent === "pageview"
+                ? c.sentinel.finalNoWhatsappEvent
+                : sentinelBase.finalNoWhatsappEvent,
+            whatsappClickEvent:
+              c.sentinel.whatsappClickEvent === "add_to_cart" ||
+              c.sentinel.whatsappClickEvent === "init_checkout" ||
+              c.sentinel.whatsappClickEvent === "pageview"
+                ? c.sentinel.whatsappClickEvent
+                : c.sentinel.whatsappClickEvent === "purchase"
+                  ? "purchase"
+                  : sentinelBase.whatsappClickEvent,
+            clickIdParam: String(c.sentinel.clickIdParam ?? sentinelBase.clickIdParam)
+              .replace(/[^a-zA-Z0-9_-]/g, "")
+              .slice(0, 80) || sentinelBase.clickIdParam,
+            selectors: Array.isArray(c.sentinel.selectors)
+              ? c.sentinel.selectors
+                  .map((rule, index) => ({
+                    id: String(rule.id || `selector_${index}`),
+                    selector: String(rule.selector || "").slice(0, 200),
+                    eventType:
+                      rule.eventType === "pageview" ||
+                      rule.eventType === "init_checkout" ||
+                      rule.eventType === "purchase" ||
+                      rule.eventType === "add_to_cart"
+                        ? rule.eventType
+                        : sentinelBase.finalNoWhatsappEvent,
+                    label: String(rule.label || "").slice(0, 120),
+                  }))
+                  .filter((rule) => rule.selector)
+              : sentinelBase.selectors,
+          }
+        : sentinelBase,
     formFields: {
       name: Boolean(c.formFields?.name ?? base.formFields.name),
       phone: Boolean(c.formFields?.phone ?? base.formFields.phone),

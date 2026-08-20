@@ -59,7 +59,7 @@ export async function POST(request: Request) {
           body.whatsappEnabled || body.mode === "chat"
             ? body.whatsappOpened
             : false,
-        status: "new",
+        status: "colhido",
         utmSource: utms.utmSource,
         utmMedium: utms.utmMedium,
         utmCampaign: utms.utmCampaign,

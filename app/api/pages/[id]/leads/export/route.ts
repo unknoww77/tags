@@ -1,5 +1,6 @@
 import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
+import { STATUS_LABEL, LOSS_REASON_LABEL } from "@/lib/leads";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -30,6 +31,8 @@ export async function GET(_request: Request, { params }: Params) {
     "id",
     "createdAt",
     "status",
+    "lossReason",
+    "lossNote",
     "name",
     "phone",
     "email",
@@ -46,7 +49,9 @@ export async function GET(_request: Request, { params }: Params) {
     [
       l.id,
       l.createdAt.toISOString(),
-      l.status,
+      STATUS_LABEL[l.status],
+      l.lossReason ? LOSS_REASON_LABEL[l.lossReason] : "",
+      l.lossNote,
       l.name,
       l.phone,
       l.email,

@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BRAND_LABELS, getTemplatesForBrand } from "@/lib/templates";
-import { defaultPageConfig, defaultItauPageConfig } from "@/lib/page-config";
+import { defaultPageConfig, defaultItauPageConfig, veloeSentinelPresets, conectcarSentinelPresets, defaultSentinelConfig } from "@/lib/page-config";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
 import { FunnelFlowEditor } from "@/components/FunnelFlowEditor";
 import { FieldLabel } from "@/components/HelpTip";
 import { PagePreview } from "@/components/PagePreview";
+import { SentinelTrackingConfigFields } from "@/components/SentinelTrackingConfigFields";
 
 export function CreatePageForm() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export function CreatePageForm() {
   const [headline, setHeadline] = useState("");
   const [description, setDescription] = useState("");
   const [config, setConfig] = useState(defaultPageConfig());
+  const [activeTab, setActiveTab] = useState<"engajamento" | "trackeamento">("engajamento");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -30,6 +32,12 @@ export function CreatePageForm() {
     if (config.sendToWhatsapp && config.whatsappNumber.length < 10) {
       setLoading(false);
       setError("Informe um WhatsApp válido (com DDI).");
+      return;
+    }
+
+    if (config.sentinel?.enabled && !config.sentinel.apiKey.trim()) {
+      setLoading(false);
+      setError("Informe a API key do Sentinel para ativar o trackeamento.");
       return;
     }
 
@@ -66,8 +74,25 @@ export function CreatePageForm() {
 
   return (
     <div className="config-editor-stack">
-      <FunnelFlowEditor config={config} onChange={setConfig} />
-      <div className="new-page-split">
+      <div className="config-editor-visual-row">
+        <FunnelFlowEditor config={config} onChange={setConfig} compact />
+        <div className="config-preview-panel">
+          <div className="config-preview-panel-head">
+            <div className="new-page-preview-label">Preview ao vivo</div>
+            <p className="muted tiny">Teste o quiz e o formulário clicando no preview.</p>
+          </div>
+          <div className="page-preview-frame">
+            <PagePreview
+              brand={brand}
+              templateId={templateId}
+              headline={headline}
+              description={description}
+              config={config}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="config-editor-settings">
       <form className="panel-form new-page-form" onSubmit={onSubmit}>
       <div className="selector-group">
         <span className="selector-label">
@@ -82,6 +107,16 @@ export function CreatePageForm() {
             onClick={() => {
               setBrand("conectcar");
               setTemplateId("default");
+              setConfig((prev) => ({
+                ...prev,
+                sentinel: {
+                  ...(prev.sentinel ?? defaultSentinelConfig()),
+                  selectors:
+                    prev.sentinel?.selectors?.length
+                      ? prev.sentinel.selectors
+                      : conectcarSentinelPresets(),
+                },
+              }));
             }}
           >
             {BRAND_LABELS.conectcar}
@@ -92,6 +127,16 @@ export function CreatePageForm() {
             onClick={() => {
               setBrand("veloe");
               setTemplateId("default");
+              setConfig((prev) => ({
+                ...prev,
+                sentinel: {
+                  ...(prev.sentinel ?? defaultSentinelConfig()),
+                  selectors:
+                    prev.sentinel?.selectors?.length
+                      ? prev.sentinel.selectors
+                      : veloeSentinelPresets(),
+                },
+              }));
             }}
           >
             {BRAND_LABELS.veloe}
@@ -138,25 +183,34 @@ export function CreatePageForm() {
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
       </label>
 
-      <EngagementConfigFields value={config} onChange={setConfig} />
+      <div className="config-tabs">
+        <button
+          type="button"
+          className={`selector-btn${activeTab === "engajamento" ? " is-active" : ""}`}
+          onClick={() => setActiveTab("engajamento")}
+        >
+          Engajamento
+        </button>
+        <button
+          type="button"
+          className={`selector-btn${activeTab === "trackeamento" ? " is-active" : ""}`}
+          onClick={() => setActiveTab("trackeamento")}
+        >
+          Trackeamento
+        </button>
+      </div>
+
+      {activeTab === "engajamento" ? (
+        <EngagementConfigFields value={config} onChange={setConfig} />
+      ) : (
+        <SentinelTrackingConfigFields value={config} onChange={setConfig} brand={brand} />
+      )}
 
       {error && <p className="form-error">{error}</p>}
       <button type="submit" disabled={loading}>
         {loading ? "Criando..." : "Criar página"}
       </button>
     </form>
-
-      {/* Preview column */}
-      <div className="new-page-preview">
-        <div className="new-page-preview-label">Preview ao vivo</div>
-        <PagePreview
-          brand={brand}
-          templateId={templateId}
-          headline={headline}
-          description={description}
-          config={config}
-        />
-      </div>
       </div>
     </div>
   );

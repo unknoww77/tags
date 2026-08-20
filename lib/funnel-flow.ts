@@ -9,36 +9,56 @@ import {
 
 export function defaultFlowLayout(config: PageEngagementConfig): FlowLayout {
   const positions: Record<string, { x: number; y: number }> = {};
-  let y = 0;
-  const x = 120;
+  let x = 0;
+  const y = 48;
+  const stepX = 280;
 
   positions.start = { x, y };
-  y += 110;
+  x += stepX;
 
   if (config.itauMode) {
     positions.itau = { x, y };
-    y += 100;
+    x += stepX;
   }
 
   if (config.showQuiz) {
     for (const q of config.quizQuestions) {
       positions[`quiz-${q.id}`] = { x, y };
-      y += 130;
+      x += stepX;
     }
   }
 
   if (config.showForm) {
     positions.form = { x, y };
-    y += 130;
+    x += stepX;
   }
 
   if (config.sendToWhatsapp) {
     positions.whatsapp = { x, y };
-    y += 110;
+    x += stepX;
   }
 
   positions.end = { x, y };
   return { positions };
+}
+
+/** Reposiciona nós em fila horizontal quando layout antigo era vertical */
+export function normalizeHorizontalLayout(config: PageEngagementConfig): FlowLayout {
+  const defaults = defaultFlowLayout(config);
+  const saved = config.flowLayout?.positions;
+  if (!saved || Object.keys(saved).length === 0) return defaults;
+
+  const xs = Object.values(saved).map((p) => p.x);
+  const ys = Object.values(saved).map((p) => p.y);
+  const spreadX = Math.max(...xs) - Math.min(...xs);
+  const spreadY = Math.max(...ys) - Math.min(...ys);
+  const nodeCount = Object.keys(defaults.positions).length;
+
+  if (nodeCount > 2 && spreadX < 120 && spreadY > 80) {
+    return defaults;
+  }
+
+  return mergeFlowLayout(config, config.flowLayout);
 }
 
 export function mergeFlowLayout(
@@ -55,7 +75,7 @@ export function mergeFlowLayout(
 export function configToFlow(
   config: PageEngagementConfig
 ): { nodes: Node[]; edges: Edge[] } {
-  const layout = mergeFlowLayout(config, config.flowLayout);
+  const layout = normalizeHorizontalLayout(config);
   const nodes: Node[] = [];
   const edges: Edge[] = [];
   const chain: string[] = ["start"];
@@ -210,9 +230,9 @@ export function addQuizNode(config: PageEngagementConfig): PageEngagementConfig 
   const positions = { ...(config.flowLayout?.positions ?? {}) };
   const lastQuiz = config.quizQuestions[config.quizQuestions.length - 1];
   const base = lastQuiz
-    ? positions[`quiz-${lastQuiz.id}`] ?? { x: 120, y: 200 }
-    : { x: 120, y: config.itauMode ? 220 : 120 };
-  positions[`quiz-${id}`] = { x: base.x + 40, y: base.y + 140 };
+    ? positions[`quiz-${lastQuiz.id}`] ?? { x: 280, y: 48 }
+    : { x: config.itauMode ? 560 : 280, y: 48 };
+  positions[`quiz-${id}`] = { x: base.x + 280, y: base.y };
 
   return {
     ...config,

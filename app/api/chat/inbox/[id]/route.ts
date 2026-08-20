@@ -96,8 +96,8 @@ export async function POST(request: Request, ctx: Ctx) {
 
     if (conversation.leadId) {
       await prisma.lead.updateMany({
-        where: { id: conversation.leadId, status: "new" },
-        data: { status: "contacted" },
+        where: { id: conversation.leadId, status: "colhido" },
+        data: { status: "usado" },
       });
     }
 

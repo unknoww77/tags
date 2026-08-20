@@ -50,7 +50,7 @@ export default async function PageDetailPage({ params }: Props) {
         <section className="panel">
           <h2>Funil da página</h2>
           <p className="muted">
-            Arraste os blocos no editor acima para montar o fluxo. Configure detalhes abaixo e veja o preview ao lado.
+            Arraste os blocos na horizontal, conecte as setas e teste o fluxo no preview ao lado.
           </p>
           <div className="selector-row wrap" style={{ marginBottom: 12 }}>
             <a
@@ -81,7 +81,7 @@ export default async function PageDetailPage({ params }: Props) {
         <section className="panel">
           <h2>Leads do funil</h2>
           <p className="muted">
-            Status: novo → contatado → convertido. Export CSV para planilha.
+            Status: colhido → usado → convertido / perdido (motivo obrigatório). Export CSV para planilha.
           </p>
           <LeadsPanel pageId={page.id} />
         </section>

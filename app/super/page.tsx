@@ -6,42 +6,52 @@ import { InviteManager } from "@/components/InviteManager";
 import { ImpersonateButton } from "@/components/ImpersonateButton";
 import { GlobalSettingsForm } from "@/components/GlobalSettingsForm";
 import { AuditLogPanel } from "@/components/AuditLogPanel";
+import { LeadStatusBadge } from "@/components/LeadStatusBadge";
 import { env } from "@/lib/env";
 import { BRAND_LABELS } from "@/lib/templates";
 import { ensureGlobalSettings } from "@/lib/settings";
+import { countByStatus, conversionRate } from "@/lib/leads";
 
 export default async function SuperAdminPage() {
   await requireSuperAdmin();
   await ensureGlobalSettings();
 
-  const [tenants, users, pages, domains, invites, views, leads] = await Promise.all([
-    prisma.tenant.findMany({
-      include: {
-        _count: { select: { pages: true, users: true } },
-        settings: true,
-      },
-      orderBy: { createdAt: "desc" },
-    }),
-    prisma.user.findMany({
-      include: { tenant: true },
-      orderBy: { createdAt: "desc" },
-      take: 200,
-    }),
-    prisma.page.findMany({
-      include: {
-        tenant: true,
-        domains: true,
-        _count: { select: { events: true } },
-      },
-      orderBy: { createdAt: "desc" },
-      take: 50,
-    }),
-    prisma.domain.findMany({ orderBy: { updatedAt: "desc" }, take: 50 }),
-    prisma.invite.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
-    prisma.trackEvent.count({ where: { eventType: "view" } }),
-    prisma.lead.count(),
-  ]);
+  const [tenants, users, pages, domains, invites, views, leadsTotal, recentLeads] =
+    await Promise.all([
+      prisma.tenant.findMany({
+        include: {
+          _count: { select: { pages: true, users: true } },
+          settings: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.user.findMany({
+        include: { tenant: true },
+        orderBy: { createdAt: "desc" },
+        take: 200,
+      }),
+      prisma.page.findMany({
+        include: {
+          tenant: true,
+          domains: true,
+          _count: { select: { events: true } },
+        },
+        orderBy: { createdAt: "desc" },
+        take: 50,
+      }),
+      prisma.domain.findMany({ orderBy: { updatedAt: "desc" }, take: 50 }),
+      prisma.invite.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
+      prisma.trackEvent.count({ where: { eventType: "view" } }),
+      prisma.lead.count(),
+      prisma.lead.findMany({
+        include: { page: { include: { tenant: true } } },
+        orderBy: { createdAt: "desc" },
+        take: 20,
+      }),
+    ]);
 
+  const leadCounts = countByStatus(recentLeads);
+  const pendingDomains = domains.filter((d) => d.nsStatus !== "active").length;
   const appUrl = env.appUrl();
 
   return (
@@ -63,38 +73,180 @@ export default async function SuperAdminPage() {
           </Link>
         </div>
 
-        <div className="stat-grid">
-          <div>
-            <span>Tenants</span>
-            <strong>{tenants.length}</strong>
+        <section className="admin-section-block">
+          <h2>Visão geral</h2>
+          <p className="muted">Métricas agregadas da rede.</p>
+          <div className="dashboard-kpi-grid">
+            <div className="dashboard-kpi">
+              <span>Tenants</span>
+              <strong>{tenants.length}</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Páginas</span>
+              <strong>{pages.length}</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Visitas</span>
+              <strong>{views}</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Leads totais</span>
+              <strong>{leadsTotal}</strong>
+            </div>
           </div>
-          <div>
-            <span>Páginas</span>
-            <strong>{pages.length}</strong>
+          <div className="stat-grid">
+            <div>
+              <span>Conversão (últimos 20)</span>
+              <strong>{conversionRate(leadCounts)}%</strong>
+            </div>
+            <div>
+              <span>Perdidos (últimos 20)</span>
+              <strong>{leadCounts.perdido}</strong>
+            </div>
+            <div>
+              <span>Domínios pendentes</span>
+              <strong>{pendingDomains}</strong>
+            </div>
+            <div>
+              <span>Convites ativos</span>
+              <strong>{invites.filter((i) => !i.revokedAt && !i.usedAt).length}</strong>
+            </div>
           </div>
-          <div>
-            <span>Visitas</span>
-            <strong>{views}</strong>
-          </div>
-          <div>
-            <span>Leads</span>
-            <strong>{leads}</strong>
-          </div>
-        </div>
-
-        <section className="panel">
-          <h2>Configuração global (todos)</h2>
-          <p className="muted">
-            Vale para toda a rede. Overrides por tenant ficam na página de cada conta.
-          </p>
-          <GlobalSettingsForm />
         </section>
 
-        <section className="panel">
-          <h2>Contas / usuários</h2>
-          <p className="muted">
-            Acessar = entrar na conta. Config = limites, Telegram e desativar por tenant.
-          </p>
+        <section className="admin-section-block panel">
+          <h2>Leads recentes (rede)</h2>
+          <p className="muted">Últimos 20 leads em todas as contas.</p>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Contato</th>
+                  <th>Status</th>
+                  <th>Página</th>
+                  <th>Tenant</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentLeads.map((lead) => (
+                  <tr key={lead.id}>
+                    <td>{lead.createdAt.toLocaleString("pt-BR")}</td>
+                    <td>
+                      {lead.name || "—"}
+                      <div className="muted tiny">{lead.phone || ""}</div>
+                    </td>
+                    <td>
+                      <LeadStatusBadge status={lead.status} />
+                    </td>
+                    <td>
+                      <Link href={`/dashboard/pages/${lead.pageId}`}>{lead.page.title}</Link>
+                    </td>
+                    <td>{lead.page.tenant.name}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="admin-section-block panel">
+          <h2>Operação</h2>
+          <p className="muted">Tenants, páginas e domínios recentes.</p>
+
+          <h3>Tenants</h3>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Users</th>
+                  <th>Páginas</th>
+                  <th>Override</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {tenants.slice(0, 10).map((t) => (
+                  <tr key={t.id}>
+                    <td>{t.name}</td>
+                    <td>{t._count.users}</td>
+                    <td>{t._count.pages}</td>
+                    <td>{t.settings ? (t.settings.disabled ? "desativado" : "sim") : "herda"}</td>
+                    <td>
+                      <Link href={`/super/tenants/${t.id}`}>Configurar</Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Páginas ativas</h3>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Tenant</th>
+                  <th>Marca</th>
+                  <th>Domínio</th>
+                  <th>NS</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {pages.slice(0, 15).map((p) => (
+                  <tr key={p.id}>
+                    <td>{p.title}</td>
+                    <td>{p.tenant.name}</td>
+                    <td>{BRAND_LABELS[p.brand]}</td>
+                    <td>{p.domains[0]?.hostname || "—"}</td>
+                    <td>{p.domains[0]?.nsStatus || "—"}</td>
+                    <td>
+                      <Link href={`/dashboard/pages/${p.id}`}>Abrir</Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Domínios</h3>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Hostname</th>
+                  <th>SSL</th>
+                  <th>NS</th>
+                  <th>Última check</th>
+                </tr>
+              </thead>
+              <tbody>
+                {domains.slice(0, 15).map((d) => (
+                  <tr key={d.id}>
+                    <td>{d.hostname}</td>
+                    <td>{d.sslMode}</td>
+                    <td className={`status-${d.nsStatus}`}>{d.nsStatus}</td>
+                    <td>
+                      {d.lastCheckedAt ? d.lastCheckedAt.toLocaleString("pt-BR") : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="admin-section-block panel">
+          <h2>Governança</h2>
+          <p className="muted">Configuração global, contas, convites e auditoria.</p>
+
+          <h3>Configuração global (todos)</h3>
+          <GlobalSettingsForm />
+
+          <h3>Contas / usuários</h3>
           <div className="table-wrap">
             <table>
               <thead>
@@ -133,40 +285,8 @@ export default async function SuperAdminPage() {
               </tbody>
             </table>
           </div>
-        </section>
 
-        <section className="panel">
-          <h2>Tenants</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Users</th>
-                  <th>Páginas</th>
-                  <th>Override</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {tenants.map((t) => (
-                  <tr key={t.id}>
-                    <td>{t.name}</td>
-                    <td>{t._count.users}</td>
-                    <td>{t._count.pages}</td>
-                    <td>{t.settings ? (t.settings.disabled ? "desativado" : "sim") : "herda"}</td>
-                    <td>
-                      <Link href={`/super/tenants/${t.id}`}>Configurar</Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="panel">
-          <h2>Convites</h2>
+          <h3>Convites</h3>
           <InviteManager
             appUrl={appUrl}
             initialInvites={invites.map((i) => ({
@@ -176,72 +296,9 @@ export default async function SuperAdminPage() {
               revokedAt: i.revokedAt?.toISOString() ?? null,
             }))}
           />
-        </section>
 
-        <section className="panel">
-          <h2>Auditoria</h2>
-          <p className="muted">Impersonação e mudanças de config.</p>
+          <h3>Auditoria</h3>
           <AuditLogPanel />
-        </section>
-
-        <section className="panel">
-          <h2>Páginas ativas</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Título</th>
-                  <th>Tenant</th>
-                  <th>Marca</th>
-                  <th>Domínio</th>
-                  <th>NS</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {pages.map((p) => (
-                  <tr key={p.id}>
-                    <td>{p.title}</td>
-                    <td>{p.tenant.name}</td>
-                    <td>{BRAND_LABELS[p.brand]}</td>
-                    <td>{p.domains[0]?.hostname || "—"}</td>
-                    <td>{p.domains[0]?.nsStatus || "—"}</td>
-                    <td>
-                      <Link href={`/dashboard/pages/${p.id}`}>Abrir</Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section className="panel">
-          <h2>Domínios</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Hostname</th>
-                  <th>SSL</th>
-                  <th>NS</th>
-                  <th>Última check</th>
-                </tr>
-              </thead>
-              <tbody>
-                {domains.map((d) => (
-                  <tr key={d.id}>
-                    <td>{d.hostname}</td>
-                    <td>{d.sslMode}</td>
-                    <td className={`status-${d.nsStatus}`}>{d.nsStatus}</td>
-                    <td>
-                      {d.lastCheckedAt ? d.lastCheckedAt.toLocaleString("pt-BR") : "—"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </section>
       </main>
     </div>

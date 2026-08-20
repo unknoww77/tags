@@ -29,7 +29,7 @@ export function FunnelFlowNode({ data, selected }: NodeProps) {
   return (
     <div className={`funnel-flow-node${selected ? " is-selected" : ""}`}>
       {d.kind !== "start" && (
-        <Handle type="target" position={Position.Top} className="funnel-flow-handle" />
+        <Handle type="target" position={Position.Left} className="funnel-flow-handle" />
       )}
       <div className="funnel-flow-node-head" style={{ borderColor: meta.accent }}>
         <span className="funnel-flow-node-icon">{meta.icon}</span>
@@ -61,7 +61,7 @@ export function FunnelFlowNode({ data, selected }: NodeProps) {
         </div>
       )}
       {d.kind !== "end" && (
-        <Handle type="source" position={Position.Bottom} className="funnel-flow-handle" />
+        <Handle type="source" position={Position.Right} className="funnel-flow-handle" />
       )}
     </div>
   );

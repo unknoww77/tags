@@ -6,6 +6,7 @@ import { PageDashboardCard, type PageCardData } from "@/components/PageDashboard
 import { env } from "@/lib/env";
 import { BRAND_LABELS } from "@/lib/templates";
 import { parsePageConfig } from "@/lib/page-config";
+import { countByStatus, conversionRate } from "@/lib/leads";
 
 function formatLiveDuration(from: Date): string {
   const ms = Date.now() - from.getTime();
@@ -33,26 +34,40 @@ export default async function DashboardPage() {
     ? { tenantId: session.user.tenantId, status: { not: "archived" as const } }
     : { status: { not: "archived" as const }, tenantId: "__none__" };
 
-  const pages = await prisma.page.findMany({
-    where,
-    include: {
-      domains: true,
-      leads: {
-        select: {
-          mode: true,
-          whatsappEnabled: true,
-          whatsappOpened: true,
-          name: true,
-          phone: true,
-          email: true,
-          city: true,
-          formJson: true,
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+  const [pages, recentLeads] = await Promise.all([
+    prisma.page.findMany({
+      where,
+      include: {
+        domains: true,
+        leads: {
+          select: {
+            mode: true,
+            status: true,
+            whatsappEnabled: true,
+            whatsappOpened: true,
+            name: true,
+            phone: true,
+            email: true,
+            city: true,
+            formJson: true,
+          },
         },
+        _count: { select: { events: true, leads: true } },
       },
-      _count: { select: { events: true, leads: true } },
-    },
-    orderBy: { createdAt: "desc" },
-  });
+      orderBy: { createdAt: "desc" },
+    }),
+    session.user.tenantId
+      ? prisma.lead.findMany({
+          where: {
+            createdAt: { gte: sevenDaysAgo },
+            page: { tenantId: session.user.tenantId },
+          },
+          select: { status: true },
+        })
+      : Promise.resolve([]),
+  ]);
 
   const platform = env.platformDomain();
   const subtitle = session.user.impersonating
@@ -61,10 +76,16 @@ export default async function DashboardPage() {
       ? "Sua conta de teste (super admin)"
       : "Gerencie landings, domínios e performance.";
 
+  const tenantLeadCounts = countByStatus(recentLeads);
+  const activePages = pages.filter((p) => p.status === "published").length;
+  const allLeads = pages.flatMap((p) => p.leads);
+  const allCounts = countByStatus(allLeads);
+
   const cards: PageCardData[] = pages.map((page) => {
     const config = parsePageConfig(page.configJson);
     const domain = page.domains[0] ?? null;
     const formFieldsCount = Object.values(config.formFields).filter(Boolean).length;
+    const leadCounts = countByStatus(page.leads);
 
     const whatsappOpened = page.leads.filter((l) => l.whatsappEnabled && l.whatsappOpened).length;
     const whatsappNotOpened = page.leads.filter(
@@ -94,6 +115,10 @@ export default async function DashboardPage() {
       domainHostname: domain?.hostname ?? null,
       domainNsStatus: domain?.nsStatus ?? null,
       leadsTotal: page._count.leads,
+      leadsColhido: leadCounts.colhido,
+      leadsUsado: leadCounts.usado,
+      leadsPerdido: leadCounts.perdido,
+      leadsConvertido: leadCounts.convertido,
       whatsappConfigured: config.sendToWhatsapp && config.whatsappNumber.length >= 10,
       whatsappNumberMasked:
         config.sendToWhatsapp && config.whatsappNumber
@@ -131,6 +156,27 @@ export default async function DashboardPage() {
           <p className="form-error">
             Nenhum tenant associado. Rode o seed ou acesse uma conta pelo Super Admin.
           </p>
+        )}
+
+        {session.user.tenantId && (
+          <div className="dashboard-kpi-grid">
+            <div className="dashboard-kpi">
+              <span>Páginas ativas</span>
+              <strong>{activePages}</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Leads colhidos (7 dias)</span>
+              <strong>{tenantLeadCounts.colhido + tenantLeadCounts.usado + tenantLeadCounts.convertido + tenantLeadCounts.perdido}</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Taxa de conversão</span>
+              <strong>{conversionRate(allCounts)}%</strong>
+            </div>
+            <div className="dashboard-kpi">
+              <span>Leads perdidos</span>
+              <strong>{allCounts.perdido}</strong>
+            </div>
+          </div>
         )}
 
         <div className="card-list">

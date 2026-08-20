@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FORM_FIELD_LABELS, type FormFieldKey, type PageEngagementConfig } from "@/lib/page-config";
 
 type Props = {
@@ -13,13 +13,13 @@ type Props = {
 
 const CC_ORANGE = "#e65c00";
 const CC_GREEN = "#00a651";
-const VL_BLUE = "#0033a0";
-const VL_TEAL = "#00bfb3";
+const VL_PURPLE = "#230c87";
+const VL_CYAN = "#25d6e9";
 
 export function PagePreview({ brand, headline, description, config }: Props) {
   const isCC = brand === "conectcar";
-  const primary = isCC ? CC_ORANGE : VL_BLUE;
-  const accent = isCC ? CC_GREEN : VL_TEAL;
+  const primary = isCC ? CC_ORANGE : VL_PURPLE;
+  const accent = isCC ? CC_GREEN : VL_CYAN;
 
   const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
   const heroSub =
@@ -43,6 +43,12 @@ export function PagePreview({ brand, headline, description, config }: Props) {
   );
   const [quizIndex, setQuizIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setAnswers({});
+    setQuizIndex(0);
+    setPreviewStep(hasQuiz ? "quiz" : hasForm ? "form" : "hero");
+  }, [hasQuiz, hasForm, config.quizQuestions.length, config.itauMode]);
 
   const enabledFields = useMemo(() => {
     let fields = (Object.keys(config.formFields) as FormFieldKey[]).filter((k) => config.formFields[k]);
@@ -75,54 +81,19 @@ export function PagePreview({ brand, headline, description, config }: Props) {
   }
 
   return (
-    <div
-      style={{
-        fontFamily: "'Inter', sans-serif",
-        background: "#fff",
-        borderRadius: 12,
-        overflow: "hidden",
-        boxShadow: "0 4px 32px rgba(0,0,0,0.18)",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        fontSize: 13,
-      }}
-    >
-      {/* browser chrome */}
-      <div
-        style={{
-          background: "#23272f",
-          padding: "8px 12px",
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          flexShrink: 0,
-        }}
-      >
-        <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "block" }} />
-        <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#febc2e", display: "block" }} />
-        <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840", display: "block" }} />
-        <div
-          style={{
-            flex: 1,
-            background: "#3a3f4b",
-            borderRadius: 6,
-            padding: "3px 10px",
-            color: "#aaa",
-            fontSize: 11,
-            marginLeft: 8,
-          }}
-        >
-          top1tags.dev/s/sua-pagina
-        </div>
+    <div className="page-preview-root">
+      <div className="page-preview-chrome">
+        <span className="page-preview-dot is-red" />
+        <span className="page-preview-dot is-yellow" />
+        <span className="page-preview-dot is-green" />
+        <div className="page-preview-url">top1tags.dev/s/sua-pagina</div>
       </div>
 
-      {/* page scroll area */}
-      <div style={{ overflowY: "auto", flex: 1 }}>
+      <div className="page-preview-scroll">
         {/* header */}
         <div
           style={{
-            background: isCC ? "#fff" : VL_BLUE,
+            background: isCC ? "#fff" : VL_PURPLE,
             borderBottom: `3px solid ${primary}`,
             padding: "10px 16px",
             display: "flex",
@@ -494,7 +465,8 @@ function FormPreview({
           </div>
         </div>
       ))}
-      <div
+      <button
+        type="button"
         style={{
           background: primary,
           color: "#fff",
@@ -505,11 +477,13 @@ function FormPreview({
           fontSize: 12,
           marginTop: 10,
           cursor: "pointer",
+          border: "none",
+          width: "100%",
         }}
         onClick={onSubmitPreview}
       >
         {hasWpp ? "Enviar e abrir WhatsApp" : "Enviar dados para contato"}
-      </div>
+      </button>
     </div>
   );
 }

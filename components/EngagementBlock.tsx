@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { trackEvent } from "@/components/TrackingBeacon";
+import { sendSentinelEvent, trackEvent } from "@/components/TrackingBeacon";
 import { SelectorButton } from "@/components/SelectorButton";
 import {
   FORM_FIELD_LABELS,
@@ -104,10 +104,37 @@ function EngagementFlow({
 
     let opened = false;
     if (config.sendToWhatsapp && config.whatsappNumber) {
+      sendSentinelEvent(
+        pageId,
+        domain,
+        config.sentinel?.whatsappClickEvent ?? "purchase",
+        "WhatsApp Final Button",
+        config,
+        {
+          source: "engagement_finish",
+          destination: "whatsapp",
+          quizAnswers,
+          formValues,
+        }
+      );
       const extras: Record<string, string> = { ...formValues, ...quizAnswers };
       const url = buildWhatsAppUrl(config.whatsappNumber, config.whatsappMessage, extras);
       const win = window.open(url, "_blank", "noopener,noreferrer");
       opened = Boolean(win);
+    } else {
+      sendSentinelEvent(
+        pageId,
+        domain,
+        config.sentinel?.finalNoWhatsappEvent ?? "add_to_cart",
+        "Quiz Final Button",
+        config,
+        {
+          source: "engagement_finish",
+          destination: "lead_only",
+          quizAnswers,
+          formValues,
+        }
+      );
     }
 
     try {

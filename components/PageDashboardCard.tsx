@@ -12,6 +12,10 @@ export type PageCardData = {
   domainHostname: string | null;
   domainNsStatus: string | null;
   leadsTotal: number;
+  leadsColhido: number;
+  leadsUsado: number;
+  leadsPerdido: number;
+  leadsConvertido: number;
   whatsappConfigured: boolean;
   whatsappNumberMasked: string | null;
   whatsappOpened: number;
@@ -53,6 +57,13 @@ export function PageDashboardCard({ page }: { page: PageCardData }) {
           </p>
           <p className="muted">Preview: {page.previewHost}</p>
         </div>
+      </div>
+
+      <div className="page-lead-pills">
+        <span className="page-lead-pill">Colhidos {page.leadsColhido}</span>
+        <span className="page-lead-pill">Usados {page.leadsUsado}</span>
+        <span className="page-lead-pill">Convertidos {page.leadsConvertido}</span>
+        <span className="page-lead-pill">Perdidos {page.leadsPerdido}</span>
       </div>
 
       <div className="page-stat-grid">
