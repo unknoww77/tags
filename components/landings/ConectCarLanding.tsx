@@ -99,12 +99,15 @@ export function ConectCarLanding({
       </div>
 
       {compact ? (
-        <section className="cc-hero-compact">
-          <h1>{page.headline || page.title}</h1>
-          <p>{page.description || "Pode ir tranquilo, por onde você for!"}</p>
-          <a className="cc-btn-white" href="#funil">
-            PEÇA JÁ
-          </a>
+        <section className="cc-hero-compact" aria-label="Campanha">
+          <div className="cc-hero-compact-inner">
+            <h1>{page.headline || page.title}</h1>
+            <p>{page.description || "Pode ir tranquilo, por onde você for!"}</p>
+            <a className="cc-btn-white cc-hero-compact-cta" href="#funil">
+              PEÇA JÁ
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
         </section>
       ) : (
         <ConectCarHeroCarousel ctaHref="#funil" />
