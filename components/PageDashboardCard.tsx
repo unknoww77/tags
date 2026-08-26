@@ -105,10 +105,18 @@ export function PageDashboardCard({ page }: { page: PageCardData }) {
           label="Domínio"
           value={
             page.domainHostname
-              ? `${page.domainHostname}${page.domainNsStatus ? ` (${page.domainNsStatus})` : ""}`
+              ? `${page.domainHostname} · ${
+                  page.domainNsStatus === "active"
+                    ? "ativo"
+                    : page.domainNsStatus === "error"
+                      ? "erro NS"
+                      : page.domainNsStatus === "pending"
+                        ? "aguardando NS"
+                        : page.domainNsStatus || "conectado"
+                }`
               : "Sem domínio"
           }
-          help="Domínio custom conectado a esta landing e status dos nameservers na Cloudflare."
+          help="Hostname ligado à landing. Ativo = Cloudflare já viu os nameservers. Aguardando NS = ainda precisa apontar na registradora."
         />
         <Stat
           label="No ar"

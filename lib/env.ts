@@ -14,6 +14,9 @@ export const env = {
   cronSecret: () => process.env.CRON_SECRET ?? "",
   cloudflareApiToken: () => process.env.CLOUDFLARE_API_TOKEN ?? "",
   cloudflareAccountId: () => process.env.CLOUDFLARE_ACCOUNT_ID ?? "",
+  /** Global API Key (legado) — tem zone.create; preferível junto com CLOUDFLARE_EMAIL */
+  cloudflareApiKey: () => process.env.CLOUDFLARE_API_KEY ?? "",
+  cloudflareEmail: () => process.env.CLOUDFLARE_EMAIL ?? "",
   trackingSalt: () => process.env.TRACKING_IP_SALT ?? "top1tags-dev-salt",
   superAdminEmail: () => process.env.SUPER_ADMIN_EMAIL ?? "admin@top1tags.dev",
   superAdminUsername: () => process.env.SUPER_ADMIN_USERNAME ?? "admin",

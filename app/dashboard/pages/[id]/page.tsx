@@ -43,6 +43,15 @@ export default async function PageDetailPage({ params }: Props) {
             <h1>{page.title}</h1>
             <p className="muted">
               {BRAND_LABELS[page.brand]} · status {page.status} · template {page.templateId}
+              {domain
+                ? ` · domínio ${domain.hostname} (${
+                    domain.nsStatus === "active"
+                      ? "NS ativo"
+                      : domain.nsStatus === "error"
+                        ? "erro NS"
+                        : "aguardando NS"
+                  })`
+                : " · sem domínio custom"}
             </p>
           </div>
         </div>

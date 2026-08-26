@@ -401,6 +401,12 @@ button:hover:not(:disabled) {
   margin: 0;
 }
 
+.form-info {
+  color: var(--ok);
+  margin: 0;
+  line-height: 1.45;
+}
+
 .success-box {
   background: rgba(74, 222, 128, 0.1);
   border: 1px solid rgba(74, 222, 128, 0.3);
