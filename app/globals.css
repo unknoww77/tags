@@ -1561,18 +1561,18 @@ code,
 
 .cc-hero-compact {
   --cc-orange: #ff6a38;
-  --cc-orange-deep: #e85a2b;
-  --cc-orange-soft: #ff8f66;
+  --cc-orange-deep: #f05628;
   position: relative;
   isolation: isolate;
   overflow: hidden;
   color: #fff;
   text-align: center;
   padding: clamp(52px, 9vw, 88px) 24px clamp(56px, 9vw, 96px);
-  background:
-    radial-gradient(900px 420px at 50% -10%, rgba(255, 255, 255, 0.28), transparent 58%),
-    radial-gradient(640px 320px at 100% 100%, rgba(255, 255, 255, 0.14), transparent 55%),
-    linear-gradient(165deg, var(--cc-orange-deep) 0%, var(--cc-orange) 42%, var(--cc-orange-soft) 100%);
+  /* só laranja sólido + luz branca — sem verde / teal */
+  background: #ff6a38 !important;
+  background-image:
+    radial-gradient(820px 380px at 50% -20%, rgba(255, 255, 255, 0.22), transparent 60%),
+    linear-gradient(180deg, #ff7344 0%, #ff6a38 48%, #f05628 100%) !important;
 }
 
 .cc-hero-compact::before {

@@ -11,15 +11,15 @@ type Props = {
   config: PageEngagementConfig;
 };
 
-const CC_ORANGE = "#e65c00";
-const CC_GREEN = "#00a651";
+const CC_ORANGE = "#ff6a38";
+const CC_ORANGE_SOFT = "#ff8a5c";
 const VL_PURPLE = "#230c87";
 const VL_CYAN = "#25d6e9";
 
 export function PagePreview({ brand, headline, description, config }: Props) {
   const isCC = brand === "conectcar";
   const primary = isCC ? CC_ORANGE : VL_PURPLE;
-  const accent = isCC ? CC_GREEN : VL_CYAN;
+  const accent = isCC ? CC_ORANGE_SOFT : VL_CYAN;
 
   const heroText = headline || (isCC ? "Peça sua tag ConectCar" : "Peça sua tag Veloe");
   const heroSub =
@@ -143,7 +143,9 @@ export function PagePreview({ brand, headline, description, config }: Props) {
         {/* hero */}
         <div
           style={{
-            background: `linear-gradient(135deg, ${primary} 0%, ${accent} 100%)`,
+            background: isCC
+              ? `linear-gradient(165deg, ${primary} 0%, ${primary} 55%, ${accent} 100%)`
+              : `linear-gradient(135deg, ${primary} 0%, ${accent} 100%)`,
             color: "#fff",
             padding: "28px 16px 24px",
             textAlign: "center",
