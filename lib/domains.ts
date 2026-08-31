@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getZone } from "@/lib/cloudflare";
+import { getZone, ensureOriginDnsRecords } from "@/lib/cloudflare";
 
 export async function validateDomainById(domainId: string) {
   const domain = await prisma.domain.findUnique({ where: { id: domainId }, include: { page: true } });
@@ -22,6 +22,23 @@ export async function validateDomainById(domainId: string) {
   try {
     const zone = await getZone(domain.cloudflareZoneId);
     const active = zone.status === "active";
+
+    if (active) {
+      try {
+        await ensureOriginDnsRecords(domain.cloudflareZoneId, domain.hostname);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Erro ao configurar DNS A";
+        return prisma.domain.update({
+          where: { id: domain.id },
+          data: {
+            nsStatus: "error",
+            lastCheckedAt: new Date(),
+            lastError: message,
+          },
+        });
+      }
+    }
+
     const updated = await prisma.domain.update({
       where: { id: domain.id },
       data: {

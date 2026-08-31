@@ -90,6 +90,61 @@ export async function getZone(zoneId: string): Promise<CloudflareZone> {
   return cfFetch<CloudflareZone>(`/zones/${zoneId}`);
 }
 
+export type CloudflareDnsRecord = {
+  id: string;
+  type: string;
+  name: string;
+  content: string;
+  proxied: boolean;
+};
+
+export async function listDnsRecords(zoneId: string): Promise<CloudflareDnsRecord[]> {
+  return cfFetch<CloudflareDnsRecord[]>(`/zones/${zoneId}/dns_records?per_page=100`);
+}
+
+export async function createDnsRecord(
+  zoneId: string,
+  data: { type: "A"; name: string; content: string; proxied?: boolean }
+): Promise<CloudflareDnsRecord> {
+  return cfFetch<CloudflareDnsRecord>(`/zones/${zoneId}/dns_records`, {
+    method: "POST",
+    body: JSON.stringify({
+      type: data.type,
+      name: data.name,
+      content: data.content,
+      proxied: data.proxied ?? true,
+      ttl: 1,
+    }),
+  });
+}
+
+function hasOriginARecord(records: CloudflareDnsRecord[], hostname: string, label: "@" | "www"): boolean {
+  const target = label === "@" ? hostname : `www.${hostname}`;
+  return records.some(
+    (r) =>
+      r.type === "A" &&
+      (r.name === target || r.name === `${target}.` || (label === "@" && r.name === "@"))
+  );
+}
+
+/** Cria A @ e www apontando para ORIGIN_IP (proxied) se ainda não existirem. */
+export async function ensureOriginDnsRecords(zoneId: string, hostname: string): Promise<void> {
+  const originIp = env.originIp();
+  if (!originIp) {
+    throw new Error(
+      "ORIGIN_IP não configurado. Defina o IP público da VPS no .env (ex: ORIGIN_IP=111.90.148.173)."
+    );
+  }
+
+  const records = await listDnsRecords(zoneId);
+  if (!hasOriginARecord(records, hostname, "@")) {
+    await createDnsRecord(zoneId, { type: "A", name: "@", content: originIp, proxied: true });
+  }
+  if (!hasOriginARecord(records, hostname, "www")) {
+    await createDnsRecord(zoneId, { type: "A", name: "www", content: originIp, proxied: true });
+  }
+}
+
 export async function findZoneByName(hostname: string): Promise<CloudflareZone | null> {
   const result = await cfFetch<CloudflareZone[]>(
     `/zones?name=${encodeURIComponent(hostname)}&status=active,pending,initializing,moved`
@@ -129,6 +184,15 @@ export async function createZoneWithFlexibleSsl(hostname: string): Promise<Cloud
     await setSslFlexible(zone.id);
   } catch {
     // Token pode listar zones sem editar settings; NS ainda servem para o cliente apontar.
+  }
+
+  try {
+    await ensureOriginDnsRecords(zone.id, hostname);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(
+      `Zone ${hostname} criada, mas falhou ao configurar DNS A → VPS: ${message}`
+    );
   }
 
   try {

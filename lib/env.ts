@@ -22,6 +22,8 @@ export const env = {
   superAdminUsername: () => process.env.SUPER_ADMIN_USERNAME ?? "admin",
   superAdminPassword: () => process.env.SUPER_ADMIN_PASSWORD ?? "ChangeMeNow123!",
   superAdminName: () => process.env.SUPER_ADMIN_NAME ?? "Super Admin",
+  /** IP público da VPS — registros A dos custom domains na Cloudflare apontam aqui. */
+  originIp: () => process.env.ORIGIN_IP?.trim() ?? "",
 };
 
 export function isPlatformHost(host: string): boolean {
