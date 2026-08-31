@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 
 type Params = { params: Promise<{ id: string }> };
@@ -20,7 +20,7 @@ export async function DELETE(_request: Request, { params }: Params) {
     return NextResponse.json({ error: "Domínio não encontrado" }, { status: 404 });
   }
 
-  if (!canAccessTenant(session.user, domain.page.tenantId)) {
+  if (!canAccessPage(session.user, domain.page.tenantId)) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { STATUS_LABEL, LOSS_REASON_LABEL } from "@/lib/leads";
 import type { LeadStatus } from "@prisma/client";
@@ -17,7 +17,7 @@ export async function GET(request: Request, { params }: Params) {
   if (!page) {
     return NextResponse.json({ error: "Não encontrado" }, { status: 404 });
   }
-  if (!canAccessTenant(session.user, page.tenantId)) {
+  if (!canAccessPage(session.user, page.tenantId)) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
 

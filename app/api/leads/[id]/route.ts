@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { canTransition } from "@/lib/leads";
 
@@ -35,7 +35,7 @@ export async function PATCH(request: Request, { params }: Params) {
   if (!lead) {
     return NextResponse.json({ error: "Lead não encontrado" }, { status: 404 });
   }
-  if (!canAccessTenant(session.user, lead.page.tenantId)) {
+  if (!canAccessPage(session.user, lead.page.tenantId)) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
 

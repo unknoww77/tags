@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { createZoneWithFlexibleSsl } from "@/lib/cloudflare";
 import { isValidHostname, normalizeHostname } from "@/lib/utils";
@@ -25,7 +25,7 @@ export async function POST(request: Request, { params }: Params) {
     return NextResponse.json({ error: "Página não encontrada" }, { status: 404 });
   }
 
-  if (!canAccessTenant(session.user, page.tenantId)) {
+  if (!canAccessPage(session.user, page.tenantId)) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
 

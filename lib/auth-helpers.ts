@@ -97,3 +97,9 @@ export function canAccessTenant(user: AppSessionUser, tenantId: string): boolean
   }
   return user.tenantId === tenantId;
 }
+
+/** Acesso a uma página pelo ID (links do /super, conflito de domínio). Super admin sempre pode. */
+export function canAccessPage(user: AppSessionUser, pageTenantId: string): boolean {
+  if (user.role === "SUPER_ADMIN") return true;
+  return user.tenantId === pageTenantId;
+}

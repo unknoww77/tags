@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { requireTenantAdmin } from "@/lib/auth-helpers";
+import { requireTenantAdmin, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { PlatformHeader } from "@/components/PlatformHeader";
 import { DomainConnect } from "@/components/DomainConnect";
@@ -22,12 +22,7 @@ export default async function PageDetailPage({ params }: Props) {
   });
 
   if (!page) notFound();
-  if (session.user.impersonating && session.user.tenantId !== page.tenantId) {
-    notFound();
-  }
-  if (session.user.role !== "SUPER_ADMIN" && session.user.tenantId !== page.tenantId) {
-    notFound();
-  }
+  if (!canAccessPage(session.user, page.tenantId)) notFound();
 
   const domain = page.domains[0] ?? null;
 

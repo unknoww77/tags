@@ -1,4 +1,4 @@
-import { getAppSession, canAccessTenant } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { STATUS_LABEL, LOSS_REASON_LABEL } from "@/lib/leads";
 
@@ -13,7 +13,7 @@ export async function GET(_request: Request, { params }: Params) {
   const { id } = await params;
   const page = await prisma.page.findUnique({ where: { id } });
   if (!page) return new Response("Não encontrado", { status: 404 });
-  if (!canAccessTenant(session.user, page.tenantId)) {
+  if (!canAccessPage(session.user, page.tenantId)) {
     return new Response("Não autorizado", { status: 401 });
   }
 

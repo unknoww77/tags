@@ -1,25 +1,19 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getAppSession, type AppSessionUser } from "@/lib/auth-helpers";
+import { getAppSession, canAccessPage as userCanAccessPage, type AppSessionUser } from "@/lib/auth-helpers";
 import { prisma } from "@/lib/prisma";
 import { parsePageConfig } from "@/lib/page-config";
 
 type Params = { params: Promise<{ id: string }> };
 
-async function canAccessPage(pageId: string, user: AppSessionUser) {
+async function loadAccessiblePage(pageId: string, user: AppSessionUser) {
   const page = await prisma.page.findUnique({
     where: { id: pageId },
     include: { domains: true },
   });
   if (!page) return null;
-  if (user.role === "SUPER_ADMIN") {
-    if (user.impersonating) {
-      return user.tenantId === page.tenantId ? page : null;
-    }
-    return page;
-  }
-  if (user.role === "TENANT_ADMIN" && user.tenantId === page.tenantId) return page;
-  return null;
+  if (!userCanAccessPage(user, page.tenantId)) return null;
+  return page;
 }
 
 const updateSchema = z.object({
@@ -39,7 +33,7 @@ export async function GET(_request: Request, { params }: Params) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
   const { id } = await params;
-  const page = await canAccessPage(id, session.user);
+  const page = await loadAccessiblePage(id, session.user);
   if (!page) {
     return NextResponse.json({ error: "Não encontrado" }, { status: 404 });
   }
@@ -52,7 +46,7 @@ export async function PATCH(request: Request, { params }: Params) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
   const { id } = await params;
-  const existing = await canAccessPage(id, session.user);
+  const existing = await loadAccessiblePage(id, session.user);
   if (!existing) {
     return NextResponse.json({ error: "Não encontrado" }, { status: 404 });
   }
@@ -90,7 +84,7 @@ export async function DELETE(_request: Request, { params }: Params) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
   const { id } = await params;
-  const existing = await canAccessPage(id, session.user);
+  const existing = await loadAccessiblePage(id, session.user);
   if (!existing) {
     return NextResponse.json({ error: "Não encontrado" }, { status: 404 });
   }
