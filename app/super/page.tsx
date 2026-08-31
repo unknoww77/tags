@@ -39,7 +39,11 @@ export default async function SuperAdminPage() {
         orderBy: { createdAt: "desc" },
         take: 50,
       }),
-      prisma.domain.findMany({ orderBy: { updatedAt: "desc" }, take: 50 }),
+      prisma.domain.findMany({
+        include: { page: { select: { id: true, title: true, tenant: { select: { name: true } } } } },
+        orderBy: { updatedAt: "desc" },
+        take: 50,
+      }),
       prisma.invite.findMany({ orderBy: { createdAt: "desc" }, take: 100 }),
       prisma.trackEvent.count({ where: { eventType: "view" } }),
       prisma.lead.count(),
@@ -218,19 +222,27 @@ export default async function SuperAdminPage() {
               <thead>
                 <tr>
                   <th>Hostname</th>
+                  <th>Página</th>
+                  <th>Tenant</th>
                   <th>SSL</th>
                   <th>NS</th>
                   <th>Última check</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {domains.slice(0, 15).map((d) => (
                   <tr key={d.id}>
                     <td>{d.hostname}</td>
+                    <td>{d.page.title}</td>
+                    <td>{d.page.tenant.name}</td>
                     <td>{d.sslMode}</td>
                     <td className={`status-${d.nsStatus}`}>{d.nsStatus}</td>
                     <td>
                       {d.lastCheckedAt ? d.lastCheckedAt.toLocaleString("pt-BR") : "—"}
+                    </td>
+                    <td>
+                      <Link href={`/dashboard/pages/${d.page.id}`}>Gerenciar</Link>
                     </td>
                   </tr>
                 ))}

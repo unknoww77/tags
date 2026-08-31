@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FieldLabel, HelpTip } from "@/components/HelpTip";
@@ -38,6 +39,9 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
   const [info, setInfo] = useState("");
   const [loading, setLoading] = useState(false);
   const [validating, setValidating] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [conflictPageId, setConflictPageId] = useState<string | null>(null);
+  const [conflictPageTitle, setConflictPageTitle] = useState<string | null>(null);
 
   useEffect(() => {
     setDomain(initial);
@@ -48,6 +52,8 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
     setLoading(true);
     setError("");
     setInfo("");
+    setConflictPageId(null);
+    setConflictPageTitle(null);
     try {
       const res = await fetch(`/api/pages/${pageId}/domain`, {
         method: "POST",
@@ -56,7 +62,18 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error || "Falha ao conectar domínio");
+        const msg = data.error || "Falha ao conectar domínio";
+        setError(msg);
+        setConflictPageId(
+          data.existingPageId && data.existingPageId !== pageId
+            ? data.existingPageId
+            : null
+        );
+        setConflictPageTitle(
+          data.existingPageTitle && data.existingPageId !== pageId
+            ? data.existingPageTitle
+            : null
+        );
         return;
       }
       setDomain(data.domain);
@@ -78,6 +95,8 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
     setValidating(true);
     setError("");
     setInfo("");
+    setConflictPageId(null);
+    setConflictPageTitle(null);
     try {
       const res = await fetch(`/api/domains/${domain.id}/validate`, { method: "POST" });
       const data = await res.json().catch(() => ({}));
@@ -106,6 +125,36 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
     }
   }
 
+  async function removeDomain() {
+    if (!domain) return;
+    const ok = window.confirm(
+      `Remover ${domain.hostname} desta página? Você poderá conectar em outra landing depois. A zone na Cloudflare não é apagada automaticamente.`
+    );
+    if (!ok) return;
+
+    setRemoving(true);
+    setError("");
+    setInfo("");
+    setConflictPageId(null);
+    setConflictPageTitle(null);
+    try {
+      const res = await fetch(`/api/domains/${domain.id}`, { method: "DELETE" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || "Falha ao remover domínio");
+        return;
+      }
+      setDomain(null);
+      setHostname("");
+      setInfo(`${data.hostname || domain.hostname} removido. Agora você pode conectar em outra página.`);
+      router.refresh();
+    } catch {
+      setError("Falha de rede ao remover domínio");
+    } finally {
+      setRemoving(false);
+    }
+  }
+
   if (!domain) {
     return (
       <form className="panel-form" onSubmit={connect}>
@@ -127,6 +176,14 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
         {error && (
           <p className="form-error" style={{ whiteSpace: "pre-wrap", lineHeight: 1.45 }}>
             {error}
+            {conflictPageId && (
+              <>
+                {" "}
+                <Link href={`/dashboard/pages/${conflictPageId}`} className="domain-error-link">
+                  Abrir {conflictPageTitle ? `"${conflictPageTitle}"` : "página"}
+                </Link>
+              </>
+            )}
           </p>
         )}
         {info && <p className="form-info">{info}</p>}
@@ -181,9 +238,19 @@ export function DomainConnect({ pageId, domain: initial }: Props) {
       {error && <p className="form-error">{error}</p>}
       {info && <p className="form-info">{info}</p>}
 
-      <button type="button" onClick={validateNow} disabled={validating}>
-        {validating ? "Verificando..." : "Verificar agora"}
-      </button>
+      <div className="domain-actions">
+        <button type="button" onClick={validateNow} disabled={validating || removing}>
+          {validating ? "Verificando..." : "Verificar agora"}
+        </button>
+        <button
+          type="button"
+          className="btn-danger-outline"
+          onClick={removeDomain}
+          disabled={validating || removing}
+        >
+          {removing ? "Removendo..." : "Remover domínio"}
+        </button>
+      </div>
     </div>
   );
 }

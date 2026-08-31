@@ -46,9 +46,23 @@ export async function POST(request: Request, { params }: Params) {
       return NextResponse.json({ error: "Não use o domínio da plataforma" }, { status: 400 });
     }
 
-    const taken = await prisma.domain.findUnique({ where: { hostname } });
+    const taken = await prisma.domain.findUnique({
+      where: { hostname },
+      include: { page: { select: { id: true, title: true } } },
+    });
     if (taken) {
-      return NextResponse.json({ error: "Domínio já cadastrado" }, { status: 400 });
+      const where =
+        taken.pageId === pageId
+          ? "nesta página"
+          : `na página "${taken.page.title}"`;
+      return NextResponse.json(
+        {
+          error: `Domínio já cadastrado ${where}. Abra a página correta e use "Remover domínio" para liberar.`,
+          existingPageId: taken.pageId,
+          existingPageTitle: taken.page.title,
+        },
+        { status: 400 }
+      );
     }
 
     const zone = await createZoneWithFlexibleSsl(hostname);

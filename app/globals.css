@@ -407,6 +407,29 @@ button:hover:not(:disabled) {
   line-height: 1.45;
 }
 
+.domain-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.domain-error-link {
+  color: var(--accent-2);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1px solid rgba(251, 113, 133, 0.55);
+  color: var(--danger);
+}
+
+.btn-danger-outline:hover:not(:disabled) {
+  background: rgba(251, 113, 133, 0.12);
+}
+
 .success-box {
   background: rgba(74, 222, 128, 0.1);
   border: 1px solid rgba(74, 222, 128, 0.3);
