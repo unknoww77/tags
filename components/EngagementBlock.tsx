@@ -140,8 +140,13 @@ function EngagementFlow({
         );
         const win = window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
         opened = Boolean(win);
-        if (opened && data.leadId) {
-          void fetch(`/api/leads/${data.leadId}/opened`, { method: "POST", keepalive: true });
+        if (opened && data.leadId && data.openedToken) {
+          void fetch(`/api/leads/${data.leadId}/opened`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: data.openedToken }),
+            keepalive: true,
+          });
         }
       } else if (config.sendToWhatsapp) {
         sendSentinelEvent(

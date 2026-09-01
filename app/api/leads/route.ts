@@ -8,6 +8,10 @@ import {
   parsePageConfig,
   pickWhatsAppNumber,
 } from "@/lib/page-config";
+import {
+  createLeadOpenedToken,
+  isPageAcceptingPublicLeads,
+} from "@/lib/lead-opened-token";
 
 const schema = z.object({
   pageId: z.string().min(1),
@@ -33,7 +37,7 @@ export async function POST(request: Request) {
 
     const body = schema.parse(await request.json());
     const page = await prisma.page.findUnique({ where: { id: body.pageId } });
-    if (!page || page.status === "archived") {
+    if (!page || !isPageAcceptingPublicLeads(page.status)) {
       return NextResponse.json({ error: "Página inválida" }, { status: 404 });
     }
 
@@ -140,10 +144,13 @@ export async function POST(request: Request) {
       whatsappNumberUsed: lead.whatsappNumberUsed,
     });
 
+    const openedToken = whatsappUrl ? createLeadOpenedToken(lead.id) : undefined;
+
     return NextResponse.json({
       ok: true,
       leadId: lead.id,
       whatsappUrl,
+      ...(openedToken ? { openedToken } : {}),
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
