@@ -4,6 +4,7 @@
 .env.production
 .next/
 node_modules/
+.publish-queue/
 npm-debug.log*
 *.pem
 

@@ -11,6 +11,8 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
+    "publish": "node scripts/publish.mjs",
+    "publish:status": "node scripts/publish.mjs --status",
     "postinstall": "prisma generate"
   },
   "prisma": {
