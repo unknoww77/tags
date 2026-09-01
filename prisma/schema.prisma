@@ -186,11 +186,12 @@ model Lead {
   formJson        Json?
   quizJson        Json?
   mode            String     @default("contact")
-  whatsappEnabled Boolean    @default(false)
-  whatsappOpened  Boolean    @default(false)
-  status          LeadStatus     @default(colhido)
-  lossReason      LeadLossReason?
-  lossNote        String?
+  whatsappEnabled    Boolean    @default(false)
+  whatsappOpened     Boolean    @default(false)
+  whatsappNumberUsed String?
+  status             LeadStatus     @default(colhido)
+  lossReason         LeadLossReason?
+  lossNote           String?
   utmSource       String?
   utmMedium       String?
   utmCampaign     String?

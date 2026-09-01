@@ -101,11 +101,17 @@ export async function notifyTelegramLead(opts: {
   leadPhone?: string | null;
   mode: string;
   whatsappOpened: boolean;
+  whatsappNumberUsed?: string | null;
 }) {
   const settings = await getEffectiveSettings(opts.tenantId);
   if (!settings.notifyTelegramOnLead || !settings.telegramBotToken || !settings.telegramChatId) {
     return;
   }
+
+  const waNumberLine =
+    opts.whatsappNumberUsed
+      ? `Número WA: ${opts.whatsappNumberUsed}`
+      : null;
 
   const text = [
     "🆕 Novo lead Top1Tags",
@@ -114,7 +120,10 @@ export async function notifyTelegramLead(opts: {
     `Telefone: ${opts.leadPhone || "—"}`,
     `Modo: ${opts.mode}`,
     `WhatsApp: ${opts.whatsappOpened ? "abriu" : opts.mode === "whatsapp" ? "não abriu" : "n/a"}`,
-  ].join("\n");
+    waNumberLine,
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   try {
     await fetch(`https://api.telegram.org/bot${settings.telegramBotToken}/sendMessage`, {

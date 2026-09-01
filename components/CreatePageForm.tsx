@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BRAND_LABELS, getTemplatesForBrand } from "@/lib/templates";
-import { defaultPageConfig, defaultItauPageConfig, veloeSentinelPresets, conectcarSentinelPresets, defaultSentinelConfig } from "@/lib/page-config";
+import { defaultPageConfig, defaultItauPageConfig, veloeSentinelPresets, conectcarSentinelPresets, defaultSentinelConfig, validateWhatsAppConfig } from "@/lib/page-config";
 import { EngagementConfigFields } from "@/components/EngagementConfigFields";
 import { FunnelFlowEditor } from "@/components/FunnelFlowEditor";
 import { FieldLabel } from "@/components/HelpTip";
@@ -29,9 +29,10 @@ export function CreatePageForm() {
     setLoading(true);
     setError("");
 
-    if (config.sendToWhatsapp && config.whatsappNumber.length < 10) {
+    const waError = validateWhatsAppConfig(config);
+    if (waError) {
       setLoading(false);
-      setError("Informe um WhatsApp válido (com DDI).");
+      setError(waError);
       return;
     }
 

@@ -5,7 +5,7 @@ import { sendSentinelEvent, trackEvent } from "@/components/TrackingBeacon";
 import { SelectorButton } from "@/components/SelectorButton";
 import {
   FORM_FIELD_LABELS,
-  buildWhatsAppUrl,
+  hasValidWhatsAppNumbers,
   parsePageConfig,
   type FormFieldKey,
   type PageEngagementConfig,
@@ -103,39 +103,6 @@ function EngagementFlow({
     setError("");
 
     let opened = false;
-    if (config.sendToWhatsapp && config.whatsappNumber) {
-      sendSentinelEvent(
-        pageId,
-        domain,
-        config.sentinel?.whatsappClickEvent ?? "purchase",
-        "WhatsApp Final Button",
-        config,
-        {
-          source: "engagement_finish",
-          destination: "whatsapp",
-          quizAnswers,
-          formValues,
-        }
-      );
-      const extras: Record<string, string> = { ...formValues, ...quizAnswers };
-      const url = buildWhatsAppUrl(config.whatsappNumber, config.whatsappMessage, extras);
-      const win = window.open(url, "_blank", "noopener,noreferrer");
-      opened = Boolean(win);
-    } else {
-      sendSentinelEvent(
-        pageId,
-        domain,
-        config.sentinel?.finalNoWhatsappEvent ?? "add_to_cart",
-        "Quiz Final Button",
-        config,
-        {
-          source: "engagement_finish",
-          destination: "lead_only",
-          quizAnswers,
-          formValues,
-        }
-      );
-    }
 
     try {
       const res = await fetch("/api/leads", {
@@ -147,14 +114,63 @@ function EngagementFlow({
           form: formValues,
           quiz: quizAnswers,
           whatsappEnabled: config.sendToWhatsapp,
-          whatsappOpened: opened,
+          whatsappOpened: false,
           ...getUtms(),
         }),
         keepalive: true,
       });
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         throw new Error(data.error || "Falha ao salvar lead");
+      }
+
+      if (config.sendToWhatsapp && data.whatsappUrl) {
+        sendSentinelEvent(
+          pageId,
+          domain,
+          config.sentinel?.whatsappClickEvent ?? "purchase",
+          "WhatsApp Final Button",
+          config,
+          {
+            source: "engagement_finish",
+            destination: "whatsapp",
+            quizAnswers,
+            formValues,
+          }
+        );
+        const win = window.open(data.whatsappUrl, "_blank", "noopener,noreferrer");
+        opened = Boolean(win);
+        if (opened && data.leadId) {
+          void fetch(`/api/leads/${data.leadId}/opened`, { method: "POST", keepalive: true });
+        }
+      } else if (config.sendToWhatsapp) {
+        sendSentinelEvent(
+          pageId,
+          domain,
+          config.sentinel?.finalNoWhatsappEvent ?? "add_to_cart",
+          "Quiz Final Button",
+          config,
+          {
+            source: "engagement_finish",
+            destination: "lead_only",
+            quizAnswers,
+            formValues,
+          }
+        );
+      } else {
+        sendSentinelEvent(
+          pageId,
+          domain,
+          config.sentinel?.finalNoWhatsappEvent ?? "add_to_cart",
+          "Quiz Final Button",
+          config,
+          {
+            source: "engagement_finish",
+            destination: "lead_only",
+            quizAnswers,
+            formValues,
+          }
+        );
       }
 
       trackEvent(pageId, domain, "lead", {
@@ -184,7 +200,7 @@ function EngagementFlow({
       }
     }
 
-    if (config.sendToWhatsapp && !config.whatsappNumber) {
+    if (config.sendToWhatsapp && !hasValidWhatsAppNumbers(config.whatsappNumbers)) {
       setError("WhatsApp não configurado nesta página.");
       return;
     }

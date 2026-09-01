@@ -79,7 +79,7 @@ export function PageDashboardCard({ page }: { page: PageCardData }) {
               ? `Sim${page.whatsappNumberMasked ? ` · ${page.whatsappNumberMasked}` : ""}`
               : "Não"
           }
-          help="Se o funil está configurado para abrir WhatsApp ao enviar. Mostra o número mascarado quando houver."
+          help="Se o funil está configurado para abrir WhatsApp ao enviar. Mostra o número mascarado ou quantidade quando há múltiplos."
         />
         <Stat
           label="WA abriu"

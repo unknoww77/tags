@@ -23,11 +23,18 @@ type Lead = {
   lossNote: string | null;
   whatsappEnabled: boolean;
   whatsappOpened: boolean;
+  whatsappNumberUsed: string | null;
   quizJson: Record<string, string> | null;
   formJson: Record<string, string> | null;
   utmSource: string | null;
   createdAt: string;
 };
+
+function maskPhone(n: string): string {
+  const d = n.replace(/\D/g, "");
+  if (d.length < 4) return d;
+  return `${d.slice(0, 4)}…${d.slice(-4)}`;
+}
 
 export function LeadsPanel({ pageId }: { pageId: string }) {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -229,6 +236,9 @@ function LeadCard({
           <span className={lead.whatsappOpened ? "status-active" : "status-error"}>
             WA {lead.whatsappOpened ? "abriu" : "não abriu"}
           </span>
+        )}
+        {lead.whatsappNumberUsed && (
+          <span className="muted">Nº {maskPhone(lead.whatsappNumberUsed)}</span>
         )}
         <span>UTM: {lead.utmSource || "(direct)"}</span>
       </div>

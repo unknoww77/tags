@@ -6,7 +6,7 @@ import { EngagementConfigFields } from "@/components/EngagementConfigFields";
 import { FunnelFlowEditor } from "@/components/FunnelFlowEditor";
 import { PagePreview } from "@/components/PagePreview";
 import { SentinelTrackingConfigFields } from "@/components/SentinelTrackingConfigFields";
-import { parsePageConfig, type PageEngagementConfig } from "@/lib/page-config";
+import { parsePageConfig, validateWhatsAppConfig, type PageEngagementConfig } from "@/lib/page-config";
 
 type Props = {
   pageId: string;
@@ -39,9 +39,10 @@ export function PageConfigEditor({
     setError("");
     setMessage("");
 
-    if (config.sendToWhatsapp && config.whatsappNumber.length < 10) {
+    const waError = validateWhatsAppConfig(config);
+    if (waError) {
       setSaving(false);
-      setError("Informe um WhatsApp válido (com DDI).");
+      setError(waError);
       return;
     }
 

@@ -5,9 +5,13 @@ import { FieldLabel, HelpTip } from "@/components/HelpTip";
 import {
   FORM_FIELD_LABELS,
   DEFAULT_QUIZ_ITAU,
+  MAX_WHATSAPP_NUMBERS,
+  redistributeEqualWeights,
+  whatsappWeightsTotal,
   type FormFieldKey,
   type PageEngagementConfig,
   type QuizQuestion,
+  type WhatsAppEntry,
 } from "@/lib/page-config";
 
 type Props = {
@@ -27,8 +31,17 @@ const FIELD_HELP: Record<FormFieldKey, string> = {
 };
 
 export function EngagementConfigFields({ value, onChange }: Props) {
+  const weightsTotal = whatsappWeightsTotal(value.whatsappNumbers);
+  const weightsOk = weightsTotal === 100;
+
   function patch(partial: Partial<PageEngagementConfig>) {
     onChange({ ...value, ...partial });
+  }
+
+  function patchWhatsAppNumbers(entries: WhatsAppEntry[]) {
+    const whatsappNumbers = entries;
+    const whatsappNumber = entries[0]?.number ?? "";
+    patch({ whatsappNumbers, whatsappNumber });
   }
 
   function toggleField(key: FormFieldKey) {
@@ -90,6 +103,30 @@ export function EngagementConfigFields({ value, onChange }: Props) {
     } else {
       patch({ itauMode: false });
     }
+  }
+
+  function updateWhatsAppEntry(index: number, partial: Partial<WhatsAppEntry>) {
+    const next = value.whatsappNumbers.map((e, i) =>
+      i === index ? { ...e, ...partial } : e
+    );
+    patchWhatsAppNumbers(next);
+  }
+
+  function addWhatsAppNumber() {
+    if (value.whatsappNumbers.length >= MAX_WHATSAPP_NUMBERS) return;
+    const next = redistributeEqualWeights([
+      ...value.whatsappNumbers,
+      { number: "", weight: 0 },
+    ]);
+    patchWhatsAppNumbers(next);
+  }
+
+  function removeWhatsAppNumber(index: number) {
+    if (value.whatsappNumbers.length <= 1) return;
+    const next = redistributeEqualWeights(
+      value.whatsappNumbers.filter((_, i) => i !== index)
+    );
+    patchWhatsAppNumbers(next);
   }
 
   return (
@@ -202,23 +239,70 @@ export function EngagementConfigFields({ value, onChange }: Props) {
         label="Ao enviar o formulário, levar para o WhatsApp?"
         value={value.sendToWhatsapp}
         onChange={(sendToWhatsapp) => patch({ sendToWhatsapp })}
-        help="Se Sim, após o envio do formulário abrimos o WhatsApp com mensagem + dados do lead. O chat flutuante da página também usa o mesmo número."
+        help="Se Sim, após o envio do formulário abrimos o WhatsApp com mensagem + dados do lead. Os leads são distribuídos entre os números conforme os percentuais abaixo."
       />
 
       <div className="stack-tight">
-        <label>
-          <FieldLabel help="Número com DDI do Brasil: 55 + DDD + número, só dígitos. Ex: 5511999999999. Usado no chat flutuante e, se ativado, no envio do formulário.">
-            Número do WhatsApp de atendimento (com DDI)
+        <div>
+          <FieldLabel help="Adicione até 5 números com DDI (55 + DDD + número). Os percentuais devem somar 100%. Ao adicionar números, a divisão é automática (ex.: 2 números = 50% cada).">
+            Números de WhatsApp de atendimento
           </FieldLabel>
-          <input
-            value={value.whatsappNumber}
-            onChange={(e) => patch({ whatsappNumber: e.target.value.replace(/\D/g, "") })}
-            placeholder="5511999999999"
-            inputMode="numeric"
-          />
-        </label>
+          <p className="muted tiny">
+            Total:{" "}
+            <span className={weightsOk ? "status-active" : "status-error"}>
+              {weightsTotal}%
+            </span>
+            {!weightsOk && " — a soma deve ser 100%"}
+          </p>
+        </div>
+
+        {value.whatsappNumbers.map((entry, index) => (
+          <div key={index} className="whatsapp-number-row selector-row wrap">
+            <label className="whatsapp-number-field">
+              <span className="muted tiny">Número {index + 1}</span>
+              <input
+                value={entry.number}
+                onChange={(e) =>
+                  updateWhatsAppEntry(index, { number: e.target.value.replace(/\D/g, "") })
+                }
+                placeholder="5511999999999"
+                inputMode="numeric"
+              />
+            </label>
+            <label className="whatsapp-weight-field">
+              <span className="muted tiny">%</span>
+              <input
+                type="number"
+                min={0}
+                max={100}
+                value={entry.weight}
+                onChange={(e) =>
+                  updateWhatsAppEntry(index, {
+                    weight: Math.max(0, Math.min(100, Number(e.target.value) || 0)),
+                  })
+                }
+              />
+            </label>
+            {value.whatsappNumbers.length > 1 && (
+              <button
+                type="button"
+                className="linkish"
+                onClick={() => removeWhatsAppNumber(index)}
+              >
+                Remover
+              </button>
+            )}
+          </div>
+        ))}
+
+        {value.whatsappNumbers.length < MAX_WHATSAPP_NUMBERS && (
+          <button type="button" className="selector-btn" onClick={addWhatsAppNumber}>
+            + adicionar número
+          </button>
+        )}
+
         <label>
-          <FieldLabel help="Texto inicial da conversa no WhatsApp (chat e formulário). Dados do lead podem ser anexados automaticamente.">
+          <FieldLabel help="Texto inicial da conversa no WhatsApp ao enviar o formulário. Dados do lead podem ser anexados automaticamente.">
             Mensagem inicial
           </FieldLabel>
           <textarea

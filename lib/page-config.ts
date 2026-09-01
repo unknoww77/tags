@@ -42,11 +42,19 @@ export type SentinelTrackingConfig = {
   selectors: SentinelSelectorRule[];
 };
 
+export type WhatsAppEntry = {
+  number: string;
+  weight: number;
+};
+
+export const MAX_WHATSAPP_NUMBERS = 5;
+
 export type PageEngagementConfig = {
   showForm: boolean;
   showQuiz: boolean;
   sendToWhatsapp: boolean;
   whatsappNumber: string;
+  whatsappNumbers: WhatsAppEntry[];
   whatsappMessage: string;
   formFields: Record<FormFieldKey, boolean>;
   quizQuestions: QuizQuestion[];
@@ -194,6 +202,7 @@ export function defaultPageConfig(): PageEngagementConfig {
     showQuiz: false,
     sendToWhatsapp: false,
     whatsappNumber: "",
+    whatsappNumbers: [{ number: "", weight: 100 }],
     whatsappMessage: "Olá! Vim pela landing e quero saber mais sobre a tag.",
     formFields: {
       name: true,
@@ -217,6 +226,7 @@ export function defaultItauPageConfig(): PageEngagementConfig {
     showQuiz: true,
     sendToWhatsapp: false,
     whatsappNumber: "",
+    whatsappNumbers: [{ number: "", weight: 100 }],
     whatsappMessage: "Olá! Vim pela landing do Itaú e quero saber mais sobre a tag.",
     formFields: {
       name: true,
@@ -234,17 +244,66 @@ export function defaultItauPageConfig(): PageEngagementConfig {
   };
 }
 
+function normalizeWhatsAppEntry(raw: Partial<WhatsAppEntry>): WhatsAppEntry {
+  return {
+    number: String(raw.number ?? "").replace(/\D/g, ""),
+    weight: Math.max(0, Math.min(100, Math.round(Number(raw.weight) || 0))),
+  };
+}
+
+export function equalSplitWeights(count: number): number[] {
+  if (count <= 0) return [];
+  const base = Math.floor(100 / count);
+  const remainder = 100 - base * count;
+  return Array.from({ length: count }, (_, i) => base + (i < remainder ? 1 : 0));
+}
+
+export function redistributeEqualWeights(entries: WhatsAppEntry[]): WhatsAppEntry[] {
+  const weights = equalSplitWeights(entries.length);
+  return entries.map((e, i) => ({ ...e, weight: weights[i] ?? 0 }));
+}
+
+export function whatsappWeightsTotal(entries: WhatsAppEntry[]): number {
+  return entries.reduce((sum, e) => sum + e.weight, 0);
+}
+
+export function hasValidWhatsAppNumbers(entries: WhatsAppEntry[]): boolean {
+  return entries.some((e) => e.number.length >= 10);
+}
+
+export function parseWhatsAppNumbers(
+  raw: unknown,
+  legacyNumber?: string
+): WhatsAppEntry[] {
+  if (Array.isArray(raw) && raw.length > 0) {
+    const parsed = raw
+      .slice(0, MAX_WHATSAPP_NUMBERS)
+      .map((item) => normalizeWhatsAppEntry(item as Partial<WhatsAppEntry>))
+      .filter((e) => e.number || e.weight > 0);
+    if (parsed.length > 0) return parsed;
+  }
+
+  const legacy = String(legacyNumber ?? "").replace(/\D/g, "");
+  if (legacy) return [{ number: legacy, weight: 100 }];
+
+  return [{ number: "", weight: 100 }];
+}
+
 export function parsePageConfig(raw: unknown): PageEngagementConfig {
   const base = defaultPageConfig();
   if (!raw || typeof raw !== "object") return base;
-  const c = raw as Partial<PageEngagementConfig>;
+  const c = raw as Partial<PageEngagementConfig> & { whatsappNumbers?: WhatsAppEntry[] };
   const sentinelBase = defaultSentinelConfig();
+
+  const whatsappNumbers = parseWhatsAppNumbers(c.whatsappNumbers, c.whatsappNumber);
+  const whatsappNumber = whatsappNumbers[0]?.number ?? "";
 
   return {
     showForm: Boolean(c.showForm ?? base.showForm),
     showQuiz: Boolean(c.showQuiz ?? base.showQuiz),
     sendToWhatsapp: Boolean(c.sendToWhatsapp ?? base.sendToWhatsapp),
-    whatsappNumber: String(c.whatsappNumber ?? base.whatsappNumber).replace(/\D/g, ""),
+    whatsappNumber,
+    whatsappNumbers,
     whatsappMessage: String(c.whatsappMessage ?? base.whatsappMessage).slice(0, 500),
     itauMode: Boolean(c.itauMode ?? base.itauMode),
     flowLayout:
@@ -322,6 +381,34 @@ export function parsePageConfig(raw: unknown): PageEngagementConfig {
   };
 }
 
+export function pickWhatsAppNumber(
+  entries: WhatsAppEntry[],
+  countsByNumber: Record<string, number>
+): string {
+  const valid = entries.filter((e) => e.number.length >= 10 && e.weight > 0);
+  if (valid.length === 0) return "";
+  if (valid.length === 1) return valid[0].number;
+
+  const totalWeight = valid.reduce((sum, e) => sum + e.weight, 0);
+  const totalLeads = valid.reduce((sum, e) => sum + (countsByNumber[e.number] ?? 0), 0);
+  const nextTotal = totalLeads + 1;
+
+  let best = valid[0];
+  let bestDeficit = -Infinity;
+
+  for (const entry of valid) {
+    const expected = (entry.weight / totalWeight) * nextTotal;
+    const actual = countsByNumber[entry.number] ?? 0;
+    const deficit = expected - actual;
+    if (deficit > bestDeficit) {
+      bestDeficit = deficit;
+      best = entry;
+    }
+  }
+
+  return best.number;
+}
+
 export function buildWhatsAppUrl(
   number: string,
   message: string,
@@ -336,4 +423,19 @@ export function buildWhatsAppUrl(
   }
   const text = encodeURIComponent(parts.join("\n"));
   return `https://wa.me/${digits}?text=${text}`;
+}
+
+export function validateWhatsAppConfig(config: PageEngagementConfig): string | null {
+  if (!config.sendToWhatsapp) return null;
+
+  if (!hasValidWhatsAppNumbers(config.whatsappNumbers)) {
+    return "Informe ao menos um WhatsApp válido (com DDI).";
+  }
+
+  const total = whatsappWeightsTotal(config.whatsappNumbers);
+  if (total !== 100) {
+    return `Os percentuais dos números devem somar 100% (atual: ${total}%).`;
+  }
+
+  return null;
 }

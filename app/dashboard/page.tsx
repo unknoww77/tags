@@ -5,7 +5,7 @@ import { PlatformHeader } from "@/components/PlatformHeader";
 import { PageDashboardCard, type PageCardData } from "@/components/PageDashboardCard";
 import { env } from "@/lib/env";
 import { BRAND_LABELS } from "@/lib/templates";
-import { parsePageConfig } from "@/lib/page-config";
+import { parsePageConfig, hasValidWhatsAppNumbers } from "@/lib/page-config";
 import { countByStatus, conversionRate } from "@/lib/leads";
 
 function formatLiveDuration(from: Date): string {
@@ -106,6 +106,14 @@ export default async function DashboardPage() {
       liveLabel = formatLiveDuration(page.updatedAt);
     }
 
+    const validWaNumbers = config.whatsappNumbers.filter((e) => e.number.length >= 10);
+    const whatsappNumberMasked =
+      config.sendToWhatsapp && validWaNumbers.length === 1
+        ? maskPhone(validWaNumbers[0].number)
+        : config.sendToWhatsapp && validWaNumbers.length > 1
+          ? `${validWaNumbers.length} números`
+          : null;
+
     return {
       id: page.id,
       title: page.title,
@@ -119,11 +127,8 @@ export default async function DashboardPage() {
       leadsUsado: leadCounts.usado,
       leadsPerdido: leadCounts.perdido,
       leadsConvertido: leadCounts.convertido,
-      whatsappConfigured: config.sendToWhatsapp && config.whatsappNumber.length >= 10,
-      whatsappNumberMasked:
-        config.sendToWhatsapp && config.whatsappNumber
-          ? maskPhone(config.whatsappNumber)
-          : null,
+      whatsappConfigured: config.sendToWhatsapp && hasValidWhatsAppNumbers(config.whatsappNumbers),
+      whatsappNumberMasked,
       whatsappOpened,
       whatsappNotOpened,
       formFieldsCount,

@@ -3,6 +3,11 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getEffectiveSettings, notifyTelegramLead } from "@/lib/settings";
 import { detectDevice, getClientIp, hashIp, pickUtms, rateLimit } from "@/lib/tracking";
+import {
+  buildWhatsAppUrl,
+  parsePageConfig,
+  pickWhatsAppNumber,
+} from "@/lib/page-config";
 
 const schema = z.object({
   pageId: z.string().min(1),
@@ -40,6 +45,40 @@ export async function POST(request: Request) {
     const ua = request.headers.get("user-agent");
     const utms = pickUtms(body);
     const form = body.form ?? {};
+    const pageConfig = parsePageConfig(page.configJson);
+
+    let whatsappNumberUsed: string | null = null;
+    let whatsappUrl: string | undefined;
+
+    if (body.whatsappEnabled && pageConfig.sendToWhatsapp) {
+      const priorLeads = await prisma.lead.findMany({
+        where: {
+          pageId: page.id,
+          whatsappEnabled: true,
+          whatsappNumberUsed: { not: null },
+        },
+        select: { whatsappNumberUsed: true },
+      });
+
+      const countsByNumber: Record<string, number> = {};
+      for (const row of priorLeads) {
+        if (row.whatsappNumberUsed) {
+          countsByNumber[row.whatsappNumberUsed] =
+            (countsByNumber[row.whatsappNumberUsed] ?? 0) + 1;
+        }
+      }
+
+      whatsappNumberUsed = pickWhatsAppNumber(pageConfig.whatsappNumbers, countsByNumber);
+
+      if (whatsappNumberUsed) {
+        const extras: Record<string, string> = { ...form, ...(body.quiz ?? {}) };
+        whatsappUrl = buildWhatsAppUrl(
+          whatsappNumberUsed,
+          pageConfig.whatsappMessage,
+          extras
+        );
+      }
+    }
 
     const lead = await prisma.lead.create({
       data: {
@@ -59,6 +98,7 @@ export async function POST(request: Request) {
           body.whatsappEnabled || body.mode === "chat"
             ? body.whatsappOpened
             : false,
+        whatsappNumberUsed,
         status: "colhido",
         utmSource: utms.utmSource,
         utmMedium: utms.utmMedium,
@@ -85,6 +125,7 @@ export async function POST(request: Request) {
           leadId: lead.id,
           mode: lead.mode,
           whatsappOpened: lead.whatsappOpened,
+          whatsappNumberUsed: lead.whatsappNumberUsed,
         },
       },
     });
@@ -96,9 +137,14 @@ export async function POST(request: Request) {
       leadPhone: lead.phone,
       mode: lead.mode,
       whatsappOpened: lead.whatsappOpened,
+      whatsappNumberUsed: lead.whatsappNumberUsed,
     });
 
-    return NextResponse.json({ ok: true, leadId: lead.id });
+    return NextResponse.json({
+      ok: true,
+      leadId: lead.id,
+      whatsappUrl,
+    });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: "Payload inválido" }, { status: 400 });
