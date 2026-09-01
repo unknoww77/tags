@@ -18,10 +18,39 @@ export const env = {
   cloudflareApiKey: () => process.env.CLOUDFLARE_API_KEY ?? "",
   cloudflareEmail: () => process.env.CLOUDFLARE_EMAIL ?? "",
   trackingSalt: () => process.env.TRACKING_IP_SALT ?? "top1tags-dev-salt",
-  superAdminEmail: () => process.env.SUPER_ADMIN_EMAIL ?? "admin@top1tags.dev",
-  superAdminUsername: () => process.env.SUPER_ADMIN_USERNAME ?? "admin",
-  superAdminPassword: () => process.env.SUPER_ADMIN_PASSWORD ?? "ChangeMeNow123!",
-  superAdminName: () => process.env.SUPER_ADMIN_NAME ?? "Super Admin",
+  /** Usado apenas em documentação/bootstrap — não há login via estes getters no runtime. */
+  superAdminEmail: () => {
+    const value = process.env.SUPER_ADMIN_EMAIL;
+    if (value) return value;
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Missing env: SUPER_ADMIN_EMAIL");
+    }
+    return "admin@top1tags.dev";
+  },
+  superAdminUsername: () => {
+    const value = process.env.SUPER_ADMIN_USERNAME;
+    if (value) return value;
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Missing env: SUPER_ADMIN_USERNAME");
+    }
+    return "admin";
+  },
+  superAdminPassword: () => {
+    const value = process.env.SUPER_ADMIN_PASSWORD;
+    if (value) return value;
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Missing env: SUPER_ADMIN_PASSWORD");
+    }
+    return "LocalDevOnly123!";
+  },
+  superAdminName: () => {
+    const value = process.env.SUPER_ADMIN_NAME;
+    if (value) return value;
+    if (process.env.NODE_ENV === "production") {
+      throw new Error("Missing env: SUPER_ADMIN_NAME");
+    }
+    return "Super Admin";
+  },
   /** IP público da VPS — registros A dos custom domains na Cloudflare apontam aqui. */
   originIp: () => process.env.ORIGIN_IP?.trim() ?? "",
 };

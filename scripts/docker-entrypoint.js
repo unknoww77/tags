@@ -28,13 +28,17 @@ if (migrate.status !== 0) {
 console.log("[entrypoint] prisma db push");
 run("node", [prismaCli, "db", "push", "--skip-generate"]);
 
-console.log("[entrypoint] seed super admin");
+console.log("[entrypoint] bootstrap seed (idempotent)");
 const seed = spawnSync("node", [tsxCli, "prisma/seed.ts"], {
   stdio: "inherit",
   env: process.env,
 });
 if (seed.status !== 0) {
-  console.warn("[entrypoint] seed failed or skipped, continuing");
+  if (process.env.NODE_ENV === "production") {
+    console.error("[entrypoint] bootstrap seed failed in production; refusing to start");
+    process.exit(seed.status || 1);
+  }
+  console.warn("[entrypoint] seed failed or skipped, continuing (non-production)");
 }
 
 console.log("[entrypoint] starting next");

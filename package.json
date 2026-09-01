@@ -11,6 +11,7 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
+    "verify:bootstrap": "node scripts/verify-bootstrap-idempotent.mjs",
     "publish": "node scripts/publish.mjs",
     "publish:status": "node scripts/publish.mjs --status",
     "postinstall": "prisma generate"
