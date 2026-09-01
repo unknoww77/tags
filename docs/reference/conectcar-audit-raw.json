@@ -1,0 +1,1024 @@
+{
+  "auditedAt": "2026-09-01T11:54:51.046Z",
+  "baseUrl": "https://conectcar.com",
+  "note": "Análise estrutural/UX — sem reprodução de assets ou textos longos proprietários.",
+  "pages": [
+    {
+      "path": "/para-voce/",
+      "title": "Página não encontrada - ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalid…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [
+          {
+            "fields": 2,
+            "id": "",
+            "classes": "search-form"
+          }
+        ],
+        "grids": 0,
+        "cards": 1,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 1,
+      "topHeadings": []
+    },
+    {
+      "path": "/para-empresas/",
+      "title": "Página não encontrada - ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalid…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [
+          {
+            "fields": 2,
+            "id": "",
+            "classes": "search-form"
+          }
+        ],
+        "grids": 0,
+        "cards": 1,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 1,
+      "topHeadings": []
+    },
+    {
+      "path": "/como-funciona/",
+      "title": "Como funcionam os Descontos nos Pedágios? - ConectCar: Tag de Pedágio e Estacion…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [],
+        "grids": 10,
+        "cards": 13,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 4,
+      "topHeadings": [
+        "Como funcionam os Descontos nos Pedágios?",
+        "Como funcionam os Descontos nos Pedágios?",
+        "Entenda como a sua tag vai garantir mais economia nas viagens com o DUF e o DBT.",
+        "Multas do Free Flow suspensas: entenda a isenção temporária e como regularizar"
+      ]
+    },
+    {
+      "path": "/ativar/",
+      "title": "Página não encontrada - ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalid…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [
+          {
+            "fields": 2,
+            "id": "",
+            "classes": "search-form"
+          }
+        ],
+        "grids": 0,
+        "cards": 1,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 1,
+      "topHeadings": []
+    },
+    {
+      "path": "/blog/",
+      "title": "Página não encontrada - ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalid…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [
+          {
+            "fields": 2,
+            "id": "",
+            "classes": "search-form"
+          }
+        ],
+        "grids": 0,
+        "cards": 1,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 1,
+      "topHeadings": []
+    },
+    {
+      "path": "/free-flow/",
+      "title": "Free Flow em Goiás: saiba como funcionará o pedágio eletrônico nas BR‑060 e BR‑4…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [],
+        "grids": 10,
+        "cards": 13,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 4,
+      "topHeadings": [
+        "Free Flow em Goiás: saiba como funcionará o pedágio eletrônico nas BR‑060 e BR‑452",
+        "Free Flow em Goiás: saiba como funcionará o pedágio eletrônico nas BR‑060 e BR‑452",
+        "Mais lidas",
+        "Multas do Free Flow suspensas: entenda a isenção temporária e como regularizar"
+      ]
+    },
+    {
+      "path": "/ajuda/",
+      "title": "Página não encontrada - ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalid…",
+      "patterns": {
+        "carousels": 1,
+        "accordions": 8,
+        "forms": [
+          {
+            "fields": 2,
+            "id": "",
+            "classes": "search-form"
+          }
+        ],
+        "grids": 0,
+        "cards": 1,
+        "heroes": 0,
+        "dropdowns": 3
+      },
+      "sectionCount": 1,
+      "topHeadings": []
+    },
+    {
+      "path": "/login/",
+      "title": "",
+      "patterns": {
+        "carousels": 0,
+        "accordions": 0,
+        "forms": [],
+        "grids": 0,
+        "cards": 0,
+        "heroes": 0,
+        "dropdowns": 0
+      },
+      "sectionCount": 0,
+      "topHeadings": []
+    }
+  ],
+  "viewports": {
+    "desktop": {
+      "width": 1440,
+      "height": 900
+    },
+    "tablet": {
+      "width": 768,
+      "height": 1024
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  "screenshots": [
+    {
+      "page": "homepage",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/homepage-desktop.png"
+    },
+    {
+      "page": "homepage",
+      "viewport": "tablet",
+      "path": "/app/docs/reference/conectcar-screenshots/homepage-tablet.png"
+    },
+    {
+      "page": "homepage",
+      "viewport": "mobile",
+      "path": "/app/docs/reference/conectcar-screenshots/homepage-mobile.png"
+    },
+    {
+      "page": "/para-voce/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-para-voce_-desktop.png"
+    },
+    {
+      "page": "/para-empresas/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-para-empresas_-desktop.png"
+    },
+    {
+      "page": "/como-funciona/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-como-funciona_-desktop.png"
+    },
+    {
+      "page": "/ativar/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-ativar_-desktop.png"
+    },
+    {
+      "page": "/blog/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-blog_-desktop.png"
+    },
+    {
+      "page": "/free-flow/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-free-flow_-desktop.png"
+    },
+    {
+      "page": "/ajuda/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-ajuda_-desktop.png"
+    },
+    {
+      "page": "/login/",
+      "viewport": "desktop",
+      "path": "/app/docs/reference/conectcar-screenshots/page-login_-desktop.png"
+    },
+    {
+      "page": "homepage",
+      "viewport": "mobile-closed",
+      "path": "/app/docs/reference/conectcar-screenshots/homepage-mobile-menu-closed.png"
+    },
+    {
+      "page": "homepage",
+      "viewport": "mobile-open",
+      "path": "/app/docs/reference/conectcar-screenshots/homepage-mobile-menu-open.png"
+    }
+  ],
+  "allNavigablePaths": [],
+  "homepage": {
+    "headerFooter": {
+      "header": {
+        "tag": "header",
+        "classes": "site-header has-menu",
+        "height": 98,
+        "padding": "0px",
+        "background": "rgb(255, 106, 56)",
+        "childCount": 1
+      },
+      "footer": {
+        "tag": "footer",
+        "classes": "site-footer",
+        "height": 0,
+        "padding": "0px",
+        "background": "rgb(41, 47, 54)",
+        "childCount": 1
+      },
+      "headerItems": [
+        "Menu Fechar",
+        "Para Você",
+        "Plano Completo ★",
+        "Plano Básico",
+        "Plano Flex",
+        "Plano Free Flow",
+        "Tag + Assistência Auto",
+        "Todos os planos",
+        "Parcerias ConectCar",
+        "Para Empresas",
+        "ConectCar Empresas",
+        "Soluções para sua empresa",
+        "Ativar",
+        "Ativar para Você",
+        "Ativar para sua Empresa",
+        "Como Funciona",
+        "Free Flow",
+        "Benefícios Exclusivos",
+        "Como Colar",
+        "Onde Usar",
+        "Descontos",
+        "Forma de Pagamento",
+        "TPA",
+        "Compre na Loja",
+        "Blog ConectCar",
+        "Free Flow",
+        "Ajuda",
+        "Free Flow - tire suas dúvidas",
+        "Acompanhar Pedido",
+        "Tire suas dúvidas",
+        "Login",
+        "Cliente",
+        "ConectCar Frotas",
+        "Conveniado",
+        "Embarcador"
+      ],
+      "footerColumns": []
+    },
+    "sections": [
+      {
+        "index": 0,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-421b334 elementor-sectio",
+        "heading": "",
+        "height": 470,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 1,
+        "tag": "section",
+        "classes": "elementor-section elementor-inner-section elementor-element elementor-element-cfddc5e elementor-hidd",
+        "heading": "",
+        "height": 91,
+        "paddingTop": "7px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 9,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-5d0daa0 elementor-sectio",
+        "heading": "",
+        "height": 684,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 10,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-c7ddbbb elementor-sectio",
+        "heading": "Compare e escolha o plano para seu perfil de uso​",
+        "height": 504,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 12,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-fa2bf86 elementor-sectio",
+        "heading": "Venha para o ConectCar Frotas e facilitea gestão de pedágios na sua empresa.",
+        "height": 277,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 14,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-7a6fe13 elementor-sectio",
+        "heading": "",
+        "height": 102,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 15,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-b544323 elementor-sectio",
+        "heading": "Presente por onde você for",
+        "height": 52,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 16,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-94e2ac7 elementor-sectio",
+        "heading": "",
+        "height": 73,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 17,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-1cdffa8 elementor-sectio",
+        "heading": "",
+        "height": 136,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 19,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-5758d1d elementor-hidden",
+        "heading": "Entenda como funciona o pagamento com a sua Tag",
+        "height": 300,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgb(247, 242, 237)"
+      },
+      {
+        "index": 20,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-9ce48da elementor-sectio",
+        "heading": "Parceiros com ofertas exclusivas",
+        "height": 371,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 21,
+        "tag": "section",
+        "classes": "elementor-section elementor-inner-section elementor-element elementor-element-2b8403b elementor-sect",
+        "heading": "Parceiros com ofertas exclusivas",
+        "height": 351,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 22,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-6162583 elementor-revers",
+        "heading": "Possui uma empresa e quer oferecer mais esse benefício?",
+        "height": 240,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      {
+        "index": 24,
+        "tag": "section",
+        "classes": "elementor-section elementor-top-section elementor-element elementor-element-7ca4a14 elementor-hidden",
+        "heading": "",
+        "height": 557,
+        "paddingTop": "25px",
+        "paddingBottom": "170px",
+        "background": "rgba(0, 0, 0, 0)"
+      }
+    ],
+    "patterns": {
+      "carousels": 226,
+      "accordions": 8,
+      "forms": [],
+      "grids": 0,
+      "cards": 26,
+      "heroes": 18,
+      "dropdowns": 3
+    },
+    "designTokens": {
+      "fonts": [
+        "Lato",
+        "-apple-system",
+        "Roboto",
+        "eicons",
+        "Roboto Slab",
+        "Averta Regular",
+        "Montserrat"
+      ],
+      "colors": [
+        "rgb(0, 0, 0)",
+        "rgb(255, 106, 56)",
+        "rgb(255, 255, 255)",
+        "rgb(236, 113, 68)",
+        "rgb(86, 86, 86)",
+        "rgba(241, 241, 241, 0)",
+        "rgb(221, 221, 221)",
+        "rgb(255, 99, 56)",
+        "rgb(209, 0, 0)",
+        "rgb(187, 187, 187)",
+        "rgba(237, 237, 237, 0.9)",
+        "rgb(255, 102, 56)",
+        "rgb(84, 89, 95)",
+        "rgb(94, 94, 94)",
+        "rgb(77, 87, 97)",
+        "rgb(41, 59, 138)",
+        "rgb(247, 242, 237)",
+        "rgb(122, 122, 122)",
+        "rgb(46, 50, 56)",
+        "rgb(255, 80, 0)",
+        "rgb(45, 53, 64)",
+        "rgb(245, 246, 248)",
+        "rgb(74, 84, 96)",
+        "rgb(177, 177, 177)",
+        "rgb(230, 230, 230)",
+        "rgb(41, 47, 54)",
+        "rgb(167, 106, 25)"
+      ],
+      "buttons": [
+        {
+          "text": "Menu Fechar",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(0, 0, 0)",
+          "padding": "10px 15px",
+          "borderRadius": "0px",
+          "fontSize": "10px",
+          "fontWeight": "500"
+        },
+        {
+          "text": "Peça sua tag",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "9px 30px 0px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Peça sua tag",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "9px 30px 0px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Peça sua tag",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "9px 30px 0px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Peça sua tag",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "9px 30px 0px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Peça sua tag",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "9px 30px 0px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Conheça o ConectCar Frotas",
+          "bg": "rgb(41, 59, 138)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "12px 40px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Conheça o ConectCar Frotas",
+          "bg": "rgb(41, 59, 138)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "12px 40px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Consulte Onde Usar",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "12px 40px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Saiba mais",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "12px 60px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Saiba mais",
+          "bg": "rgb(255, 99, 56)",
+          "color": "rgb(255, 255, 255)",
+          "padding": "12px 60px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Seja nosso parceiro",
+          "bg": "rgb(255, 255, 255)",
+          "color": "rgb(167, 106, 25)",
+          "padding": "12px 40px 5px",
+          "borderRadius": "50px",
+          "fontSize": "15px",
+          "fontWeight": "900"
+        }
+      ],
+      "headings": [
+        {
+          "tag": "H1",
+          "sample": "ConectCar: Tag de Pedágio e Estacionamento. Sem Mensalidade.",
+          "fontSize": "36px",
+          "fontWeight": "500",
+          "lineHeight": "39.6px",
+          "color": "rgb(0, 0, 0)",
+          "fontFamily": "Lato"
+        },
+        {
+          "tag": "H2",
+          "sample": "Escolha o plano que mais combina com você",
+          "fontSize": "30px",
+          "fontWeight": "600",
+          "lineHeight": "30px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Completo ★",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Básico",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Flex",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Free Flow",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Tag + Assistência Auto",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H1",
+          "sample": "Compare e escolha o plano para seu perfil de uso​",
+          "fontSize": "36px",
+          "fontWeight": "600",
+          "lineHeight": "36px",
+          "color": "rgb(46, 50, 56)",
+          "fontFamily": "Averta Regular"
+        },
+        {
+          "tag": "H2",
+          "sample": "ConectCar Frotas: facilite a gestão de pedágios na sua empre",
+          "fontSize": "30px",
+          "fontWeight": "800",
+          "lineHeight": "38px",
+          "color": "rgb(41, 59, 138)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Venha para o ConectCar Frotas e facilitea gestão de pedágios",
+          "fontSize": "30px",
+          "fontWeight": "600",
+          "lineHeight": "38px",
+          "color": "rgb(41, 59, 138)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Presente por onde você for",
+          "fontSize": "30px",
+          "fontWeight": "900",
+          "lineHeight": "32px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Como funciona o pagamento com a sua Tag​",
+          "fontSize": "30px",
+          "fontWeight": "900",
+          "lineHeight": "40px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Entenda como funciona o pagamento com a sua Tag",
+          "fontSize": "30px",
+          "fontWeight": "900",
+          "lineHeight": "40px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Parceiros com ofertas exclusivas",
+          "fontSize": "30px",
+          "fontWeight": "900",
+          "lineHeight": "40px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H3",
+          "sample": "Possui uma empresa e quer oferecer mais esse benefício?",
+          "fontSize": "24px",
+          "fontWeight": "600",
+          "lineHeight": "30px",
+          "color": "rgb(255, 255, 255)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "",
+          "fontSize": "30px",
+          "fontWeight": "600",
+          "lineHeight": "30px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Quer mais da sua tag? Baixe o app ConectCar e tenha mais con",
+          "fontSize": "30px",
+          "fontWeight": "500",
+          "lineHeight": "33px",
+          "color": "rgb(0, 0, 0)",
+          "fontFamily": "Lato"
+        },
+        {
+          "tag": "H2",
+          "sample": "",
+          "fontSize": "30px",
+          "fontWeight": "600",
+          "lineHeight": "30px",
+          "color": "rgb(255, 99, 56)",
+          "fontFamily": "Roboto"
+        },
+        {
+          "tag": "H2",
+          "sample": "Quer mais da sua tag? Baixe o app ConectCar e tenha mais con",
+          "fontSize": "30px",
+          "fontWeight": "500",
+          "lineHeight": "33px",
+          "color": "rgb(0, 0, 0)",
+          "fontFamily": "Lato"
+        },
+        {
+          "tag": "H2",
+          "sample": "Políticas",
+          "fontSize": "16px",
+          "fontWeight": "600",
+          "lineHeight": "24px",
+          "color": "rgb(255, 255, 255)",
+          "fontFamily": "Lato"
+        }
+      ]
+    },
+    "navLinks": [
+      {
+        "label": "Plano Completo ★",
+        "href": "https://lp.conectcar.com/planocompleto?utm_source=site&utm_medium=menu&utm_campaign=completo"
+      },
+      {
+        "label": "Plano Básico",
+        "href": "https://lp.conectcar.com/escolha-o-lado-bom-plano-basico?utm_source=site&utm_medium=menu&utm_campaign=basico"
+      },
+      {
+        "label": "Plano Flex",
+        "href": "https://lp.conectcar.com/escolha-o-lado-bom-plano-flex?utm_source=site&utm_medium=menu&utm_campaign=flex"
+      },
+      {
+        "label": "Plano Free Flow",
+        "href": "https://lp.conectcar.com/plano-free-flow?utm_source=site&utm_medium=menu&utm_campaign=free_flow"
+      },
+      {
+        "label": "Tag + Assistência Auto",
+        "href": "https://lp.conectcar.com/tag-porto-auto-b?utm_source=site&utm_medium=menu&utm_campaign=tag_assist"
+      },
+      {
+        "label": "Todos os planos",
+        "href": "https://lp.conectcar.com/planos?utm_source=site&utm_medium=menu&utm_campaign=planos"
+      },
+      {
+        "label": "Parcerias ConectCar",
+        "href": "https://conectcar.com/parcerias/"
+      },
+      {
+        "label": "ConectCar Empresas",
+        "href": "https://lp.conectcar.com/conectcarempresas?utm_source=site&utm_medium=menu&utm_campaign=empresas"
+      },
+      {
+        "label": "Soluções para sua empresa",
+        "href": "https://conectcar.com/white-label/"
+      },
+      {
+        "label": "Ativar",
+        "href": "#"
+      },
+      {
+        "label": "Ativar para Você",
+        "href": "https://cliente.conectcar.com/AtivacaoTag?_ga=2.224964370.942226390.1654619659-1742909721.1649276534"
+      },
+      {
+        "label": "Ativar para sua Empresa",
+        "href": "https://cliente-frotas.conectcar.com/home"
+      },
+      {
+        "label": "Como Funciona",
+        "href": "#"
+      },
+      {
+        "label": "Free Flow",
+        "href": "https://lp.conectcar.com/free-flow?utm_source=site&utm_medium=menu&utm_campaign=comofunciona"
+      },
+      {
+        "label": "Benefícios Exclusivos",
+        "href": "https://lp.conectcar.com/beneficios?utm_source=site&utm_medium=menu&utm_campaign=comofunciona"
+      },
+      {
+        "label": "Como Colar",
+        "href": "https://conectcar.com/comocolar/"
+      },
+      {
+        "label": "Onde Usar",
+        "href": "https://conectcar.com/onde-usar/"
+      },
+      {
+        "label": "Descontos",
+        "href": "https://lp.conectcar.com/desconto-no-pedagio-e-free-flow?utm_source=site&utm_medium=menu&utm_campaign=comofunciona"
+      },
+      {
+        "label": "Forma de Pagamento",
+        "href": "https://conectcar.com/formas-de-pagamento/"
+      },
+      {
+        "label": "TPA",
+        "href": "https://lp.conectcar.com/tpa?utm_source=site&utm_medium=menu&utm_campaign=comofunciona"
+      },
+      {
+        "label": "Compre na Loja",
+        "href": "https://conectcar.com/comprenaloja/"
+      },
+      {
+        "label": "Blog ConectCar",
+        "href": "https://blog.conectcar.com?utm_source=site&utm_medium=menu"
+      },
+      {
+        "label": "Free Flow",
+        "href": "https://lp.conectcar.com/free-flow?utm_source=site&utm_medium=menu"
+      },
+      {
+        "label": "Free Flow - tire suas dúvidas",
+        "href": "https://atendimentoconectcar.zendesk.com/hc/pt-br/sections/13441113329051-Pedágio-Free-Flow"
+      },
+      {
+        "label": "Acompanhar Pedido",
+        "href": "https://conectcar.com/acompanhar-pedido/"
+      },
+      {
+        "label": "Tire suas dúvidas",
+        "href": "https://atendimentoconectcar.zendesk.com/hc/pt-br"
+      },
+      {
+        "label": "Login",
+        "href": "#"
+      },
+      {
+        "label": "Cliente",
+        "href": "https://cliente.conectcar.com/?_ga=2.156297139.942226390.1654619659-1742909721.1649276534"
+      },
+      {
+        "label": "ConectCar Frotas",
+        "href": "https://cliente-frotas.conectcar.com/"
+      },
+      {
+        "label": "Conveniado",
+        "href": "https://conveniado.conectcar.com/?_ga=2.231819031.942226390.1654619659-1742909721.1649276534"
+      },
+      {
+        "label": "Embarcador",
+        "href": "https://dclogglh.digitalcomm.com.br:8443/dclogg-conectcar/login"
+      },
+      {
+        "label": "Política de PLDFT",
+        "href": "/wp-content/uploads/2025/12/PLDFT-V05-site.pdf"
+      },
+      {
+        "label": "Política de Privacidade",
+        "href": "https://conectcar.com/nova-politica-de-privacidade-da-conectcar/"
+      },
+      {
+        "label": "Política Segurança da Informação e Cyber",
+        "href": "/wp-content/uploads/2025/09/Pol-SI-V05-set2025-site-ConectCar.pdf"
+      },
+      {
+        "label": "Relatório de Transparência e Igualdade Salarial",
+        "href": "/wp-content/uploads/2026/03/Transparencia-e-Igualdade-Salarial-2025-26.pdf"
+      },
+      {
+        "label": "Código de Conduta",
+        "href": "/wp-content/uploads/2026/05/Codigo-de-Conduta-V06-abr26-site-ConectCar.pdf"
+      },
+      {
+        "label": "Política da Qualidade",
+        "href": "/wp-content/uploads/2025/12/Qualidade-V.04-Site.pdf"
+      },
+      {
+        "label": "Manual de Privacidade para Fornecedores",
+        "href": "/wp-content/uploads/2025/09/Manual-de-Privacidade-Fornecedores_Setembro25.pdf"
+      },
+      {
+        "label": "Sobre a ConectCar",
+        "href": "https://conectcar.com/sobre-a-conectcar/"
+      },
+      {
+        "label": "Manual do usuário",
+        "href": "/wp-content/uploads/2025/02/Manual-do-Usuário.pdf"
+      },
+      {
+        "label": "Trabalhe Conosco",
+        "href": "https://conectcar.gupy.io/"
+      },
+      {
+        "label": "Canais de Atendimento",
+        "href": "https://atendimentoconectcar.zendesk.com/hc/pt-br/categories/360003765051-Auto-Atendimento"
+      },
+      {
+        "label": "Canal de ética",
+        "href": "https://canalconfidencial.com.br/conectcar/"
+      },
+      {
+        "label": "Canal de Privacidade",
+        "href": "https://titulares.becompliance.com/webforms/9af12a01-d7d6-480f-b778-486dc79de438/469e8ee1-80b2-4752-890b-b3395d3224d5%20"
+      },
+      {
+        "label": "Planos para você",
+        "href": "https://lp.conectcar.com/planos?utm_source=site&utm_medium=footer&utm_campaign=home"
+      },
+      {
+        "label": "Certificados e Premiações",
+        "href": "https://conectcar.com/certificados-e-premiacoes/"
+      },
+      {
+        "label": "Segurança",
+        "href": "https://conectcar.com/seguranca/"
+      },
+      {
+        "label": "Termo de adesão",
+        "href": "/wp-content/uploads/2026/07/Termo-de-Adesao-Unico_versao30_2026.06.29_vf.pdf"
+      },
+      {
+        "label": "Termo de adesão – vale pedágio",
+        "href": "/wp-content/uploads/2026/03/Termo-de-Adesao-VPO_2025.12.22-1.pdf"
+      },
+      {
+        "label": "Regulamento Ailos",
+        "href": "/wp-content/uploads/2026/04/Regulamento-TAG-de-Estacionamento-ConectCar-Credisan-v3-310326-compactado-1.pdf"
+      },
+      {
+        "label": "Regulamento Únilos",
+        "href": "/wp-content/uploads/2026/03/regulamento_unilos_pf.pdf"
+      },
+      {
+        "label": "Regulamento Shell Box",
+        "href": "/wp-content/uploads/2026/03/2025.02.28-Beneficio-Shell-Box-Regulamento.pdf"
+      },
+      {
+        "label": "Regulamento Clientes Claro Clube – Benefício",
+        "href": "/wp-content/uploads/2026/03/ConectCar-e-Claro-Clube-Plano-Completo-Regulamento-2026.02.01-1-1.docx"
+      },
+      {
+        "label": "Regulamento Maxpar/AutoGlass – Benefício",
+        "href": "/wp-content/uploads/2026/03/Regulamento-MaxparAutoGlass-–-Beneficio.pdf"
+      },
+      {
+        "label": "Regulamento Way 262 – Benefício",
+        "href": "/wp-content/uploads/2026/03/Regulamento-Way-262-–-Beneficio.pdf"
+      },
+      {
+        "label": "Regulamento Localiza Meoo – Benefício",
+        "href": "https://conectcar.com/wp-content/uploads/2026/08/Regulamento-Localiza-Meoo-e-ConectCar-Agosto.pdf?_gl=1*av3ip0*_gcl_au*NjU3MzE3Mjc2LjE3Nzg4NzcyOTYuLS4tLjE3ODQ1NTY2NDEuMTg5NjU5MDU4NC4xNzg2NDcwNjY4LjE3ODY0NzA5MjY.*_ga*MTIzMjM1MDgxLjE3NzYxNzk2NTI.*_ga_7P1BRSTXR8*czE3ODY0Njk5NjQkbzc4JGcxJHQxNzg2NDcwOTc2JGo5JGwwJGgw"
+      },
+      {
+        "label": "Privacidade de dados",
+        "href": "https://conectcar.com/privacidade-de-dados/"
+      }
+    ]
+  },
+  "mobileBehavior": {
+    "hasMenuButton": true,
+    "menuButtonText": "<iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-TQ33LC8\"\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe>\n\n<iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-TQ33LC8\"\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe>\n\n\n        Smooch.on('ready', function(){\n                console.log('the init has completed!');\n                Smooch.sendMessage('Olá')\n                });\n\n        Smooch.init({ \n            integrationId: \"5f43efbec5c229000fc81b83\" ,\n            //embedded: true,\n            locale: \"pt-BR\",\n            businessName: 'ConectCar',\n            customText: {\n                    inputPlaceholder: \"Escreva uma mensagem\",\n                    connectNotificationText: \"Continue a conversa no whatsapp clicando no ícone abaixo\",\n                    whatsappChannelDescriptionDesktop: \"Continue a conversa no Whatsapp escaniando o QRCode ou clicando no link abaixo.\\n\\nEm seguida confirme a mensagem pré pronta com o seu código '{{code}}'.\",\n                    notificationSettingsChannelsDescription: \"Continue a conversa no Whatsapp clicando no ícone abaixo\",\n                    connectNotificationSingleText: \"Seja notificado quando receber uma mensagem\",\n                    shareLocation: \"Localização\",\n                    uploadDocument: \"Arquivo\",\n                    uploadPhoto: \"Imagem\",\n                    messageRelativeTimeJustNow: \"Agora\",\n                    messageRelativeTimeDay: '{value}d atrás',\n                    messageRelativeTimeHour: '{value}h atrás',\n                    messageRelativeTimeMinute: '{value}m atrás',\n                    messageDelivered: 'Entregue',\n                    syncConversation: 'Usar Whatsapp Web',\n                    linkChannelPageHeader: 'Sincronize sua conversa',\n                    messageSeen: 'Visto',\n                    messageSending: 'Enviando',\n                },\n            menuItems: {\n                imageUpload: true,\n                fileUpload: true,\n                shareLocation: false,\n            }\n        })\n        .then(() => {\n    })\n           \n\n\n\tPular para o conteúdo\n\n\t\n\n    \n        \n            \n\n\n\n\t\n\t\t\t\t\t\tConectCar: Tag de Pedágio e Estacionamento. Sem Mensalidade.\n\t\t\t\n\t\n\n            \n                \n            \n\n            \n\t\n\t\t\n\t\t\t\n\t\t\t\tMenu\t\t\t\t\t\t\t\t\t\n\t\t\t\tFechar\t\t\t\t\t\t\t\t\t\n\t\t\t\n\t\t\n\t\t\n                  \n                    \n                  \n                Para Você\n\nPlano Completo  ★Plano BásicoPlano FlexPlano Free FlowTag + Assistência AutoTodos os planosParcerias ConectCar\nPara Empresas\n\nConectCar EmpresasSoluções para sua empresa\nAtivar\n\nAtivar para VocêAtivar para sua Empresa\nComo Funciona\n\nFree FlowBenefícios ExclusivosComo ColarOnde UsarDescontosForma de PagamentoTPA\nCompre na LojaBlog ConectCarFree FlowAjuda\n\nFree Flow - tire suas dúvidasAcompanhar PedidoTire suas dúvidas\nLogin\n\nClienteConectCar FrotasConveniadoEmbarcador\n\t\n        \n    \n\n\t\n\t\t\n\t\t\t\n\n\n\n\t\n\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tATENÇÃO: Falsos atendentes estão se passando por nossa central de atendimento. Para sua segurança, fale com a gente apenas pelos nossos canais oficiais.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t⚠️ ATENÇÃO: Falsos atendentes estão se passando por nossa central de atendimento. Para sua segurança, fale com a gente apenas pelos nossos canais oficiais!\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tPlano Completo ★\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tO plano mais vendido!\nDia-a-dia e viagens sem preocupações\n\n100% OFF POR 1 ANO na mensalidade\n\nSem frete. Sem taxa de adesão.\nA partir do 13º mês, R$17,90/mês\n\n\n\nPeça sua tag\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tPlano Básico\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tPara quem usa de vez em quando\nSEM MENSALIDADE\n\n\ne apenas R$ 20,00 de taxa\n\nde adesão\n\n\nRecargas com o melhor\n\ncusto-benefício\n\n\n\nTaxas de recarga variam de acordo com valor de cada recarga\n\nPeça sua tag\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tPlano Flex\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tPara quem só quer pagar quando usar\nLivre de taxa de adesão\ne sem taxa de inatividade.\nR$18,90 somente no mês que usar.\n\n\nPeça sua tag\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tPlano Free Flow\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tPara quem usa apenas nos pórticos Free Flow\nSem mensalidade para uso no Free Flow\nTaxa de adesão convertida em saldo\n\n\nPeça já!\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tTag + Assistência Auto\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\tUso em pedágios e estacionamentos\n+Guincho +Socorro Mecânico +Chaveiro\n\n\n12 meses de desconto!\nR$19,90/mês\n\n\nPeça sua tag\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\tPlano Completo ★O plano mais vendido!Para quem está sempre rodando pelas cidades e estradas\nR$9,90/mês\nSem taxa de recarga\nPeça já!Plano BásicoPara quem usa de vez em quandoSem mensalidade\n+ 50% OFF na adesão!\nPague por recarga\nPeça já!Plano FlexPara quem só quer pagar quando usar\nLivre de taxa de adesão\ne sem taxa de inatividade.\nR$18,90 somente no mês que usar.\nPeça já!Plano Free FlowPara quem usa apenas nos pórticosdo Free Flow\nSem mensalidadepara uso no Free Flow\nTaxa de adesão convertida em saldo\nPeça já!\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tEscolha o plano que mais combina com você\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tCompleto ★\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tO plano mais vendido!Dia-a-dia e viagens sem preocupações\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t100% OFF POR 1 ANO na mensalidade\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tSem frete. Sem taxa de adesão.A partir do 13º mês, R$17,90/mês\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tPeça sua tag\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tBásico\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tPara quem usa de vez em quando\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tSEM MENSALIDADE\n\n\ne apenas R$ 20,00 de taxa\n\nde adesão\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\nRecargas com o melhor\n\ncusto-benefício\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tTaxas de recarga variam de acordo com valor de cada recarga\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tPeça sua tag\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tFlex\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tPara quem só quer pagar quando usar\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tLivre de taxa de adesãoe sem taxa de inatividade.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tR$18,90 somente no mês que usar.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tPeça sua tag\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tFree Flow\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tPara quem usa apenas nos pórticosFree Flow\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tSem mensalidade para usono Free Flow\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tTaxa de adesão convertida em saldo\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tPeça sua tag\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tTag +\nAssistência Auto\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tUso em pedágios e estacionamentos+Guincho +Socorro Mecânico +Chaveiro\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t12 meses de desconto!\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tR$19,90/mês\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tPeça sua tag\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tCompare e escolha o plano para seu perfil de uso​\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\n\t\t\t    \n\t\t\t        \n\t\t\t\t\t\t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tPlano\n\t\t\t        \t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tMensalidade\n\t\t\t        \t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tTaxa de adesão\n\t\t\t        \t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tMétodo de pagamento\n\t\t\t        \t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tRecarga automática\n\t\t\t        \t\t\t\t            \n\t\t\t\t\t\t\t\t\t\t\t\t\t\tBenefícios\n\t\t\t        \t\t\t\t        \n\t\t\t    \n\t\t\t  \t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tCompleto\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tR$17,90/mês após 13º mês\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t                                                        \n                                                                                                                \n                                                   \t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tCartão de crédito\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t                                                        \n                                                                                                                \n                                                   \t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t1 troca gratuita por ano\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t        \t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tBásico\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tSem mensalidade\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tR$20\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tCartão de crédito e PIX\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tOpcional\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tNão possui mensalidade\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t        \t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tFlex\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tR$18,90 no mês que usar\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t                                                        \n                                                                                                                \n                                                   \t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tCartão de crédito\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t                                                        \n                                                                                                                \n                                                   \t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tNão usa, não paga\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t        \t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tFree Flow\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tR$17,90 no mês que usar\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tR$30 revertido em saldo\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tCartão de crédito\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t                                                        \n                                                                                                                \n                                                   \t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\tSem mensalidade no free flow\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t        \t\t\t    \n\t\t\t\n\t\t\n\t  \t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\ndocument.addEventListener('DOMContentLoaded', function() {\n  var table = document.querySelector('.eael-data-table');\n  if (!table) return;\n\n  var headers = Array.from(table.querySelectorAll('thead th'))\n    .map(function(th) { return th.innerText.trim(); });\n\n  table.querySelectorAll('tbody tr').forEach(function(tr) {\n    tr.querySelectorAll('td').forEach(function(td, i) {\n      td.setAttribute('data-label', headers[i] || '');\n    });\n  });\n});\n\n\n\ndocument.addEventListener('DOMContentLoaded', function() {\n  var table = document.querySelector('.eael-data-table');\n  if (!table) return;\n\n  // Atribui data-label para o JS de altura\n  var headers = Array.from(table.querySelectorAll('thead th'))\n    .map(function(th) { return th.innerText.trim(); });\n\n  table.querySelectorAll('tbody tr').forEach(function(tr) {\n    tr.querySelectorAll('td').forEach(function(td, i) {\n      td.setAttribute('data-label', headers[i] || '');\n    });\n  });\n\n  // Força estilos mobile removendo inline styles\n  function applyMobileFix() {\n    if (window.innerWidth <= 768) {\n      table.querySelectorAll('tbody td').forEach(function(td) {\n        td.style.removeProperty('background-color');\n        td.style.removeProperty('background');\n        td.style.setProperty('background', '#ffffff', 'important');\n        td.style.setProperty('background-color', '#ffffff', 'important');\n        td.style.setProperty('text-align', 'left', 'important');\n\n        // Filhos também\n        td.querySelectorAll('*').forEach(function(child) {\n          child.style.removeProperty('background-color');\n          child.style.removeProperty('background');\n          child.style.setProperty('text-align', 'left', 'important');\n        });\n      });\n\n      table.querySelectorAll('tbody tr').forEach(function(tr) {\n        tr.style.removeProperty('background-color');\n        tr.style.removeProperty('background');\n        tr.style.setProperty('background', '#ffffff', 'important');\n        tr.style.setProperty('background-color', '#ffffff', 'important');\n      });\n    }\n  }\n\n  applyMobileFix();\n  window.addEventListener('resize', applyMobileFix);\n});\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tConectCar Frotas:\nfacilite a gestão de pedágios na sua empresa\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t✓ CONTROLE    ✓ TRANSPARÊNCIA\n✓ AGILIDADE    ✓ SUPORTE \nE MAIS ECONOMIA:desconto de 1% em todos os abastecimentos!\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tConheça o ConectCar Frotas\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tVenha para o ConectCar Frotas \ne facilitea gestão de pedágios \nna sua empresa.\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t✓ CONTROLE    ✓ TRANSPARÊNCIA✓ AGILIDADE    ✓ SUPORTE \t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tE MAIS ECONOMIA: desconto de 1% em todos os abastecimentos!\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tConheça o ConectCar Frotas\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\n\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\n\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tPresente por onde você for\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tConsulte Onde Usar\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\n100% dos pedágios\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\nFree Flow\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tEstacionamentos com e sem cancela\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tShoppings, aeroportos e hospitais\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\nEscolas e universidades\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tClube, estádios, teatros\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tComo funciona o pagamento com a sua Tag​\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tPré-pago para você não se preocupar com saldo, recarga automática ou manual: veja como funcionam as formas de pagamento da Tag ConectCar.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tSaiba mais\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tEntenda como funciona o pagamento com a sua Tag\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tPré-pago para você não se preocupar com saldo, recarga automática ou manual: veja como funcionam as formas de pagamento da Tag ConectCar.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tSaiba mais\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tParceiros com ofertas exclusivas\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tÉ cliente de um de nossos parceiros? Clique e garanta sua tag ConectCar com condições especiais!\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\tMaxi Frota\n\t\t\t\t\t\t\t\tItaúPorto BankMercado PagoLocaliza MeooLocalizaSegSat>UnicredUniprimeMaxi Frota\t\t\tItaú\n\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tPossui uma empresa e quer oferecer mais esse benefício?\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tVeja como é fácil ter uma tag com a sua marca.\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\tSeja nosso parceiro\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tQuer mais da sua tag? Baixe o app ConectCar e tenha mais controlee autonomia\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tBaixe o app ConectCar e tenha mais controle e autonomia.Acompanhe seu saldo, acesse o extrato detalhado, gerencie suas recargas, confira onde usar sua tag e muito mais!     \t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\tQuer mais da sua tag?\n Baixe o app ConectCar e tenha mais controle e autonomia\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tBaixe o app ConectCar e tenha mais controle e autonomia.Acompanhe seu saldo, acesse o extrato detalhado, gerencie suas recargas, confira onde usar sua tag e muito mais!     \t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\nCertificação ISO 27001\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\n\nCertificação ISO 9001\n\n\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tCertificação ISO 27001\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\t\t\t\tCertificação ISO 9001\t\t\t\t\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\t\n\t\t\n\t\t\t\t\n\t\t\t\n\n\t\n\n\n\n\n\n\t\n\t\t\nConectCar Instituição de Pagamentoe Soluções de Mobilidade Eletrônica S.ACNPJ: 16.577.631/0002-99Rua Funchal, nº 418 - 10º andar - Cj 1002.Vila Olímpia - São Paulo-SP - CEP 04551-060\nPolíticasPolítica de PLDFT\nPolítica de Privacidade\nPolítica Segurança da Informação e Cyber\nRelatório de Transparência e Igualdade Salarial\nCódigo de Conduta\nPolítica da Qualidade\nManual de Privacidade para Fornecedores\nA ConectCarSobre a ConectCar\nManual do usuário\nTrabalhe Conosco\nCanais de Atendimento\nCanal de ética\nCanal de Privacidade\nPlanos para você\nCertificados e Premiações\nSegurança\nRegulamentosTermo de adesão\nTermo de adesão – vale pedágio\nRegulamento Ailos\nRegulamento Únilos\nRegulamento Shell Box\nRegulamento Clientes Claro Clube – Benefício\nRegulamento Maxpar/AutoGlass – Benefício\nRegulamento Way 262 – Benefício\nRegulamento Localiza Meoo – Benefício\n\n\nSiga a ConectCar\n\n \n                \n\n            \n                \n            \n\n            \n                           \n            \n           \n\n                \n           \n            \n        \n\n\n\nBaixe nosso app\n\n            \n            \n        \n\n\n\n\n            \n \n\n \n\n\n\n\n\n\n            \n \n\n \n\n\n\t\n\n\n\n\n\n\n    \n        \n                                                \n\n        Privacidade de dados\n        \n        \n\n    \n\n\n\n\n\n{\"prefetch\":[{\"source\":\"document\",\"where\":{\"and\":[{\"href_matches\":\"/*\"},{\"not\":{\"href_matches\":[\"/wp-*.php\",\"/wp-admin/*\",\"/wp-content/uploads/*\",\"/wp-content/*\",\"/wp-content/plugins/*\",\"/wp-content/themes/conectcar/*\",\"/*\\\\?(.+)\"]}},{\"not\":{\"selector_matches\":\"a[rel~=\\\"nofollow\\\"]\"}},{\"not\":{\"selector_matches\":\".no-prefetch, .no-prefetch a\"}}]},\"eagerness\":\"conservative\"}]}\n\ndocument.body.classList.remove(\"no-js\");\t\n\tif ( -1 !== navigator.userAgent.indexOf( 'MSIE' ) || -1 !== navigator.appVersion.indexOf( 'Trident/' ) ) {\n\t\tdocument.body.classList.add( 'is-IE' );\n\t}\n\t\n\t\n        \n        !function(d,g,e){d.TiktokAnalyticsObject=e;var a=d[e]=d[e]||[];a.methods=\"page track identify instances debug on off once ready alias group enableCookie disableCookie\".split(\" \");a.setAndDefer=function(b,c){b[c]=function(){b.push([c].concat(Array.prototype.slice.call(arguments,0)))}};for(d=0;d<a.methods.length;d++)a.setAndDefer(a,a.methods[d]);a.instance=function(b){b=a._i[b]||[];for(var c=0;c<a.methods.length;c++)a.setAndDefer(b,a.methods[c]);return b};a.load=function(b,c){var f=\"https://analytics.tiktok.com/i18n/pixel/events.js\";\na._i=a._i||{};a._i[b]=[];a._i[b]._u=f;a._t=a._t||{};a._t[b]=+new Date;a._o=a._o||{};a._o[b]=c||{};c=document.createElement(\"script\");c.type=\"text/javascript\";c.async=!0;c.src=f+\"?sdkid\\x3d\"+b+\"\\x26lib\\x3d\"+e;b=document.getElementsByTagName(\"script\")[0];b.parentNode.insertBefore(c,b)};a.load(\"CLN2KI3C77UEPNH42JRG\");a.page()}(window,document,\"ttq\");var g_EC={email:\"#email\",phone_number:'[type\\x3d\"tel\"]'};window.g_setupEC=Object.create(null);window.g_ECObj=Object.create(null);var g_countryCode=\"55\";document.addEventListener(\"input\",g_setup_ECObj);function g_setup_ECObj(a){a=a.target;for(i in g_EC)a.matches(g_EC[i])&&(g_setupEC[\"g_\"+i]=a.value);g_save_toECObj()}\nfunction g_save_toECObj(){for(i in g_EC)if(g_setupEC[\"g_\"+i]&&\"email\"===i&&g_validateMail(g_setupEC[\"g_\"+i])&&(window.g_ECObj[i]=g_setupEC[\"g_\"+i]),g_setupEC[\"g_\"+i]&&\"phone_number\"===i){var a=g_validatePhone(g_setupEC[\"g_\"+i]);a=a.includes(\"+\")?a:a.includes(g_countryCode)?\"+\"+a:\"+\"+g_countryCode+a;11<=a.length&&15>=a.length?window.g_ECObj[i]=a:delete window.g_ECObj[i]}}function g_validateMail(a){return/\\S+@\\S+\\.\\S+/.test(a)}function g_validatePhone(a){return a.replace(/\\D/g,\"\")}g_save_toECObj();\n!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version=\"2.0\",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,\"script\",\"https://connect.facebook.net/en_US/fbevents.js\");fbq(\"init\",\"1563640374809856\");fbq(\"track\",\"PageView\");\n<img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=1563640374809856&amp;ev=PageView&amp;noscript=1\">\n\n            var ht = new HT(null);\n        \n        \t\t\t\n\t\t\t\t( () => {\n\t\t\t\t\tconst lazyloadRunObserver = () => {\n\t\t\t\t\t\tconst lazyloadBackgrounds = document.querySelectorAll( `.e-con.e-parent:not(.e-lazyloaded)` );\n\t\t\t\t\t\tconst lazyloadBackgroundObserver = new IntersectionObserver( ( entries ) => {\n\t\t\t\t\t\t\tentries.forEach( ( entry ) => {\n\t\t\t\t\t\t\t\tif ( entry.isIntersecting ) {\n\t\t\t\t\t\t\t\t\tlet lazyloadBackground = entry.target;\n\t\t\t\t\t\t\t\t\tif( lazyloadBackground ) {\n\t\t\t\t\t\t\t\t\t\tlazyloadBackground.classList.add( 'e-lazyloaded' );\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\tlazyloadBackgroundObserver.unobserve( entry.target );\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t});\n\t\t\t\t\t\t}, { rootMargin: '200px 0px 200px 0px' } );\n\t\t\t\t\t\tlazyloadBackgrounds.forEach( ( lazyloadBackground ) => {\n\t\t\t\t\t\t\tlazyloadBackgroundObserver.observe( lazyloadBackground );\n\t\t\t\t\t\t} );\n\t\t\t\t\t};\n\t\t\t\t\tconst events = [\n\t\t\t\t\t\t'DOMContentLoaded',\n\t\t\t\t\t\t'elementor/lazyload/observe',\n\t\t\t\t\t];\n\t\t\t\t\tevents.forEach( ( event ) => {\n\t\t\t\t\t\tdocument.addEventListener( event, lazyloadRunObserver );\n\t\t\t\t\t} );\n\t\t\t\t} )();\n\t\t\t\n\t\t\t\n( Element.prototype.matches && Element.prototype.closest && window.NodeList && NodeList.prototype.forEach ) || document.write( '<\\u0073cript src=\"/wp-content/themes/conectcar/assets/js/polyfills.js?ver=1.6\"></scr' + 'ipt>' );\n//# sourceURL=twenty-twenty-one-ie11-polyfills-js-after\n\n\n\n\nvar localize = {\"ajaxurl\":\"https://conectcar.com/wp-admin/admin-ajax.php\",\"nonce\":\"be130f96c5\",\"i18n\":{\"added\":\"Adicionado \",\"compare\":\"Comparar\",\"loading\":\"Carregando...\"},\"eael_translate_text\":{\"required_text\":\"\\u00e9 um campo obrigat\\u00f3rio\",\"invalid_text\":\"Inv\\u00e1lido\",\"billing_text\":\"Cobran\\u00e7a\",\"shipping_text\":\"Envio\",\"fg_mfp_counter_text\":\"de\"},\"page_permalink\":\"https://conectcar.com/\",\"cart_redirectition\":\"\",\"cart_page_url\":\"\",\"el_breakpoints\":{\"mobile\":{\"label\":\"Dispositivos m\\u00f3veis no modo retrato\",\"value\":767,\"default_value\":767,\"direction\":\"max\",\"is_enabled\":true},\"mobile_extra\":{\"label\":\"Dispositivos m\\u00f3veis no modo paisagem\",\"value\":880,\"default_value\":880,\"direction\":\"max\",\"is_enabled\":false},\"tablet\":{\"label\":\"Tablet no modo retrato\",\"value\":1024,\"default_value\":1024,\"direction\":\"max\",\"is_enabled\":true},\"tablet_extra\":{\"label\":\"Tablet no modo paisagem\",\"value\":1200,\"default_value\":1200,\"direction\":\"max\",\"is_enabled\":false},\"laptop\":{\"label\":\"Notebook\",\"value\":1366,\"default_value\":1366,\"direction\":\"max\",\"is_enabled\":false},\"widescreen\":{\"label\":\"Tela ampla (widescreen)\",\"value\":2400,\"default_value\":2400,\"direction\":\"min\",\"is_enabled\":false}}};\n//# sourceURL=eael-general-js-extra\n\n\n\n\n\n\njQuery.uiBackCompat = true;\n//# sourceURL=jquery-ui-core-js-before\n\n\n\nvar EAELImageMaskingConfig = {\"svg_dir_url\":\"/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/img/image-masking/svg-shapes/\"};\n//# sourceURL=elementor-frontend-js-extra\n\n\nvar elementorFrontendConfig = {\"environmentMode\":{\"edit\":false,\"wpPreview\":false,\"isScriptDebug\":false},\"i18n\":{\"shareOnFacebook\":\"Compartilhar no Facebook\",\"shareOnX\":\"Compartilhar no X\",\"pinIt\":\"Fixar\",\"download\":\"Baixar\",\"downloadImage\":\"Baixar imagem\",\"fullscreen\":\"Tela cheia\",\"zoom\":\"Zoom\",\"share\":\"Compartilhar\",\"playVideo\":\"Reproduzir v\\u00eddeo\",\"previous\":\"Anterior\",\"next\":\"Pr\\u00f3ximo\",\"close\":\"Fechar\",\"a11yCarouselPrevSlideMessage\":\"Slide anterior\",\"a11yCarouselNextSlideMessage\":\"Pr\\u00f3ximo slide\",\"a11yCarouselFirstSlideMessage\":\"Este \\u00e9 o primeiro slide\",\"a11yCarouselLastSlideMessage\":\"Este \\u00e9 o \\u00faltimo slide\",\"a11yCarouselPaginationBulletMessage\":\"Ir para o slide\"},\"is_rtl\":false,\"breakpoints\":{\"xs\":0,\"sm\":480,\"md\":768,\"lg\":1025,\"xl\":1440,\"xxl\":1600},\"responsive\":{\"breakpoints\":{\"mobile\":{\"label\":\"Dispositivos m\\u00f3veis no modo retrato\",\"value\":767,\"default_value\":767,\"direction\":\"max\",\"is_enabled\":true},\"mobile_extra\":{\"label\":\"Dispositivos m\\u00f3veis no modo paisagem\",\"value\":880,\"default_value\":880,\"direction\":\"max\",\"is_enabled\":false},\"tablet\":{\"label\":\"Tablet no modo retrato\",\"value\":1024,\"default_value\":1024,\"direction\":\"max\",\"is_enabled\":true},\"tablet_extra\":{\"label\":\"Tablet no modo paisagem\",\"value\":1200,\"default_value\":1200,\"direction\":\"max\",\"is_enabled\":false},\"laptop\":{\"label\":\"Notebook\",\"value\":1366,\"default_value\":1366,\"direction\":\"max\",\"is_enabled\":false},\"widescreen\":{\"label\":\"Tela ampla (widescreen)\",\"value\":2400,\"default_value\":2400,\"direction\":\"min\",\"is_enabled\":false}},\"hasCustomBreakpoints\":false},\"version\":\"4.2.1\",\"is_static\":false,\"experimentalFeatures\":{\"additional_custom_breakpoints\":true,\"e_panel_promotions\":true,\"theme_builder_v2\":true,\"global_classes_should_enforce_capabilities\":true,\"e_variables\":true,\"e_opt_in_v4_page\":true,\"e_components\":true,\"e_interactions\":true,\"e_widget_creation\":true,\"import-export-customization\":true,\"e_pro_atomic_form\":true,\"e_pro_collection_loop\":true,\"e_pro_variables\":true,\"e_pro_interactions\":true},\"urls\":{\"assets\":\"\\/wp-content\\/plugins\\/elementor\\/assets\\/\",\"ajaxurl\":\"https:\\/\\/conectcar.com\\/wp-admin\\/admin-ajax.php\",\"uploadUrl\":\"\\/wp-content\\/uploads\"},\"nonces\":{\"floatingButtonsClickTracking\":\"35b8fd3aef\",\"atomicFormsSendForm\":\"c18cc4b024\"},\"swiperClass\":\"swiper\",\"settings\":{\"page\":[],\"editorPreferences\":[]},\"kit\":{\"active_breakpoints\":[\"viewport_mobile\",\"viewport_tablet\"],\"global_image_lightbox\":\"yes\",\"lightbox_enable_counter\":\"yes\",\"lightbox_enable_fullscreen\":\"yes\",\"lightbox_enable_zoom\":\"yes\",\"lightbox_enable_share\":\"yes\",\"lightbox_title_src\":\"title\",\"lightbox_description_src\":\"description\"},\"post\":{\"id\":6005,\"title\":\"ConectCar%3A%20Tag%20de%20Ped%C3%A1gio%20e%20Estacionamento.%20Sem%20Mensalidade.\",\"excerpt\":\"\",\"featuredImage\":false}};\n//# sourceURL=elementor-frontend-js-before\n\n\n\n\n\n\n\n\n\n\nwp.i18n.setLocaleData( { 'text direction\\u0004ltr': [ 'ltr' ] } );\n//# sourceURL=wp-i18n-js-after\n\n\nvar ElementorProFrontendConfig = {\"ajaxurl\":\"https:\\/\\/conectcar.com\\/wp-admin\\/admin-ajax.php\",\"nonce\":\"2057a57289\",\"urls\":{\"assets\":\"\\/wp-content\\/plugins\\/elementor-pro\\/assets\\/\",\"rest\":\"https:\\/\\/conectcar.com\\/wp-json\\/\"},\"settings\":{\"lazy_load_background_images\":true},\"popup\":{\"hasPopUps\":true},\"shareButtonsNetworks\":{\"facebook\":{\"title\":\"Facebook\",\"has_counter\":true},\"twitter\":{\"title\":\"Twitter\"},\"linkedin\":{\"title\":\"LinkedIn\",\"has_counter\":true},\"pinterest\":{\"title\":\"Pinterest\",\"has_counter\":true},\"reddit\":{\"title\":\"Reddit\",\"has_counter\":true},\"vk\":{\"title\":\"VK\",\"has_counter\":true},\"odnoklassniki\":{\"title\":\"OK\",\"has_counter\":true},\"tumblr\":{\"title\":\"Tumblr\"},\"digg\":{\"title\":\"Digg\"},\"skype\":{\"title\":\"Skype\"},\"stumbleupon\":{\"title\":\"StumbleUpon\",\"has_counter\":true},\"mix\":{\"title\":\"Mix\"},\"telegram\":{\"title\":\"Telegram\"},\"pocket\":{\"title\":\"Pocket\",\"has_counter\":true},\"xing\":{\"title\":\"XING\",\"has_counter\":true},\"whatsapp\":{\"title\":\"WhatsApp\"},\"email\":{\"title\":\"Email\"},\"print\":{\"title\":\"Print\"},\"x-twitter\":{\"title\":\"X\"},\"threads\":{\"title\":\"Threads\"}},\"facebook_sdk\":{\"lang\":\"pt_BR\",\"app_id\":\"\"},\"lottie\":{\"defaultAnimationUrl\":\"\\/wp-content\\/plugins\\/elementor-pro\\/modules\\/lottie\\/assets\\/animations\\/default.json\"}};\n//# sourceURL=elementor-pro-frontend-js-before\n\n\n\n\t\t\n\t\t/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener(\"hashchange\",(function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())}),!1);\n\t\t\n\t\t\n\n\n\nif(window.location.href.includes(\"checkout.conectcar\"))var interval=setInterval(function(){var a=document.querySelector(\"input#email\");a&&(a.addEventListener(\"input\",function(){/\\S+@\\S+\\.\\S+/.test(a.value)&&(window.data={email:a.value})}),clearInterval(interval))},2E3);"
+  }
+}
